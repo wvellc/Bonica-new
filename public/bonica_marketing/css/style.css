@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+body{font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 18px; line-height: 34px; letter-spacing: 0.05em; color: #000000; overflow-x: hidden;}
+h2{font-family: 'Outfit', sans-serif; font-size: 35px; font-weight: 400; color:#000; text-transform: uppercase; text-align: center; margin-top: 50px; margin-bottom: 50px;}
+h2 span{font-size: 25px; font-weight: 200; letter-spacing: 2.2px;}
+section {overflow-x: hidden;}
+
+.header{width: 100%; background: #fff;}
+.logo{width: 100%; padding: 10px; text-align: center; font-size: 46px; line-height: 53px; font-family: 'Bellefair', serif;}
+.logo img{width: 150px;}
+.headervideo{width: 100%; height: calc(100vh - 76px); overflow: hidden;}
+.imageholder{width: 100%; overflow: hidden; margin-bottom: 50px;}
+.imageholder img{width: 100%;}
+
+.ourstory .imageholder img{object-fit: cover; width: auto;}
+
+.imagetext{width: 100%; font-size: 20px; font-weight: 500; line-height: 1.67; letter-spacing: 1.2px; text-align: center; color: #000; margin-bottom: 50px;}
+.readmorebtn{width: 100%; text-align: center;}
+.readmorebtn a{display: inline-block; font-size: 18px; letter-spacing: 2.4px; color: #000; background: #eec9c2; padding: 10px 30px; text-decoration: none;}
+
+.imageholderoverlay{position: relative; top:0; left: 0; z-index: 1;}
+.imageholderoverlay .imageholder{overflow: visible; margin-bottom: 0;}
+.textholderoverlay{position: relative; z-index: 2;}
+
+.imageoverlaytext{background: #fff; padding: 75px 75px 75px 100px;}
+.imageoverlaytext h3{font-size: 24px;}
+.imageoverlaytext .readmorebtn{text-align: left;}
+
+.visitus{margin-bottom: 100px;}
+/********/
+.footer{width: 100%; background: #fcf5f4; padding: 15px 0;}
+.copytext{text-align: left; font-size: 15px; font-weight: 300;}
+.foologo{text-align: center;}
+.foologo img{width: 100px;}
+.fooicon{text-align: right}
