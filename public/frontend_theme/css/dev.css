@@ -1,0 +1,231 @@
+.b-img-box {
+    position: relative;
+    padding-right: 36%;
+}
+
+.b-img-box img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    max-width: 30%;
+    width: 100%;
+}
+
+.check-shape-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.color-text-box {
+    position: relative !important;
+    opacity: 1 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500 !important;
+}
+
+span.color-text-box span.color-gold {
+    position: static !important;
+    opacity: 1 !important;
+    margin: 0 10px 0 0;
+}
+
+.product-loader {
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999999;
+}
+
+.product-loader img {
+    max-width: 60px;
+    width: 100%;
+}
+
+.order-history-box-item .remove-order {
+    position: absolute;
+    left: -7px;
+    top: -7px;
+    background: #C36D5F;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.order-history-box-item {
+    position: relative;
+}
+
+@media screen and (max-width:991px) {
+    .b-img-box {
+        padding-right: 0;
+        padding-top: 330px;
+    }
+
+    .b-img-box img {
+        max-width: 100%;
+        width: 100% !important;
+        height: 300px;
+        object-fit: cover;
+        margin-bottom: 30px;
+    }
+}
+
+/* .slick-list{
+    height: 711px !important;
+} */
+/* .products-d-small-image-wrapper .slick-slider{
+    height: 100% !important;
+} */
+/* .slick-list .draggable{
+        height: unset !important;
+    } */
+/* slick-track {
+    display: flex !important;
+  }
+
+  .slick-slide {
+    height: auto;
+  } */
+
+
+
+  @media screen and (max-width:1700px) {
+    .box-diamond-on-hand {
+        top: 36%;
+        max-width: 13px;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .order-history-box-item .remove-order {
+        left: auto;
+        right: 0;
+    }
+}
+
+.main-page-loader {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+    background: rgba(255, 255, 255, 0.96);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-page-loader img {
+    width: 100%;
+    max-width: 90px;
+    -webkit-animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
+    animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
+}
+
+@-webkit-keyframes scale-up-center {
+    0% {
+        -webkit-transform: scale(0.7);
+        transform: scale(0.7);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes scale-up-center {
+    0% {
+        -webkit-transform: scale(0.7);
+        transform: scale(0.7);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/* .slider-nav {
+    height: auto !important;
+} */
+
+.fancybox-is-open .fancybox-bg,
+.fancybox-bg {
+    background: #fff;
+}
+
+.fancybox-is-open .fancybox-bg {
+    opacity: .95;
+}
+
+.fancybox-iframe,
+.fancybox-video {
+    background: #fff;
+}
+
+.demo-two .tl-container .icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.demo-two .tl-container .icon {
+    overflow: hidden;
+}
+
+.btn-filetr:focus {
+    background: transparent;
+    color: #000000;
+    border-color: transparent;
+}
+
+.shiiping-info-wrapper .order-history-box-item {
+    background: #FFFFFF;
+    border: 0.5px solid #FCF5F4;
+    box-shadow: 0px 3.41846px 21.3654px 0.427307px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+.pr-d-desc p {
+    padding: 0 0 13px;
+}
+
+.shiiping-info-wrapper .order-history-box-image {
+    box-shadow: none;
+    padding: 0;
+}
+
+@media screen and (min-width:575px) {
+    .truck-img {
+        top: 6px !important;
+    }
+    .delivery-truck-info {
+        width: 50%;
+    }
+}
+@media (min-width: 1340px) {
+    .video-wrap {
+        height: 750px;
+        overflow: hidden;
+    }
+
+    .video-wrap video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
