@@ -469,7 +469,7 @@
 					<div class="row align-items-center justify-content-between">
 						<div class="col-md-12 text-center ">
 							<div class="section-title">
-								<h2><span>YOU</span> may also like</span></h2>
+								<h2><span>DISCOVER MORE PRODUCTS</span></h2>
 							</div>
 						</div>
 					</div>
