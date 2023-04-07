@@ -73,9 +73,13 @@
 
                                 <div class="center-diamond">
                                     @if(count($product->ProductShapes) > 0)
-                                    <div class="mt-3">
+                                    
+                                    @if($product->is_solitaire == 1)
+                                    <div class="mt-3 {{$product->is_solitaire}}">
                                         <h4 style="font-size: 16px;">Center Diamond</h4>
                                     </div>
+                                    @endif
+
                                     <div class="center-dropdowns d-flex">
                                         <div class="b-dropdown shape f-item me-5">
 											<div class="select-box">
