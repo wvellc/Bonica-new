@@ -34,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
 
         $categories = Category::query()->with('children')->Active()->where('parent_id',0)->orderBy('sort_order', 'ASC')->get();
         View::share('categories', $categories);
+        
+        $cloudFrontUrl = env('CLOUDFRONTURL')."categories/";;
+        View::share('cloudFrontUrl', $cloudFrontUrl);
 
         $countries = Country::query()->orderBy('sort_order', 'asc')->get();
         View::share('countries', $countries);

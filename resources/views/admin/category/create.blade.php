@@ -76,7 +76,7 @@
                                 @endif
                                 @isset($formObj->image)
                                 <div class="imgPreview">
-                                    <img src="{{ URL::asset('uploads/category/'.$formObj->image) }}" width="200px" class="img-thumbnail" alt="Category">
+                                    <img src="{{ URL::asset($cloud_front_url.$formObj->image) }}" width="200px" class="img-thumbnail" alt="Category">
                                 </div>
                                 @endisset
                             </div>
