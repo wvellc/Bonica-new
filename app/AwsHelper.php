@@ -19,7 +19,7 @@ class AWSHelper
 			$file 				= $request->file($fileName);
 			$extension 			= $file->getClientOriginalExtension();
 			$fileNameToStore 	= time() . rand() . '.' . $extension;
-			$filePath 			= $path . $fileNameToStore . DIRECTORY_SEPARATOR;
+			$filePath 			= $path . $fileNameToStore;
 			Storage::disk('s3')->put($filePath, file_get_contents($file));
 		} else {
 			if (!empty($oldFileName)) {

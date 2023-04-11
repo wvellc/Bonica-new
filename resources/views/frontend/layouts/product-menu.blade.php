@@ -1,9 +1,12 @@
 <ul class="product-menu-links d-flex align-items-center justify-content-center">
     @if(!empty($categories))
         @foreach($categories as $key => $category)
+        @php
+            $exists = Storage::disk('s3')->has('categories/' . $category['image']);
+        @endphp
         <li class="dropdown">
             <span class="submenu-button"></span>
-            <a href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}" data-src="@if ($category['image']){{ file_exists(public_path('uploads/category/'.$category['image'])) ? asset('uploads/category/'.$category['image']) :  '' }}@endif" class="dropdown-toggle" id="newarrivalsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ file_exists(public_path('uploads/category/'.$category['icon'])) ? asset('uploads/category/'.$category['icon']) :  '' }}" alt="" class="me-2 p-m-img"><span>{{$category->name}}</span> </a>
+            <a href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}" data-src="@if ($category['image']){{ ($exists === true) ? asset($cloudFrontUrl.$category['image']) :  '' }}@endif" class="dropdown-toggle" id="newarrivalsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ file_exists(public_path('uploads/category/'.$category['icon'])) ? asset('uploads/category/'.$category['icon']) :  '' }}" alt="" class="me-2 p-m-img"><span>{{$category->name}}</span> </a>
             @if($category->children()->count() > 0)
             <div  class="dropdown-menu"  aria-labelledby="newarrivalsDropdown">
                 <div class="container">
@@ -11,16 +14,16 @@
                         <div class="col-lg-4">
                             <ul class="category-list">
                                 <li>By Category</li>
-                                <li><a href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}" data-src="@if ($category['image']){{ file_exists(public_path('uploads/category/'.$category['image'])) ? asset('uploads/category/'.$category['image']) :  '' }}@endif"><span>All {{$category->name}}</span></a></li>
+                                <li><a href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}" data-src="@if ($category['image']){{ ($exists === true) ? asset($cloudFrontUrl.$category['image']) :  '' }}@endif"><span>All {{$category->name}}</span></a></li>
                                 @foreach($category->children as $key => $subcategory)
-                                <li><a href="{{ route('frontend.show_sub_category_product', ['category' => $category['slug'],'subcategory' => $subcategory->slug]) }}" data-src="@if($subcategory->image) {{ file_exists(public_path('uploads/category/'.$subcategory->image)) ? asset('uploads/category/'.$subcategory->image) :  '' }} @endif"><span>{{$subcategory->name}}</span></a></li>
+                                <li><a href="{{ route('frontend.show_sub_category_product', ['category' => $category['slug'],'subcategory' => $subcategory->slug]) }}" data-src="@if ($subcategory['image']){{ ($exists === true) ? asset($cloudFrontUrl.$subcategory['image']) :  '' }}@endif"><span>{{$subcategory->name}}</span></a></li>
                                 @endforeach
                             </ul>
                         </div>
                         @if($category->image)
                             <div class="col-lg-4 d-none d-lg-block">
                                 <div class="image-holder" >
-                                <img src="@if ($category['image']){{ file_exists(public_path('uploads/category/'.$category['image'])) ? asset('uploads/category/'.$category['image']) :  '' }}@endif" alt="">
+                                <img src="@if ($category['image']){{ ($exists === true) ? asset($cloudFrontUrl.$category['image']) :  '' }}@endif" alt="">
                                 </div>
                             </div>
                         @endif
@@ -73,6 +76,7 @@
 $(".product-menu-links li a").hover( function() {
 
     var value = $(this).attr('data-src');
+
     $(".image-holder img").hide();
     if(value != ''){
         $(".image-holder img").show();

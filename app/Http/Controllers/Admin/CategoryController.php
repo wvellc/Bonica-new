@@ -10,10 +10,12 @@ use App\Models\Product;
 use App\Models\DiscoverProduct;
 use App\Models\ShopthelookProduct;
 use App\Commonhelper;
+use App\AWSHelper;
 use DataTables;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Carbon\Carbon;
+use Storage;
 
 class CategoryController extends Controller
 {
@@ -33,7 +35,8 @@ class CategoryController extends Controller
         $module                    = "Category";
         $this->module            = $module;
         $this->modelObj            = new Category();
-        $this->path = "uploads/category/";
+        $this->path = "categories/";
+        $this->cloud_front_path = env('CLOUDFRONTURL')."categories/";
     }
 
     /**
@@ -68,8 +71,8 @@ class CategoryController extends Controller
                     return $is_parent;
                 })
                 ->editColumn('image', function ($row) {
-                    if ($row->image) {
-                        $category_image = file_exists($this->path . $row->image) ? $this->path . $row->image :  '/images/default-img.png';
+                    if ($row->image && Storage::disk('s3')->has($this->path .  $row->image)) {
+                        $category_image =$this->cloud_front_path . $row->image;
                     } else {
                         $category_image =  '/images/default-img.png';
                     }
@@ -152,7 +155,7 @@ class CategoryController extends Controller
             $category->meta_description  = $request->meta_description;
 
             if ($request->has('image')) {
-                $image = Commonhelper::uploadFileWithThumbnail($request, 'image', $this->path, $thumbnailPath = NULL, $resizeH = 560, $resizeW = 690);
+                $image = AWSHelper::uploadImageS3($request, 'image', $this->path);
                 $category->image = $image;
             }
             if ($request->has('icon')) {
@@ -209,6 +212,7 @@ class CategoryController extends Controller
             "selectedShopthelookStatusID"  => $category->shopthelook_status,
             "selectedDiscoverProducts"  => $selectedDiscoverProducts,
             "selectedshopthelookProducts"  => $selectedshopthelookProducts,
+            "cloud_front_url"=> $this->cloud_front_path,
         );
 
         $data['parent_category'] = Category::where('parent_id', 0)->pluck('name', 'id')->toArray();
@@ -242,7 +246,7 @@ class CategoryController extends Controller
         $category->shopthelook_status = $request->shopthelook_status;
 
         if ($request->has('image')) {
-            $image = Commonhelper::uploadFileWithThumbnail($request, 'image', $this->path, $thumbnailPath = NULL, $resizeH = 560, $resizeW = 690, $category->image);
+            $image = AWSHelper::uploadImageS3($request, 'image', $this->path, $category->image);
             $category->image = $image;
         }
         if ($request->has('icon')) {
@@ -302,7 +306,7 @@ class CategoryController extends Controller
         $category->delete();
         if ($category->image) {
             if (file_exists(public_path($this->path . $category->image))) {
-                Commonhelper::deleteFile(public_path($this->path . $category->image));
+                AWSHelper::deleteImageS3(public_path($this->path . $category->image));
             }
         }
         if ($category->icon) {
