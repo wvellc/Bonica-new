@@ -202,11 +202,11 @@
                                     @foreach ($product->ProductMetalMaterial as $ProductMetalMaterial)
                                         @php
                                         $metal_arr[$ProductMetalMaterial->metal_id] = array('name' => $ProductMetalMaterial->metal->name, 'bgcolor' => $ProductMetalMaterial->metal->bgcolor);
-                                        if(isset($ProductMetalMaterial->material->name)){
+                                        if(isset($ProductMetalMaterial->material->name) && array_key_first($metal_arr) == $ProductMetalMaterial->metal_id){
                                             $material_arr[$ProductMetalMaterial->material_id] = $ProductMetalMaterial->material->name;
                                         }
                                         @endphp
-                                    @endforeach
+                                        @endforeach
 								<div class="">
 									<h5>Metal</h5>
 									<div class="metal-list">
