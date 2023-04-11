@@ -163,7 +163,7 @@ class CategoryController extends Controller
                 $category->icon = $icon;
             }
             if ($request->has('banner_image')) {
-                $banner_image = Commonhelper::uploadFileWithThumbnail($request, 'banner_image', $this->path, $thumbnailPath = NULL, $resizeH = 300, $resizeW = 1920);
+                $banner_image = AWSHelper::uploadImageS3($request, 'banner_image', $this->path);
                 $category->banner_image = $banner_image;
             }
             $category->save();
@@ -232,7 +232,6 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-
         $category  = Category::find($id);
         $category->name        = $request->name;
         $category->parent_id   = $request->parent_id;
@@ -254,7 +253,7 @@ class CategoryController extends Controller
             $category->icon = $icon;
         }
         if ($request->has('banner_image')) {
-            $banner_image = Commonhelper::uploadFileWithThumbnail($request, 'banner_image', $this->path, $thumbnailPath = NULL, $resizeH = 300, $resizeW = 1920, $category->banner_image);
+            $banner_image = AWSHelper::uploadImageS3($request, 'banner_image', $this->path, $category->banner_image);
             $category->banner_image = $banner_image;
         }
 
@@ -305,13 +304,18 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->delete();
         if ($category->image) {
-            if (file_exists(public_path($this->path . $category->image))) {
-                AWSHelper::deleteImageS3(public_path($this->path . $category->image));
+            if (Storage::disk('s3')->has($this->path . $category->image)) {
+                AWSHelper::deleteImageS3($this->path . $category->image);
             }
         }
         if ($category->icon) {
             if (file_exists(public_path($this->path . $category->icon))) {
                 Commonhelper::deleteFile(public_path($this->path . $category->icon));
+            }
+        }
+        if ($category->banner_image) {
+            if (Storage::disk('s3')->has($this->path . $category->banner_image)) {
+                AWSHelper::deleteImageS3($this->path . $category->banner_image);
             }
         }
         return response()->json(['code' => 200, 'message' => __('messages.delete_message', ['title' => 'category']), 'data' => array()]);
