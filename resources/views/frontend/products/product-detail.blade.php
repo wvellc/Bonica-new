@@ -207,26 +207,29 @@
                                         }
                                         @endphp
                                         @endforeach
-								<div class="">
+                                        
+                                <div class="">
 									<h5>Metal</h5>
 									<div class="metal-list">
                                         @foreach ($metal_arr as $key => $metal)
 										<input onclick="getProductPrice(); getProductPriceImage();" type="radio" @if ($product->firstProductMetalMaterial->metal_id == $key) checked @endif id="metal_{{$key}}" name="metal" value="{{$key}}" />
 										<label for="metal_{{$key}}"><span class="color-gold" style="background-color:{{$metal['bgcolor']}};"></span> {{$metal['name']}}</label>
                                         @endforeach
-
 									</div>
 								</div>
-								<div class="">
+                                
+                                    @if(!empty($material_arr))
+                                    <div class="">
 
-									<h5>Material</h5>
-									<div class="square-radio-design">
-                                        @foreach ($material_arr as $key => $material)
-                                            <input onclick="getProductPrice();" type="radio" @if ($product->firstProductMetalMaterial->material_id == $key) checked @endif id="material_{{$key}}" name="material" value="{{$key}}" />
-                                            <label for="material_{{$key}}">{{$material}}</label>
-                                        @endforeach
-									</div>
-								</div>
+                                        <h5>Material</h5>
+                                        <div class="square-radio-design">
+                                            @foreach ($material_arr as $key => $material)
+                                                <input onclick="getProductPrice();" type="radio" @if ($product->firstProductMetalMaterial->material_id == $key) checked @endif id="material_{{$key}}" name="material" value="{{$key}}" />
+                                                <label for="material_{{$key}}">{{$material}}</label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
                                 @endif
                                 @if (count($product->ProductSize) > 0 && count($country_size) > 0)
 								<div class="ring-size">
