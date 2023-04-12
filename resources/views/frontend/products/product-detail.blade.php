@@ -207,22 +207,21 @@
                                         }
                                         @endphp
                                         @endforeach
-                                        
                                 <div class="">
 									<h5>Metal</h5>
 									<div class="metal-list">
                                         @foreach ($metal_arr as $key => $metal)
-										<input onclick="getProductPrice(); getProductPriceImage();" type="radio" @if ($product->firstProductMetalMaterial->metal_id == $key) checked @endif id="metal_{{$key}}" name="metal" value="{{$key}}" />
+										<input onclick="getProductPriceImage();" type="radio" @if ($product->firstProductMetalMaterial->metal_id == $key) checked @endif id="metal_{{$key}}" name="metal" value="{{$key}}" />
 										<label for="metal_{{$key}}"><span class="color-gold" style="background-color:{{$metal['bgcolor']}};"></span> {{$metal['name']}}</label>
                                         @endforeach
 									</div>
 								</div>
                                 
                                     @if(!empty($material_arr))
-                                    <div class="">
+                                    <div class="" id="materialboxhide">
 
                                         <h5>Material</h5>
-                                        <div class="square-radio-design">
+                                        <div class="square-radio-design" id="materialbox">
                                             @foreach ($material_arr as $key => $material)
                                                 <input onclick="getProductPrice();" type="radio" @if ($product->firstProductMetalMaterial->material_id == $key) checked @endif id="material_{{$key}}" name="material" value="{{$key}}" />
                                                 <label for="material_{{$key}}">{{$material}}</label>
@@ -876,7 +875,13 @@ function getProductPriceImage()
             },
             success: function (data) {
                 if(data.msg == 'success'){
-
+                    if(data.materialMetalHTML == ""){
+                        $("#materialboxhide").hide();
+                    } else {
+                        $("#materialboxhide").show();
+                    }
+                    $("#materialbox").html(data.materialMetalHTML);
+                    getProductPrice();
                    /*  $('#product_price').html(data.product_price);
                     $('#sales_product_price').html(data.salesProductPrice); */
                     var taketime = (new Date().getTime() - this.start_time) * 2;
@@ -905,9 +910,9 @@ function getProductPriceImage()
                     if(getnameShape == ""){
                         var getnameShape = $( "#shape").getAttribute('data-name').toLowerCase();
                     }
-                    console.log(getnameShape);
+                    //console.log(getnameShape);
                     $('#diamondOnhand').attr('src', "{{asset('images/shapes')}}/"+getnameShape+'.png');
-
+                    
                 }
             },
             error:function (response) {

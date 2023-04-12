@@ -10,6 +10,7 @@ use App\Models\DiscoverProduct;
 use App\Models\ShopthelookProduct;
 use App\Models\Metal;
 use App\Models\Material;
+use App\Models\MaterialMetal;
 use App\Models\ProductMetalMaterial;
 use App\Models\SizeCountry;
 use App\Models\ProductCenterDiamondPacket;
@@ -179,6 +180,7 @@ class ProductController extends Controller
         $country_size = SizeCountry::where('country_id', $currency['country_id'])->pluck('size_id')->toArray();
 
         //dd($product);
+        // dd($product->ProductMetalMaterial);
         $data['product'] =  $product;
         $data['likes_products'] =  $likes_products;
         $data['cat_segment'] =  $catSegment;
@@ -192,7 +194,6 @@ class ProductController extends Controller
 
         $data['side_diamond_colors'] =  $side_diamond_colors;
         $data['side_diamond_claritys'] =  $side_diamond_claritys;
-
         return view('frontend.products.product-detail', $data);
     }
 
@@ -509,6 +510,25 @@ class ProductController extends Controller
         $metal_id = ($request->metal_id) ? $request->metal_id : 0;
         $material_id = ($request->material_id) ? $request->material_id : 0;
 
+
+        $materialMetal = ProductMetalMaterial::with("material")->where("product_id",$product_id)->where("metal_id",$metal_id)->get();
+        
+        $materialMetalHTML = "";
+        // $materialMetalHTML1 = array();
+        if(!empty($materialMetal)){
+            foreach ($materialMetal as $key => $value) {
+                if(!empty($value->material)){
+                    // $materialMetalHTML1[] = $value->material;
+                    if($key == 0){
+                        $radioChecked = "checked";
+                    } else {
+                        $radioChecked = "";
+                    }
+                    $materialMetalHTML .= '<input onclick="getProductPrice();" type="radio" '.$radioChecked.' id="material_'.$value->material->id.'" name="material" value="'.$value->material->id.'" /><label for="material_'.$value->material->id.'">'.$value->material->name.'</label>';
+                }
+            }
+        }
+        //dd($materialMetalHTML);
         /* $product_price = Product::getProductPrice($product_id);
         $salesProductPrice = Product::getProductSalesPrice($product_id);
         $shape_price = ProductShape::getProductShapePrice($product_id, $shape_id);
@@ -586,6 +606,6 @@ class ProductController extends Controller
         $ProductImageHtml .= '</div>
 								</div>';
 
-        return response()->json(['msg' => 'success', 'ProductImageHtml' => $ProductImageHtml]);
+        return response()->json(['msg' => 'success', 'ProductImageHtml' => $ProductImageHtml,'materialMetalHTML' => $materialMetalHTML]);
     }
 }
