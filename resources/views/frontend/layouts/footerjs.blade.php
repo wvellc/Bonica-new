@@ -9,4 +9,5 @@
 {{ Html::script("frontend_theme/js/bootstrap-datepicker.min.js") }}
 {{ Html::script("frontend_theme/js/jquery.fancybox.min.js") }}
 {{ Html::script("frontend_theme/js/custom.js") }}
+{{ Html::script("frontend_theme/js/loader.js") }}
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

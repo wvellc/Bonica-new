@@ -36,6 +36,7 @@
     {{ Html::style("frontend_theme/css/custom.css") }}
     {{ Html::style("frontend_theme/css/responsive.css") }}
     {{ Html::style("frontend_theme/css/dev.css") }}
+    {{ Html::style("frontend_theme/css/loader.css") }}
 
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('favicons/apple-icon-57x57.png')}}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('favicons/apple-icon-60x60.png')}}">
