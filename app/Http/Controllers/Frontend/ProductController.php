@@ -268,7 +268,7 @@ class ProductController extends Controller
             $products = $products->whereIn('id', $productIds);
         }
         $products = $products->Active();
-
+        $product_count = count($products->get());
         if ($sorting) {
             if ($sorting == 'recommended') {
                 $products = $products->orderBy('recommended', 'DESC');
@@ -278,7 +278,11 @@ class ProductController extends Controller
                 $products = $products->orderBy('price', 'asc');
             }
         }
-
+        $page = $request['page_no'];
+        $per_page_data = 12;
+        $skip = $page == 1? 0: $per_page_data * ($page-1);
+        $products = $products->skip($skip);
+        $products = $products->take($per_page_data);
         $products = $products->get();
 
 
@@ -392,7 +396,7 @@ class ProductController extends Controller
             $ProductData_Html .= '</div>';
         }
 
-        return response()->json(['msg' => 'success', 'totalProducts' => count($products), 'ProductData_Html' => $ProductData_Html]);
+        return response()->json(['msg' => 'success', 'totalProducts' => $product_count, 'ProductData_Html' => $ProductData_Html]);
     }
     public function gatDiscoverProduct(Request $request)
     {

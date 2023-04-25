@@ -5,6 +5,9 @@
 @section('content')
     <div class="full-page-overlay"></div>
     <div class="product-list-page">
+        <div class="product-loader" style="display: none;">
+            <img src="{{asset('images/spinner2.gif')}}" alt="spinner"/>
+        </div>
         <!-- header -->
         @include('frontend.layouts.header')
         <!-- main -->
@@ -203,6 +206,7 @@
 @endsection
 @push('js')
     <script>
+        $('.product-loader').hide();
         $(function() {
 
             $('.metal-dropdown-menu li').click(function(e) {
@@ -355,7 +359,20 @@
                 }
             });
         }
-        function gatData()
+
+        var page = 1;
+        //gatData(page);
+
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            page++;
+            //$('.product-loader').show();
+            //setTimeout("gatData(page)", 1000);
+            gatData(page);
+            }
+        });
+
+        function gatData(page)
         {
             var metal_id = '';
             if($('.metal-dropdown-menu li a.active').length > 0){
@@ -378,7 +395,7 @@
             var url = '{!! route("frontend.getdata") !!}';
             $.ajax({
                     type: "POST",
-                    url: url,
+                    url: url+"?page=" + page,
                     data: {
                         _token: $('meta[name="csrf-token"]').attr('content'),
                         category_id: '{{$category['id']}}',
@@ -391,11 +408,12 @@
                         gender : gender,
                         sorting : sorting,
                         cat_segment : '{{$catSegment}}',
-                        subcategory_segment : '{{$subCategorySegment}}'
+                        subcategory_segment : '{{$subCategorySegment}}',
+                        page_no : page
                     },
                     dataType: 'JSON',
                     beforeSend: function() {
-                        $("#prodcut-box").html('<div class="product-loader"><img src="{{asset('images/spinner2.gif')}}" alt="spinner"/></div>');
+                        // $("#prodcut-box").html('<div class="product-loader"><img src="{{asset('images/spinner2.gif')}}" alt="spinner"/></div>');
                     },
                     complete: function(){
                         //$("#div_load_more").html('<button onclick="loadMore();"  class="btn btn-primary btn-load-more">Load More</button>');
@@ -403,8 +421,10 @@
                     success: function (data) {
                         if(data.msg == 'success'){
 
+                            // $('.product-loader').hide();
                             $('.total_products').html(data.totalProducts);
-                            $('#prodcut-box').html(data.ProductData_Html);
+                            $('#prodcut-box').append(data.ProductData_Html);
+                            //$('#prodcut-box').html(data.ProductData_Html);
 
                             $('.pl-pro-image-box-slider-wrapper').slick({
                                 slidesToShow: 1,
@@ -425,6 +445,7 @@
                     },
                     error:function (response) {
                         //$('#error_rating').html(response.responseJSON.errors.rating);
+                        alert('No response from server');
 
                     }
                 });
