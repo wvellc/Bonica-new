@@ -5,9 +5,6 @@
 @section('content')
     <div class="full-page-overlay"></div>
     <div class="product-list-page">
-        <div class="product-loader" style="display: none;">
-            <img src="{{asset('images/spinner2.gif')}}" alt="spinner"/>
-        </div>
         <!-- header -->
         @include('frontend.layouts.header')
         <!-- main -->
@@ -154,6 +151,13 @@
                                 <div class="main-prodcut-box-wrapper" id="prodcut-box"></div>
                             </div>
                         </div>
+                        <div class="col-3" style="padding-left:50%;padding-top:10px;">
+                        <div class="snippet" data-title="dot-flashing">
+                            <div class="stage">
+                                <div class="dot-flashing"></div>
+                            </div>
+                        </div>
+                    </div>
                         {{-- <div class="row">
                             <div class="col-md-12">
                                 <div class="text-center mt-5">
@@ -206,7 +210,7 @@
 @endsection
 @push('js')
     <script>
-        $('.product-loader').hide();
+        $('.dot-flashing').hide();
         $(function() {
 
             $('.metal-dropdown-menu li').click(function(e) {
@@ -366,8 +370,8 @@
         $(window).scroll(function() {
             if($(window).scrollTop() + $(window).height() >= $(document).height()) {
             page++;
-            //$('.product-loader').show();
-            //setTimeout("gatData(page)", 1000);
+            $('.dot-flashing').show();
+            //setTimeout("gatData(page)", 100000);
             gatData(page);
             }
         });
@@ -421,7 +425,7 @@
                     success: function (data) {
                         if(data.msg == 'success'){
 
-                            // $('.product-loader').hide();
+                            $('.dot-flashing').hide();
                             $('.total_products').html(data.totalProducts);
                             $('#prodcut-box').append(data.ProductData_Html);
                             //$('#prodcut-box').html(data.ProductData_Html);
