@@ -51,7 +51,7 @@
 											</div>
 											<div class="col-sm-6 mb-3">
 												<label class="d-block text-center text-sm-end">
-													<a href="{{ route('frontend.forgot-password') }}" class="text-underline">Forgot Password?</a>
+													<a href="{{ route('frontend.forgot-password') }}" class="text-underline">Forgot Password<span class="jost-fonts bold">?</span></a>
 												</label>
 											</div>
 										</div>
