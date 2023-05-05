@@ -233,15 +233,24 @@ class ProductController extends Controller
         $cat_segment = $request->cat_segment;
         $subcategory_segment = $request->subcategory_segment;
 
+        $page = $request['page_no'];
+        $per_page_data = 12;
+        $skip = $page == 1? 0: $per_page_data * ($page-1);
         $productIds = array();
         if ($metal_id || $material_id) {
 
             $product_metal_material =  ProductMetalMaterial::select('product_id');
             if ($metal_id) {
                 $product_metal_material = $product_metal_material->where('metal_id', $metal_id);
+                $page = $request['page_no'];
+                $per_page_data = 12;
+                $skip = $page == 1? 0: $per_page_data * ($page-1);
             }
             if ($material_id) {
                 $product_metal_material = $product_metal_material->where('material_id', $material_id);
+                $page = $request['page_no'];
+                $per_page_data = 12;
+                $skip = $page == 1? 0: $per_page_data * ($page-1);
             }
             $product_metal_material = $product_metal_material->get()->toArray();
             if (count($product_metal_material) > 0) {
@@ -255,6 +264,7 @@ class ProductController extends Controller
         //$products = Product::with('productImages','firstProductShape','firstProductShape.shape','firstProductMetalMaterial','firstProductMetalMaterial.metal','firstProductMetalMaterial.material')->where('cat_id',$request->category_id)->Active()->get();
         $products = Product::with('productImages', 'firstProductShape', 'firstProductMetalMaterial', 'firstProductMetalMaterial.metal', 'firstProductMetalMaterial.material');
 
+
         if ($subcategory_segment) {
             $products = $products->where('sub_cat_id', $category_id);
         } else {
@@ -263,24 +273,34 @@ class ProductController extends Controller
 
         if ($gender) {
             $products = $products->where('gender', $gender);
+            $page = $request['page_no'];
+            $per_page_data = 12;
+            $skip = $page == 1? 0: $per_page_data * ($page-1);
         }
         if (count($productIds) > 0) {
             $products = $products->whereIn('id', $productIds);
         }
         $products = $products->Active();
         $product_count = count($products->get());
+
         if ($sorting) {
             if ($sorting == 'recommended') {
                 $products = $products->orderBy('recommended', 'DESC');
+                $page = $request['page_no'];
+                $per_page_data = 12;
+                $skip = $page == 1? 0: $per_page_data * ($page-1);
             } else if ($sorting == 'price_high_to_low') {
+                $page = $request['page_no'];
+                $per_page_data = 12;
+                $skip = $page == 1? 0: $per_page_data * ($page-1);
                 $products = $products->orderBy('price', 'desc');
             } else if ($sorting == 'price_low_to_high') {
+                $page = $request['page_no'];
+                $per_page_data = 12;
+                $skip = $page == 1? 0: $per_page_data * ($page-1);
                 $products = $products->orderBy('price', 'asc');
             }
         }
-        $page = $request['page_no'];
-        $per_page_data = 12;
-        $skip = $page == 1? 0: $per_page_data * ($page-1);
         $products = $products->skip($skip);
         $products = $products->take($per_page_data);
         $products = $products->get();
