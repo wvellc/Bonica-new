@@ -303,8 +303,9 @@ class ProductController extends Controller
         }
         $products = $products->skip($skip);
         $products = $products->take($per_page_data);
-        $products = $products->get();
 
+        $products = $products->get();
+        $pageproductdata = count($products);
 
         $ProductData_Html = '';
         //dd($products);
@@ -416,7 +417,7 @@ class ProductController extends Controller
             $ProductData_Html .= '</div>';
         }
 
-        return response()->json(['msg' => 'success', 'totalProducts' => $product_count, 'ProductData_Html' => $ProductData_Html]);
+        return response()->json(['msg' => 'success', 'totalProducts' => $product_count, 'pageproductdata' => $pageproductdata ,'ProductData_Html' => $ProductData_Html]);
     }
     public function gatDiscoverProduct(Request $request)
     {

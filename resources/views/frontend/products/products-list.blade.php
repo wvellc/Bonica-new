@@ -18,6 +18,7 @@
         @endphp
         <main>
             <section class="inner-banner-section" style="background-image:url({{ asset($category_banner_image) }}) ;">
+                <input type="hidden" name="loader" id="loader" value="1">
                 <div class="container">
                     <div class="row align-items-center justify-content-between">
                         <div class="col-sm-12 col-md-6 col-xl-4 order-2 order-md-1">
@@ -379,11 +380,16 @@
         //gatData(page);
 
         $(window).scroll(function() {
+            var loader_value = $("#loader").val();
             if($(window).scrollTop() + $(window).height() >= $(document).height()) {
             page++;
             $('.dot-flashing').show();
             //setTimeout("gatData(page)", 100000);
-            gatData(page);
+                if(loader_value == 1){
+                    gatData(page);
+                }else{
+                    $('.dot-flashing').hide();
+                }
             }
         });
 
@@ -436,7 +442,9 @@
                     },
                     success: function (data) {
                         if(data.msg == 'success'){
-
+                            if(data.pageproductdata < 12){
+                                $("#loader").val(0);
+                            }   
                             $('.dot-flashing').hide();
                             $('.total_products').html(data.totalProducts);
                             $('#prodcut-box').append(data.ProductData_Html);
