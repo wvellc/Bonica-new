@@ -444,6 +444,8 @@
                         if(data.msg == 'success'){
                             if(data.pageproductdata < 12){
                                 $("#loader").val(0);
+                            }else{
+                                $("#loader").val(1);
                             }   
                             $('.dot-flashing').hide();
                             $('.total_products').html(data.totalProducts);
