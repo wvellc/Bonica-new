@@ -30,7 +30,7 @@ class ProductRequest extends FormRequest
             'description' => 'required|string',
             'price' => 'required',
             'quantity' => 'required',
-            'metal_display_priority'=>'required',
+            //'metal_display_priority'=>'required',
 		];
 	}
     public function messages()
