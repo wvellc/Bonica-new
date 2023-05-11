@@ -870,6 +870,15 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">Images</h3>
+                                            <div class="metal-priority">
+                                                <!-- <h4>Metal Display Priority</h4> -->
+                                                <div class="col-md-6 col-sm-3">
+                                                    <div class="select-box">
+
+                                                        {!! Form::select('metal_display_priority', ['' => 'Metal Display Priority'] + $metal_arr,$selectMetalDisplayPrio, ['class' => 'form-control','id' => 'metal_display_priority']) !!}
+
+                                                    </div>
+                                            </div>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool"
                                                     data-card-widget="collapse"><i class="fas fa-plus"></i>
@@ -1996,6 +2005,7 @@
         }
 
         function updateImageAttribute(id, value, type) {
+            var metal_display_priority = $("#metal_display_priority").val();
 
             var msg_HTML = "";
             $.ajax({
@@ -2005,7 +2015,8 @@
                     _token: "{{ csrf_token() }}",
                     id: id,
                     value: value,
-                    type: type
+                    type: type,
+                    metal_display_priority: metal_display_priority,
                 },
                 dataType: 'JSON',
                 success: function(data) {
