@@ -435,7 +435,7 @@ class ProductController extends Controller
             $product->meta_title  = $request->meta_title;
             $product->meta_keywords  = $request->meta_keywords;
             $product->meta_description  = $request->meta_description;
-            $product->metal_display_priority_id = $request->metal_prio;
+            $product->metal_display_priority_id = $request->metal_display_priority;
             $product->multiplyby = json_encode($request->multiplyby);
 
             if($request->recommended){
