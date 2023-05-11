@@ -139,6 +139,7 @@ class ProductController extends Controller
             "selectedStatusID"  => 1,
             "selectedcatID"  => null,
             "selectedsubcatID"  => null,
+            "selectMetalDisplayPrio"=>null,
         );
         $data['category'] = Category::where('parent_id', 0)->pluck('name', 'id')->toArray();
         $data['metals'] = Metal::select('id', 'name')->Active()->get();
@@ -203,6 +204,7 @@ class ProductController extends Controller
         //$data['selected_shape'] = array();
 
         $materialmetal = MaterialMetal::query()->with('metal','material')->get()->toArray();
+
         $materialmetal_arr = array();
         if(count($materialmetal) > 0){
             foreach( $materialmetal as $key => $value){
@@ -211,6 +213,7 @@ class ProductController extends Controller
                 $materialmetal_arr[$value['metal_id'].$material_id] = $material.$value['metal']['name'];
             }
         }
+
         $data['materialmetal'] = $materialmetal_arr;
         $data['selected_materialmetal'] = array();
         $data['countrys'] = Country::select('id','name')->whereNotIn('slug', ['india'])->orderBy('sort_order', 'asc')->get();
@@ -261,7 +264,9 @@ class ProductController extends Controller
             "selectedStatusID"  => $product->status,
             "selectedcatID"  => $product->cat_id,
             "selectedsubcatID"  => $product->sub_cat_id,
+            "selectMetalDisplayPrio"=>$product->metal_display_priority_id,
         );
+
         $data['category'] = Category::where('parent_id', 0)->pluck('name', 'id')->toArray();
         $data['metals'] = Metal::select('id', 'name')->Active()->get();
         $data['materials'] = Material::select('id', 'name')->Active()->get();
@@ -379,7 +384,7 @@ class ProductController extends Controller
     }
     private function handleCreateOrUpdate($request, $edit = false, $id = null)
     {
-        //dd($request->all());
+
         if ($edit) {
             $product  = Product::find($id);
             $msg = 'messages.update_message';
@@ -389,7 +394,7 @@ class ProductController extends Controller
         }
 
         DB::beginTransaction();
-        try {
+        // try {
             if ($request->description) {
                 $dom = new \DomDocument();
                 $dom->loadHtml($request->description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -430,6 +435,7 @@ class ProductController extends Controller
             $product->meta_title  = $request->meta_title;
             $product->meta_keywords  = $request->meta_keywords;
             $product->meta_description  = $request->meta_description;
+            $product->metal_display_priority_id = $request->metal_prio;
             $product->multiplyby = json_encode($request->multiplyby);
 
             if($request->recommended){
@@ -452,33 +458,40 @@ class ProductController extends Controller
 
             ProductMetalMaterial::where('product_id', $product->id)->delete();
             $metalmaterial_arr = $request->materialmetal;
-            if(is_array($metalmaterial_arr))
-            foreach ($metalmaterial_arr as $value) {
 
-                $metalmaterial = explode('-',$value);
-                $metal_id = $metalmaterial[0];
-                $material_id = isset($metalmaterial[1]) ? $metalmaterial[1] : null;
-                $metalmaterial_data = array('product_id' => $product->id, 'metal_id' => $metal_id, 'material_id' =>  $material_id);
-                ProductMetalMaterial::create($metalmaterial_data);
+            if(is_array($metalmaterial_arr)){
+                foreach ($metalmaterial_arr as $value) {
+
+                    $metalmaterial = explode('-',$value);
+                    $metal_id = $metalmaterial[0];
+                    $material_id = isset($metalmaterial[1]) ? $metalmaterial[1] : null;
+                    $metalmaterial_data = array('product_id' => $product->id, 'metal_id' => $metal_id, 'material_id' =>  $material_id,'metal_display_priority_id'=>0);
+                    ProductMetalMaterial::create($metalmaterial_data);
+                }
 
             }
+            ProductMetalMaterial::where('product_id',$product->id)->where('metal_id',$request->metal_prio)->update(['metal_display_priority_id'=>1]);
 
             ProductSize::where('product_id', $product->id)->delete();
             if (!empty($request->size)) {
                 foreach ($request->size as $key => $value) {
-                    $size_data = array('product_id' => $product->id, 'size_id' =>  $value, 'price_percentage' =>  $request->price_percentage[$key]);
+                    $price_percentage = '';
+                    if(isset($request->price_percentage)){
+                        $price_percentage = $request->price_percentage[$key];
+                    }
+                    $size_data = array('product_id' => $product->id, 'size_id' =>  $value, 'price_percentage' =>  $price_percentage);
                     ProductSize::create($size_data);
                 }
             }
-
             ProductShape::where('product_id', $product->id)->delete();
             ProductCenterDiamondPacket::where('product_id', $product->id)->delete();
+
             if (!empty($request->shape_ids)) {
                 foreach ($request->shape_ids as $value) {
 
                     $shape_data = array('product_id' => $product->id, 'shape_id' =>  $value);
                     ProductShape::create($shape_data);
-
+                    
                     if(!empty($request->center_diamonds_shape)){
                         if(count($request->center_diamonds_shape[$value]) > 0){
 
@@ -499,6 +512,7 @@ class ProductController extends Controller
                         }
                     }
                 }
+                // ProductShape::where('product_id',$product->id)->where('shape_id',$request->shape_prio)->update(['shape_priority_id'=>1]);
             }
 
             ProductSideDiamondPacket::where('product_id', $product->id)->delete();
@@ -567,7 +581,7 @@ class ProductController extends Controller
                     Country::where('id', $key)->update(['multiplyby' => $value]);
                 }
             } */
-
+           
             if($request->file('images'))
             {
                 foreach($request->file('images') as $key => $productimages)
@@ -597,18 +611,20 @@ class ProductController extends Controller
                         }
                         $shape_id = ($request->shape_arr[$key]) ? $request->shape_arr[$key] : null ;
                         $metal_id = ($request->metal_arr[$key]) ? $request->metal_arr[$key] : null ;
-                        $image_data = array('product_id' => $product->id, 'shape_id' =>  $shape_id, 'metal_id' =>  $metal_id, 'image' =>  $imageName, 'image_path' =>  $imagePath ,'video_path' => $videoPath, 'video_type' =>  $video_type, 'type' =>  $type, 'sort_order' =>  1 + $index);
+                
+                        $image_data = array('product_id' => $product->id, 'shape_id' =>  $shape_id, 'metal_id' =>  $metal_id, 'image' =>  $imageName, 'image_path' =>  $imagePath ,'video_path' => $videoPath, 'video_type' =>  $video_type, 'type' =>  $type, 'sort_order' =>  1 + $index,'metal_display_priority_id'=>0);
                         ProductImage::create($image_data);
                     }
                 }
             }
+            ProductImage::where('product_id',$product->id)->where('metal_id',$request->metal_prio)->update(['metal_display_priority_id'=>1]);
             DB::commit();
             return redirect()->route($this->moduleViewName . '.index')->with('success', __($msg, ['title' => 'Product']));
-        } catch (\Exception $e) {
-            DB::rollback();
-            return redirect()->route($this->moduleViewName . '.edit', $id)->with('error', $e->getMessage());
-            // something went wrong
-        }
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     return redirect()->route($this->moduleViewName . '.edit', $id)->with('error', $e->getMessage());
+        //     // something went wrong
+        // }
     }
     /**
      * Remove the specified resource from storage.
@@ -655,7 +671,12 @@ class ProductController extends Controller
         $id =  $request->id;
         $value =  $request->value;
         $type =  $request->type;
-        ProductImage::where('id', $id )->update([$type => $value]);
+        
+        if($value == $request->metal_display_priority){
+            ProductImage::where('id', $id )->update([$type => $value,'metal_display_priority_id'=>1]);
+        }else{
+            ProductImage::where('id', $id )->update([$type => $value,'metal_display_priority_id'=>0]);
+        }
         return response()->json(['code' => 200, 'message' => 'The image attribute has been successfully updated.', 'msg' => 'update']);
     }
     public function updateStatus(Request $request)

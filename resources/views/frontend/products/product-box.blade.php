@@ -20,9 +20,18 @@
 
     /*Get Product Images*/
 
-    $productImages = productImages($product->id, $metal_id, $shape_id);
+    /*comment by dipali*/
+
+    /* $productImages = productImages($product->id, $metal_id, $shape_id);
     $product_first_image = $productImages['product_list_first_image'];
-    $image_paths = $productImages['product_first_image_paths'];
+    $image_paths = $productImages['product_first_image_paths'];*/
+
+    /* Added By dipali */
+    $proirityProductImages = proirityProductImages($product->id);
+    $product_first_image = $proirityProductImages['product_list_first_image'];
+    $image_paths = $proirityProductImages['product_first_image_paths'];
+
+    /* end */
 
     if($subcategory_segment){
         $product_url =  route('frontend.product_detail', ['category' => $cat_segment,'subcategory' => $subcategory_segment,'product' => $product->slug]);

@@ -14,7 +14,7 @@ use App\Models\ProductSize;
 class Product extends Model
 {
     use HasFactory,Sluggable;
-    protected $fillable = ['cat_id', 'sub_cat_id','labour_type','is_solitaire','other_expenses', 'name', 'slug','is_sales','sales_price','price','gender','is_all_include_price','short_description','description' ,'quantity' ,'sku', 'made_in', 'resizable','diamonds','stone','igi_certified','recommended','color','clarity','gold_weight','diamond_weight','net_weight','diamond_pcs','status','meta_title', 'meta_keywords', 'meta_description', 'created_at', 'updated_at'];
+    protected $fillable = ['cat_id', 'sub_cat_id','labour_type','is_solitaire','other_expenses', 'name', 'slug','is_sales','sales_price','price','gender','metal_display_priority_id','is_all_include_price','short_description','description' ,'quantity' ,'sku', 'made_in', 'resizable','diamonds','stone','igi_certified','recommended','color','clarity','gold_weight','diamond_weight','net_weight','diamond_pcs','status','meta_title', 'meta_keywords', 'meta_description', 'created_at', 'updated_at'];
     public function sluggable() : array
     {
         return [

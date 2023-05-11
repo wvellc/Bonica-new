@@ -261,8 +261,7 @@ class ProductController extends Controller
 
         //$products = Product::with('productImages','firstProductShape','firstProductShape.shape','firstProductMetalMaterial','firstProductMetalMaterial.metal','firstProductMetalMaterial.material')->where('cat_id',$request->category_id)->Active()->get();
         $products = Product::with('productImages', 'firstProductShape', 'firstProductMetalMaterial', 'firstProductMetalMaterial.metal', 'firstProductMetalMaterial.material');
-
-
+       
         if ($subcategory_segment) {
             $products = $products->where('sub_cat_id', $category_id);
         } else {
