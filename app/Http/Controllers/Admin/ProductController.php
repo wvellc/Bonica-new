@@ -470,7 +470,7 @@ class ProductController extends Controller
                 }
 
             }
-            ProductMetalMaterial::where('product_id',$product->id)->where('metal_id',$request->metal_prio)->update(['metal_display_priority_id'=>1]);
+            ProductMetalMaterial::where('product_id',$product->id)->where('metal_id',$request->metal_display_priority)->update(['metal_display_priority_id'=>1]);
 
             ProductSize::where('product_id', $product->id)->delete();
             if (!empty($request->size)) {
@@ -617,7 +617,7 @@ class ProductController extends Controller
                     }
                 }
             }
-            ProductImage::where('product_id',$product->id)->where('metal_id',$request->metal_prio)->update(['metal_display_priority_id'=>1]);
+            ProductImage::where('product_id',$product->id)->where('metal_id',$request->metal_display_priority)->update(['metal_display_priority_id'=>1]);
             DB::commit();
             return redirect()->route($this->moduleViewName . '.index')->with('success', __($msg, ['title' => 'Product']));
         // } catch (\Exception $e) {
