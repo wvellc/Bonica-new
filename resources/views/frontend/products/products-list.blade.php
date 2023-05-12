@@ -452,7 +452,7 @@
                             $('#prodcut-box').append(data.ProductData_Html);
                             //$('#prodcut-box').html(data.ProductData_Html);
 
-                            $('.pl-pro-image-box-slider-wrapper').slick({
+                            $(".pl-pro-image-box-slider-wrapper").not('.slick-initialized').slick({
                                 slidesToShow: 1,
                                 slidesToScroll: 1,
                                 dots: false,
