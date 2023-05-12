@@ -27,7 +27,7 @@
     $image_paths = $productImages['product_first_image_paths'];*/
 
     /* Added By dipali */
-    $proirityProductImages = proirityProductImages($product->id);
+    $proirityProductImages = proirityProductImages($product->id, $metal_id, $shape_id);
     $product_first_image = $proirityProductImages['product_list_first_image'];
     $image_paths = $proirityProductImages['product_first_image_paths'];
 

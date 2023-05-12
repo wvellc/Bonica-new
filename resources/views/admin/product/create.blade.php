@@ -385,7 +385,20 @@
                                     </div>
                                 </div>
 
-
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 select-inner-design-wrapper multi-select-with-checkbo-wrapper">
+                                    <div class="form-group">
+                                        <label for="metal_display_priority"> Metal Priority</label>
+                                        {!! Form::select('metal_display_priority', ['' => 'Metal Display Priority'] + $metal_arr,$selectMetalDisplayPrio, ['class' => 'form-control','id' => 'metal_display_priority']) !!}
+                                        <!-- <div class="error" id="error_metal_display_priority"></div>
+                                        @if ($errors->has('metal_display_priority'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('metal_display_priority') }}
+                                            </div>
+                                        @endif -->
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
 
@@ -870,15 +883,10 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">Images</h3>
-                                            <div class="metal-priority">
+                                        
                                                 <!-- <h4>Metal Display Priority</h4> -->
-                                                <div class="col-md-6 col-sm-3">
-                                                    <div class="select-box">
 
-                                                        {!! Form::select('metal_display_priority', ['' => 'Metal Display Priority'] + $metal_arr,$selectMetalDisplayPrio, ['class' => 'form-control','id' => 'metal_display_priority']) !!}
-
-                                                    </div>
-                                            </div>
+ 
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool"
                                                     data-card-widget="collapse"><i class="fas fa-plus"></i>
@@ -886,6 +894,7 @@
                                             </div>
                                             <!-- /.card-tools -->
                                         </div>
+                                    </div>
                                         @php $lastcount = 1; @endphp
                                         <div id="alert_msg"></div>
                                         <!-- /.card-header -->
@@ -1830,6 +1839,7 @@
                 $('#error_price').html('');
                 $('#error_sales_price').html('');
                 $('#error_quantity').html('');
+                //$('#error_metal_display_priority').html('');
 
                 var error = false;
                 if (cat_id == '') {
@@ -1852,7 +1862,11 @@
                 if (price == '') {
                     $('#error_price').html('The price field is required.');
                     error = true;
-                }
+                } 
+                // if (metal_display_priority == '') {
+                //     $('#error_metal_display_priority').html('please select metal priority.');
+                //     error = true;
+                // }
                 if (quantity == '') {
                     $('#error_quantity').html('The quantity field is required.');
                     error = true;

@@ -465,12 +465,12 @@ class ProductController extends Controller
                     $metalmaterial = explode('-',$value);
                     $metal_id = $metalmaterial[0];
                     $material_id = isset($metalmaterial[1]) ? $metalmaterial[1] : null;
-                    $metalmaterial_data = array('product_id' => $product->id, 'metal_id' => $metal_id, 'material_id' =>  $material_id,'metal_display_priority_id'=>0);
+                    $metalmaterial_data = array('product_id' => $product->id, 'metal_id' => $metal_id, 'material_id' =>  $material_id);
                     ProductMetalMaterial::create($metalmaterial_data);
                 }
 
             }
-            ProductMetalMaterial::where('product_id',$product->id)->where('metal_id',$request->metal_display_priority)->update(['metal_display_priority_id'=>1]);
+            //ProductMetalMaterial::where('product_id',$product->id)->where('metal_id',$request->metal_display_priority)->update(['metal_display_priority_id'=>1]);
 
             ProductSize::where('product_id', $product->id)->delete();
             if (!empty($request->size)) {
@@ -581,7 +581,7 @@ class ProductController extends Controller
                     Country::where('id', $key)->update(['multiplyby' => $value]);
                 }
             } */
-           
+           ProductImage::where('product_id',$product->id)->update(['metal_display_priority_id'=>0]);
             if($request->file('images'))
             {
                 foreach($request->file('images') as $key => $productimages)
