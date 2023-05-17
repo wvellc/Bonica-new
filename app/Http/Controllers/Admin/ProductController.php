@@ -62,7 +62,7 @@ class ProductController extends Controller
         if ($request->ajax()) {
             //$model = Product::query()->with('category','subcategory','singleProductImages');
             $model = DB::table('products')
-                    ->select('products.id as id','products.name as name','products.quantity as quantity','categories.name as category','product_images.image_path as image','products.price as price','products.status as status' , 'subcategorydata.name as subcategory','products.sub_cat_id as sub_cat_id')
+                    ->select('products.id as id','products.name as name','products.quantity as quantity','categories.name as category','product_images.image_path as image','products.price as price','products.status as status' , 'subcategorydata.name as subcategory','products.sub_cat_id as sub_cat_id','products.cat_id as cat_id')
                     ->leftjoin('categories','categories.id','=','products.cat_id')
                     ->leftjoin('categories as subcategorydata','subcategorydata.id','=','products.sub_cat_id')
                     ->leftjoin('product_images','product_images.product_id','=','products.id');
@@ -85,9 +85,9 @@ class ProductController extends Controller
                 ->editColumn('image', function ($row) {
                     $product_image =  '/images/default-img.png';
 
-                    //if(isset($row->singleProductImages) && $row->singleProductImages != null){
+                    if(isset($row->image) && $row->image != null){
                         $product_image = $row->image;
-                    //}
+                    }
 
                     return '<img  width="150px" height="150px" src="'.url($product_image).'" class="img-thumbnail" alt="category">';
                 })
@@ -102,9 +102,9 @@ class ProductController extends Controller
                 })
                 ->editColumn('category', function ($row) {
                     $category = $row->category;
-                    //if($row->cat_id > 0){
+                    if($row->cat_id > 0){
                         $category = $row->category;
-                    //}
+                    }
                     return $category;
                 })
                 ->editColumn('status', function ($row) {
@@ -114,16 +114,16 @@ class ProductController extends Controller
                     }
                     return '<input type="checkbox" ' . $checked . ' data-toggle="toggle" data-on="Active" data-off="Inactive" onchange="statusChange(' . $row->id . ')" data-onstyle="success" data-offstyle="danger" class="toggle-demo" id="toggle-demo">';
                 })
-                ->filter(function ($query) {
-                    if (request()->has('search') && ! is_null(request()->get('search')['value']) ) {
-                        $searchItem = request()->get('search')['value'];
-                        $query = $query->where(function($query) use ($searchItem){
-                            $query->Where('name', 'like', "%{$searchItem}%");
-                            $query->orWhere('category', 'like', "%{$searchItem}%");
-                        });
+                // ->filter(function ($query) {
+                //     if (request()->has('search') && ! is_null(request()->get('search')['value']) ) {
+                //         $searchItem = request()->get('search')['value'];
+                //         $query = $query->where(function($query) use ($searchItem){
+                //             $query->Where('name', 'like', "%{$searchItem}%");
+                //             $query->orWhere('category', 'like', "%{$searchItem}%");
+                //         });
                 
-                    }
-                })
+                //     }
+                // })
                 // ->orderColumn('category', function ($query, $order) {
                 //     $query->orderBy('cat_id', $order);
                 // })
