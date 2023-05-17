@@ -60,7 +60,12 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $model = Product::query()->with('category','subcategory','singleProductImages');
+            //$model = Product::query()->with('category','subcategory','singleProductImages');
+            $model = DB::table('products')
+                    ->select('products.id as id','products.name as name','products.quantity as quantity','categories.name as category','product_images.image_path as image','products.price as price','products.status as status' , 'subcategorydata.name as subcategory','products.sub_cat_id as sub_cat_id')
+                    ->leftjoin('categories','categories.id','=','products.cat_id')
+                    ->leftjoin('categories as subcategorydata','subcategorydata.id','=','products.sub_cat_id')
+                    ->leftjoin('product_images','product_images.product_id','=','products.id');
 
             return Datatables::of($model)
                 ->addColumn('action', function ($row) {
@@ -80,27 +85,28 @@ class ProductController extends Controller
                 ->editColumn('image', function ($row) {
                     $product_image =  '/images/default-img.png';
 
-                    if(isset($row->singleProductImages) && $row->singleProductImages != null){
-                        $product_image = $row->singleProductImages['image_path'];
-                    }
+                    //if(isset($row->singleProductImages) && $row->singleProductImages != null){
+                        $product_image = $row->image;
+                    //}
 
                     return '<img  width="150px" height="150px" src="'.url($product_image).'" class="img-thumbnail" alt="category">';
                 })
                 ->editColumn('subcategory', function ($row) {
                     $subcategory = '';
-                    if($row->sub_cat_id > 0){
-                        $subcategory = $row->subcategory->name;
+                    if(!empty($row->subcategory)){
+                     
+                        // $subcategoryData = Category::pluck('name')->where("id",$row->sub_cat_id);
+                        $subcategory = $row->subcategory;
                     }
                     return $subcategory;
                 })
                 ->editColumn('category', function ($row) {
                     $category = $row->category;
-                    if($row->cat_id > 0){
-                        $category = $row->category->name;
-                    }
+                    //if($row->cat_id > 0){
+                        $category = $row->category;
+                    //}
                     return $category;
                 })
-
                 ->editColumn('status', function ($row) {
                     $checked = "";
                     if ($row->status == 1) {
@@ -108,9 +114,19 @@ class ProductController extends Controller
                     }
                     return '<input type="checkbox" ' . $checked . ' data-toggle="toggle" data-on="Active" data-off="Inactive" onchange="statusChange(' . $row->id . ')" data-onstyle="success" data-offstyle="danger" class="toggle-demo" id="toggle-demo">';
                 })
-                ->orderColumn('category', function ($query, $order) {
-                    $query->orderBy('cat_id', $order);
+                ->filter(function ($query) {
+                    if (request()->has('search') && ! is_null(request()->get('search')['value']) ) {
+                        $searchItem = request()->get('search')['value'];
+                        $query = $query->where(function($query) use ($searchItem){
+                            $query->Where('name', 'like', "%{$searchItem}%");
+                            $query->orWhere('category', 'like', "%{$searchItem}%");
+                        });
+                
+                    }
                 })
+                // ->orderColumn('category', function ($query, $order) {
+                //     $query->orderBy('cat_id', $order);
+                // })
             ->rawColumns(['image','price','status','action','subcategory'])
             ->make();
 

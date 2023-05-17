@@ -107,7 +107,7 @@
                 { data: 'image', name: 'image', orderable: false, searchable: false },
                 { data: 'name', name: 'name', orderable: true, searchable: true },
                 { data: 'category', name: 'category', orderable: true, searchable: false },
-                { data: 'subcategory', name: 'subcategory', orderable: false, searchable: false },
+                { data: 'subcategory', name: 'subcategory', orderable: true, searchable: false },
                 { data: 'quantity', name: 'quantity', orderable: true, searchable: true },
                 { data: 'price', name: 'price', orderable: true, searchable: true },
                 { data: 'status', name: 'status', orderable: false, searchable: true },
