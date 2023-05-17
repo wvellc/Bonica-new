@@ -29,11 +29,10 @@ use App\Models\Labour;
 use App\Models\Country;
 use App\Models\ProductCenterDiamondPacket;
 use App\Models\ProductSideDiamondPacket;
-
 use DataTables;
-
 use DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class ProductController extends Controller
@@ -62,8 +61,9 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             $model = Product::query()->with('category','subcategory','singleProductImages');
-            return DataTables::eloquent($model)
-                ->addColumn('action', function (Product $row) {
+
+            return Datatables::of($model)
+                ->addColumn('action', function ($row) {
                     return view(
                         "admin.partials.action",
                         [
@@ -74,46 +74,46 @@ class ProductController extends Controller
                         ]
                     )->render();
                 })
-                ->editColumn('created_at', function ($row) {
-                    return Commonhelper::dateFormatChange($row->created_at);
-                })
                 ->editColumn('price', function ($row) {
-                    return '&#8377; ' .$row->price;
+                     return '&#8377; ' .$row->price;
                 })
+                ->editColumn('image', function ($row) {
+                    $product_image =  '/images/default-img.png';
 
-                ->editColumn('category', function ($row) {
-                    $category = $row->category;
-                    if($row->cat_id > 0){
-                        $category = $row->category->name;
+                    if(isset($row->singleProductImages) && $row->singleProductImages != null){
+                        $product_image = $row->singleProductImages['image_path'];
                     }
-					return $category;
-				})
+
+                    return '<img  width="150px" height="150px" src="'.url($product_image).'" class="img-thumbnail" alt="category">';
+                })
                 ->editColumn('subcategory', function ($row) {
                     $subcategory = '';
                     if($row->sub_cat_id > 0){
                         $subcategory = $row->subcategory->name;
                     }
-					return $subcategory;
-				})
-                ->editColumn('image', function ($row) {
-                    $product_image =  '/images/default-img.png';
-
-                    if(isset($row->singleProductImages) && $row->singleProductImages['image_path']){
-                        $product_image = $row->singleProductImages['image_path'];
+                    return $subcategory;
+                })
+                ->editColumn('category', function ($row) {
+                    $category = $row->category;
+                    if($row->cat_id > 0){
+                        $category = $row->category->name;
                     }
-
-                    return '<img  width="100" src="'.url($product_image).'" class="img-thumbnail" alt="category">';
+                    return $category;
                 })
 
-                ->editColumn('status', function (Product $row) {
+                ->editColumn('status', function ($row) {
                     $checked = "";
                     if ($row->status == 1) {
                         $checked = "checked";
                     }
                     return '<input type="checkbox" ' . $checked . ' data-toggle="toggle" data-on="Active" data-off="Inactive" onchange="statusChange(' . $row->id . ')" data-onstyle="success" data-offstyle="danger" class="toggle-demo" id="toggle-demo">';
                 })
-                ->rawColumns(['price','image','category','subcategory','status', 'action'])
-                ->make(true);
+                ->orderColumn('category', function ($query, $order) {
+                    $query->orderBy('cat_id', $order);
+                })
+            ->rawColumns(['image','price','status','action','subcategory'])
+            ->make();
+
         } else {
             $data['module']        = $this->module;
             $data['page_title']    = "List";
