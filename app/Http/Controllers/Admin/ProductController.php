@@ -66,7 +66,7 @@ class ProductController extends Controller
                     ->leftjoin('categories','categories.id','=','products.cat_id')
                     ->leftjoin('categories as subcategorydata','subcategorydata.id','=','products.sub_cat_id')
                     ->leftjoin('product_images','product_images.product_id','=','products.id');
-
+                    
             return Datatables::of($model)
                 ->addColumn('action', function ($row) {
                     return view(
@@ -114,16 +114,18 @@ class ProductController extends Controller
                     }
                     return '<input type="checkbox" ' . $checked . ' data-toggle="toggle" data-on="Active" data-off="Inactive" onchange="statusChange(' . $row->id . ')" data-onstyle="success" data-offstyle="danger" class="toggle-demo" id="toggle-demo">';
                 })
-                // ->filter(function ($query) {
-                //     if (request()->has('search') && ! is_null(request()->get('search')['value']) ) {
-                //         $searchItem = request()->get('search')['value'];
-                //         $query = $query->where(function($query) use ($searchItem){
-                //             $query->Where('name', 'like', "%{$searchItem}%");
-                //             $query->orWhere('category', 'like', "%{$searchItem}%");
-                //         });
+                ->filter(function ($query) {
+
+                    if (request()->has('search') && ! is_null(request()->get('search')['value']) ) {
+                        $searchItem = request()->get('search')['value'];
+                        $query = $query->where(function($query) use ($searchItem){
+                            $query->Where('products.name', 'like', "%{$searchItem}%");
+                            $query->orWhere('categories.name', 'like', "%{$searchItem}%");
+                            $query->orWhere('subcategorydata.name', 'like', "%{$searchItem}%");
+                        });
                 
-                //     }
-                // })
+                    }
+                })
                 // ->orderColumn('category', function ($query, $order) {
                 //     $query->orderBy('cat_id', $order);
                 // })
