@@ -62,11 +62,10 @@ class ProductController extends Controller
         if ($request->ajax()) {
             //$model = Product::query()->with('category','subcategory','singleProductImages');
             $model = DB::table('products')
-                    ->select('products.id as id','products.name as name','products.quantity as quantity','categories.name as category','product_images.image_path as image','products.price as price','products.status as status' , 'subcategorydata.name as subcategory','products.sub_cat_id as sub_cat_id','products.cat_id as cat_id')
+                    ->select('products.id as id','products.name as name','products.quantity as quantity','categories.name as category','products.price as price','products.status as status' , 'subcategorydata.name as subcategory','products.sub_cat_id as sub_cat_id','products.cat_id as cat_id',DB::raw('(select image_path from product_images where product_id  =   products.id order by id asc limit 1) as image') )
                     ->leftjoin('categories','categories.id','=','products.cat_id')
-                    ->leftjoin('categories as subcategorydata','subcategorydata.id','=','products.sub_cat_id')
-                    ->leftjoin('product_images','product_images.product_id','=','products.id');
-                    
+                    ->leftjoin('categories as subcategorydata','subcategorydata.id','=','products.sub_cat_id');
+              
             return Datatables::of($model)
                 ->addColumn('action', function ($row) {
                     return view(
@@ -83,6 +82,7 @@ class ProductController extends Controller
                      return '&#8377; ' .$row->price;
                 })
                 ->editColumn('image', function ($row) {
+            
                     $product_image =  '/images/default-img.png';
 
                     if(isset($row->image) && $row->image != null){
