@@ -146,9 +146,12 @@
                                
 
                                 @if (count($side_diamond_colors) > 0 || count($side_diamond_claritys) > 0)
+
+                                @if($product->is_solitaire == 1)
                                 <div class="mt-3">
                                     <h4 style="font-size: 16px;">Side Diamonds</h4>
                                 </div>
+                                @endif
 
                                 <div class="d-flex">
                                     @if (count($side_diamond_colors) > 0)
