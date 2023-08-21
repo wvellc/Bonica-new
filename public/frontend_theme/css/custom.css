@@ -3469,8 +3469,10 @@ img.right-checked {
   height: 100%;
 }
 
-.pd-slider-large-img img, 
-.pd-slider-large-img a { remove object fit } 
+.pd-slider-large-img img,
+.pd-slider-large-img a {
+  height: 100%;
+}
 
 ul.pro-d-list-info li {
   position: relative;
