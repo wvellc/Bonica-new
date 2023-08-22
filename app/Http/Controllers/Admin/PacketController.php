@@ -10,6 +10,9 @@ use App\Models\Shape;
 use App\Models\Color;
 use App\Models\Clarity;
 use DataTables;
+use Validator;
+use App\Imports\ImportPacket;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PacketController extends Controller
 {
@@ -225,6 +228,23 @@ class PacketController extends Controller
             Packet::where('id', request('id'))->update($dataUpdate);
         }
         return response(['status' => 200, "msg" =>  __('messages.status_message', ['title' => $this->module,'status_type' => $statusMessage])]);
+
+    }
+
+    public function importpacket(Request $request){
+    	if ($request->hasFile('csv_file')) {
+        $file = $request->file('csv_file');
+        if ($file->isValid()) {
+            $realPath = $file->getRealPath();
+            // Continue processing the file
+        	Excel::import(new ImportPacket, $request->file('csv_file'));
+        	//return response(['status' => 200,"msg"=>'success']);
+        } else {
+            // Handle the case where the file is not valid
+        }
+    } else {
+        // Handle the case where the 'csv' file is not present in the request
+    }
 
     }
 

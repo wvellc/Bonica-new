@@ -186,6 +186,7 @@ return [
         Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -244,6 +245,7 @@ return [
         'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
