@@ -120,6 +120,9 @@ Route::group(['middleware' => ['checkrequest', 'HtmlMinifier', 'preventbackhisto
             Route::post('packet/status', [PacketController::class, 'updateStatus'])->name('packet.statusupdate');
             Route::resource('packet', PacketController::class);
 
+            #import packet xls
+            Route::post('import-packet',[PacketController::class,'importpacket'])->name('import-packet');
+
             //Material Metal
             Route::resource('materialmetal', MaterialMetalController::class);
 

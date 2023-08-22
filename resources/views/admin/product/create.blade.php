@@ -13,6 +13,11 @@
         input[type=number] {
             -moz-appearance: textfield;
         }
+
+        ul.multiselect-container {
+            max-height: 190px !important;
+            overflow-y: scroll !important;
+        }
     </style>
     <!-- Content Header (Page header) -->
     <div class="content-header">

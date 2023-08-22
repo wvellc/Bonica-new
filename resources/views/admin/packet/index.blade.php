@@ -7,6 +7,8 @@
 <!-- SweetAlert2 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 @section('content')
 <!-- Content Header (Page header) -->
@@ -34,7 +36,11 @@
 				<div class="card">
 					<div class="card-header">
 						<h3 class="card-title">{{$page_title}}</h3>
-						<small class="float-sm-right"><a class="btn btn-info bg-gradient-info" href="{{ route("admin.packet.create") }}">
+						<small class="float-sm-right">
+							<button type="button" class="btn btn-info bg-gradient-info add-pdf" onclick="uploadPdf()"> <i class="fas fa-file-pdf"> </i>  
+							 Import Csv
+							</button>
+							<a class="btn btn-info bg-gradient-info" href="{{ route("admin.packet.create") }}">
 							Add {{$module}}
 						</a></small>
 					</div>
@@ -69,23 +75,14 @@
 </section>
 @endsection
 @push('js')
-<!-- DataTables  & Plugins -->
-{{ Html::script("admin_theme/plugins/datatables/jquery.dataTables.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-responsive/js/dataTables.responsive.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-responsive/js/responsive.bootstrap4.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-buttons/js/dataTables.buttons.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-buttons/js/buttons.bootstrap4.min.js") }}
-{{ Html::script("admin_theme/plugins/jszip/jszip.min.js") }}
-{{ Html::script("admin_theme/plugins/pdfmake/pdfmake.min.js") }}
-{{ Html::script("admin_theme/plugins/pdfmake/vfs_fonts.js") }}
-{{ Html::script("admin_theme/plugins/datatables-buttons/js/buttons.html5.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-buttons/js/buttons.print.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-buttons/js/buttons.colVis.min.js") }}
-
 <!-- SweetAlert2 -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
 		var myTable =  $('#tbl_datatable').DataTable({
@@ -185,4 +182,5 @@
         }
 
 </script>
+@include('admin.partials.pdf_upload_script')
 @endpush
