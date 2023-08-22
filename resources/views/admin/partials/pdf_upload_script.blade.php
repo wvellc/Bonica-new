@@ -2,7 +2,7 @@
 function uploadPdf(){
 	Swal.fire({
 	    title: 'Upload File',
-	    html: '<input type="file" id="fileInput" class="form-control" name="file"><span id="detailed_sample_file" class="sample_file"><a href="<?= asset(SAMPLE_FILE_PATH) ?>">Click here</a> to download sample file</span>',
+	    html: '<span class="error"> upload only xlsx file. </span><input type="file" id="fileInput" class="form-control" name="file"><span id="detailed_sample_file" class="sample_file"><a href="<?= asset(SAMPLE_FILE_PATH) ?>">Click here</a> to download sample file</span>',
 	    showCancelButton: true,
 	    confirmButtonColor: '#40485b',
 		confirmButtonText: 'Import',
