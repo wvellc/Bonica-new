@@ -25,17 +25,30 @@ class ImportPacket implements ToCollection
                 $shape = ucfirst($packetData[2]);
                 $color = ucwords($packetData[3]);
                 $clarity = ucwords($packetData[4]);
-                
-                $shapeId = Shape::select('id')->where('name',$shape)->first();
-                $colorId = Color::select('id')->where('name',$color)->first();
-                $clarityId = Clarity::select('id')->where('name',$clarity)->first();
+
+                $shapeId = null;
+                $colorId = null;
+                $clarityId = null;
+
+                if($shape){
+                    $shapeId = Shape::select('id')->where('name',$shape)->first();
+                    $shapeId = $shapeId->id;
+                }
+                if($color){
+                    $colorId = Color::select('id')->where('name',$color)->first();
+                    $colorId = $colorId->id;
+                }
+                if($clarity){
+                    $clarityId = Clarity::select('id')->where('name',$clarity)->first();
+                    $clarityId = $clarityId->id;
+                }
 
                 $packet = new Packet();
                 $packet->name = $packetData[0];
                 $packet->diamond_size = $packetData[1];
-                $packet->shape_id = $shapeId->id;
-                $packet->color_id = $colorId->id;
-                $packet->clarity_id = $clarityId->id;
+                $packet->shape_id = $shapeId;
+                $packet->color_id = $colorId;
+                $packet->clarity_id = $clarityId;
                 $packet->price = $packetData[5];
                 $packet->save();
             }

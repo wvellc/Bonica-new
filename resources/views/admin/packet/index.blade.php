@@ -117,41 +117,50 @@
         myTable.column(0).visible(false);
 
 		$("body").on("click",".remove-action",function(e){
-            toastr.options = {
-                "closeButton": true,
-                "newestOnTop": true,
-                "positionClass": "toast-top-right"
-            };
+		    toastr.options = {
+		        "closeButton": true,
+		        "newestOnTop": true,
+		        "positionClass": "toast-top-right"
+		    };
 			e.preventDefault();
-			var id  = $(this).data('id');
-			var url = $(this).data('url');
-			var current_object = $(this);
-			swal({
-				title: "Are you sure?",
-				text: "Once deleted, you will not be able to recover this record!",
-				type: "warning",
-				showCancelButton: true,
-				dangerMode: true,
-				cancelButtonClass: '#dcccbd',
-				confirmButtonColor: '#40485b',
-				confirmButtonText: 'Delete',
-			},function () {
-				$.ajax({
-					type: "DELETE",
-					url: url,
-					headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-					dataType: 'JSON',
-					success: function (response) {
-						if (response.code == 200) {
-							myTable.ajax.reload();
-                            toastr.success(response.message);
-
-						} else {
-							toastr.error(response.message);
-						}
-					}
-				});
-			});
+	        var id = $(this).data('id');
+	        var url = $(this).data('url');
+	        var current_object = $(this);
+	        Swal.fire({
+	            title: "Are you sure?",
+	            text: "Once deleted, you will not be able to recover this record!",
+	            icon: "warning",
+	            showCancelButton: true,
+	            dangerMode: true,
+	            cancelButtonClass: '#dcccbd',
+	            confirmButtonColor: '#40485b',
+	            confirmButtonText: 'Delete',
+	        }).then((result) => {
+	            if (result.isConfirmed) {
+	                $.ajax({
+	                    type: "DELETE",
+	                    url: url,
+	                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	                    dataType: 'JSON',
+	                    success: function(response) {
+	                        if (response.code == 200) {
+	                            myTable.ajax.reload();
+	                            Swal.fire({
+	                                title: "Deleted",
+	                                text: response.message,
+	                                icon: "success",
+	                            });
+	                        } else {
+	                            Swal.fire({
+	                                title: "Deleted",
+	                                text: response.message,
+	                                icon: "error",
+	                            });
+	                        }
+	                    }
+	                });
+	            }
+	        });
 		});
         function statusChange(id) {
             $.ajax({
