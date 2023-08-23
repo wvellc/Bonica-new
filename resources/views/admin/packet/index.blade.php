@@ -38,7 +38,7 @@
 						<h3 class="card-title">{{$page_title}}</h3>
 						<small class="float-sm-right">
 							<button type="button" class="btn btn-info bg-gradient-info add-pdf" onclick="uploadPdf()"> <i class="fas fa-file-pdf"> </i>  
-							 Import Csv
+							 Import Xlsx
 							</button>
 							<a class="btn btn-info bg-gradient-info" href="{{ route("admin.packet.create") }}">
 							Add {{$module}}
