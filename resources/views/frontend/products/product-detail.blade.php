@@ -390,6 +390,9 @@
 			</section>
             @if(count($product->ProductShapes) > 0)
                 @if($cat_segment == 'rings')
+                @php
+                    $productShapes = strtolower($product->ProductShapes[0]['shape']['name']);
+                @endphp
                 <section class="section diamond-section">
                     <div class="container-fluid p-0">
                         <div class="row align-items-center">
@@ -397,7 +400,7 @@
                                 <div class="hand-wrapper">
                                     <img id="hand" src="{{ asset('images/hand.png') }}" alt="image" class="v-hand" >
                                     <div class="box-diamond-on-hand">
-                                        <img id="diamondOnhand" src="{{ asset('images/shapes/round.png') }}" alt="image" class="diamond-on-hand" style="transform: scale(2.20);">
+                                        <img id="diamondOnhand" src="{{ asset('images/shapes/'.$productShapes.'.png') }}" alt="image" class="diamond-on-hand" style="transform: scale(2.20);">
                                     </div>
                                     <span>Shown with ring size 6</span>
                                 </div>

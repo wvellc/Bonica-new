@@ -111,6 +111,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('admin.size-master-price.index') }}"
+                                class="nav-link {{ request()->is('admin/size-master-price') || request()->is('admin/size-master-price/*') ? 'active' : '' }}">
+                                <i class="fas fa-solid fa-recycle nav-icon"></i>
+                                <p>Size Master Price</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin.shape.index') }}"
                                 class="nav-link {{ request()->is('admin/shape') || request()->is('admin/shape/*') ? 'active' : '' }}">
                                 <i class="fas fa-solid fa-recycle nav-icon"></i>

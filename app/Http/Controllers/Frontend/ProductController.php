@@ -15,6 +15,9 @@ use App\Models\ProductMetalMaterial;
 use App\Models\SizeCountry;
 use App\Models\ProductCenterDiamondPacket;
 use App\Models\ProductSideDiamondPacket;
+use App\Models\SizeMasterPrice;
+use App\Models\Size;
+use App\Models\Country;
 
 use Cookie;
 
@@ -507,14 +510,62 @@ class ProductController extends Controller
         'metal_id' => $request->metal_id,
         'material_id' => $request->material_id];
 
+        
+        //start calculation of users select size wise change price logic  
+
+        //Get the selected ring size from the database
+        $ringSize = Size::where('id',$request->ringSize)->first();
+
+        $countryId = $currency['country_id'];
+
+        // Get all sizes with associated countries based on the given country ID
+        $allSizes = Size::select('name')->with(['country' => function($query) use ($countryId) {
+            $query->where('country_id', $countryId);
+        }])->get()->toArray();
+       
+       //// Sort the sizes in ascending order
+        usort($allSizes, function ($a, $b) {
+            $aValue = floatval($a["name"]);
+            $bValue = floatval($b["name"]);
+            
+            if ($aValue == $bValue) {
+                return 0;
+            }
+            
+            return ($aValue < $bValue) ? -1 : 1;
+        });
+
+        // Get the master price for sizes
+        $sizeMasterPrice = SizeMasterPrice::select('price')->first();
+        
+        $sizePrice = 0;
+
+        // Calculate the cumulative price based on ring size and size prices
+        if($ringSize->name > $allSizes[0]['name']){
+            foreach ($allSizes as $key => $singleSize) {
+                if ($singleSize['name'] < $ringSize->name) {
+                    $sizePrice += $sizeMasterPrice->price;
+                } else {
+                    break; // Stop adding prices once the condition is no longer met
+                }
+            }
+        }
+        
         $productDataArr = productPriceCalculation($productData);
+
+        if($sizePrice > 0){
+            // Calculate the price increment based on the percentage of size price
+            $priceIncrement = $productDataArr['total_price'] * $sizePrice / 100;
+            // Add the calculated price increment to the total price
+            $productDataArr['total_price'] = $productDataArr['total_price'] + $priceIncrement;
+        }
+        //end calculation of users select size wise change price logic  
 
         $salesProductPrice = Product::getProductSalesPrice($request->product_id);
         $product_price = $currency['symbol'] . ' ' . number_format((float)($productDataArr['countryMultiplyby'][$currency['country_id']] * $productDataArr['total_price']) / $currency['rate'], 3, '.', '');
 
         //$salesProductPrice = $currency['symbol'] . ' ' . number_format((float)($salesProductPrice + $shape_price + $metal_material_price) / $currency['rate'], 3, '.', '');
         $salesProductPrice = $currency['symbol'] . ' ' . number_format((float)($salesProductPrice) / $currency['rate'], 3, '.', '');
-
         return response()->json(['msg' => 'success', 'product_price' => $product_price, 'salesProductPrice' => $salesProductPrice]);
 
     }

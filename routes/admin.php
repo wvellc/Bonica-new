@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\ClarityController;
 use App\Http\Controllers\Admin\LabourController;
 use App\Http\Controllers\Admin\MaterialMetalController;
 use App\Http\Controllers\Admin\PacketController;
+use App\Http\Controllers\Admin\SizeMasterPriceController;
 
 Route::group(['middleware' => ['checkrequest', 'HtmlMinifier', 'preventbackhistory'], 'as' => 'admin.'], function () {
     # Admin Login Routes...
@@ -98,7 +99,10 @@ Route::group(['middleware' => ['checkrequest', 'HtmlMinifier', 'preventbackhisto
             Route::get('search-country', [SizeController::class, 'searchCountry'])->name('search-country');
             Route::get('search-size', [SizeController::class, 'searchSize'])->name('search-size');
             Route::resource('size', SizeController::class);
-
+            
+            //size master price
+            Route::resource('size-master-price', SizeMasterPriceController::class);
+            Route::post('size-master-price/status', [SizeMasterPriceController::class, 'updateStatus'])->name('size-master-price.statusupdate');
 
             //Shape
             Route::post('shape/status', [ShapeController::class, 'updateStatus'])->name('shape.statusupdate');
