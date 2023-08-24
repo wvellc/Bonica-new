@@ -541,12 +541,14 @@ class ProductController extends Controller
         $sizePrice = 0;
 
         // Calculate the cumulative price based on ring size and size prices
-        if($ringSize->name > $allSizes[0]['name']){
-            foreach ($allSizes as $key => $singleSize) {
-                if ($singleSize['name'] < $ringSize->name) {
-                    $sizePrice += $sizeMasterPrice->price;
-                } else {
-                    break; // Stop adding prices once the condition is no longer met
+        if($ringSize){
+            if($ringSize->name > $allSizes[0]['name']){
+                foreach ($allSizes as $key => $singleSize) {
+                    if ($singleSize['name'] < $ringSize->name) {
+                        $sizePrice += $sizeMasterPrice->price;
+                    } else {
+                        break; // Stop adding prices once the condition is no longer met
+                    }
                 }
             }
         }
