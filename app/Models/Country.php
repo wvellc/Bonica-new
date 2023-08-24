@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Size;
 
 class Country extends Model
 {
@@ -14,5 +15,10 @@ class Country extends Model
     public static function AllCountry()
     {
         return Country::pluck('name', 'id')->toArray();
+    }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'size_countries', 'country_id', 'size_id');
     }
 }
