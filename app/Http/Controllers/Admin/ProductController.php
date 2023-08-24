@@ -490,6 +490,10 @@ class ProductController extends Controller
             }
             //ProductMetalMaterial::where('product_id',$product->id)->where('metal_id',$request->metal_display_priority)->update(['metal_display_priority_id'=>1]);
 
+            if($category->slug == 'rings'){
+                $request->size =  Size::Active()->pluck('id');
+            }
+            
             ProductSize::where('product_id', $product->id)->delete();
             if (!empty($request->size)) {
                 foreach ($request->size as $key => $value) {

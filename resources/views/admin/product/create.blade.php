@@ -1013,7 +1013,8 @@
                                     </div>
                                     <!-- /.card -->
                                 </div>
-                                <div
+                                <!-- comment by dipali gupta -->
+                                <!-- <div
                                     class="col-md-12 col-sm-12 select-inner-design-wrapper multi-select-with-checkbo-wrapper">
                                     <div class="form-group">
                                         <label for="size">Ring Size</label>
@@ -1022,16 +1023,16 @@
                                             'id' => 'size',
                                             'multiple' => 'multiple',
                                         ]) !!}
-                                        <!-- Error -->
+                                      
                                         @if ($errors->has('size'))
                                             <div class="error">
                                                 {{ $errors->first('size') }}
                                             </div>
                                         @endif
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="row" id="div_sizes">
+                            <!-- <div class="row" id="div_sizes">
                                 @if ($selectedSizePercentage)
                                     @foreach ($selectedSizePercentage as $value)
                                         <div class="col-md-4 col-lg-4" id="row_size_{{ $value['size_id'] }}">
@@ -1064,7 +1065,8 @@
                                         </div>
                                     @endforeach
                                 @endif
-                            </div>
+                            </div> -->
+                            <!--end  comment by dipali gupta -->
                             @if ($countrys)
                                 <div class="row">
                                     <div class="col-md-6">
@@ -1410,47 +1412,51 @@
             $('#shape_id_' + shape_id).remove();
         }
 
-        function sizeSelection(size, size_id) {
-            var items = `<div class="col-md-4 col-lg-4" id="row_size_${size_id}">
-                            <div class="content box-content-wrapper">
-                                <div class="card py-0">
-                                    <div class="card-body" id="card_body">
-                                            <div id="row">
-                                                <div class="row mb-2 align-items-center" id="row">
-                                                    <div class="col-md-6 mb-2 mb-md-0 ">
-                                                        <input type="number"
-                                                            name="size_name[]"
-                                                            class="form-control"
-                                                            id="size[]"
-                                                            step = "any"
-                                                            placeholder="size"
-                                                            value="${size}">
-                                                    </div>
-                                                    <div class="col-md-6 mb-2 mb-md-0 input-group">
-                                                        <input type="number"
-                                                        name="price_percentage[]"
-                                                        class="form-control"
-                                                        id="price_percentage"
-                                                        placeholder=""
-                                                        step = "any"
-                                                        value="" onkeyup="productPriceCalculation()">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">%</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-            $('#div_sizes').append(items);
-        }
+        //comment by dipali gupta
 
-        function removeSizeSelection(size_id) {
-            //console.log(shape_id);
-            $('#row_size_' + size_id).remove();
-        }
+        // function sizeSelection(size, size_id) {
+        //     var items = `<div class="col-md-4 col-lg-4" id="row_size_${size_id}">
+        //                     <div class="content box-content-wrapper">
+        //                         <div class="card py-0">
+        //                             <div class="card-body" id="card_body">
+        //                                     <div id="row">
+        //                                         <div class="row mb-2 align-items-center" id="row">
+        //                                             <div class="col-md-6 mb-2 mb-md-0 ">
+        //                                                 <input type="number"
+        //                                                     name="size_name[]"
+        //                                                     class="form-control"
+        //                                                     id="size[]"
+        //                                                     step = "any"
+        //                                                     placeholder="size"
+        //                                                     value="${size}">
+        //                                             </div>
+        //                                             <div class="col-md-6 mb-2 mb-md-0 input-group">
+        //                                                 <input type="number"
+        //                                                 name="price_percentage[]"
+        //                                                 class="form-control"
+        //                                                 id="price_percentage"
+        //                                                 placeholder=""
+        //                                                 step = "any"
+        //                                                 value="" onkeyup="productPriceCalculation()">
+        //                                                 <div class="input-group-append">
+        //                                                     <span class="input-group-text">%</span>
+        //                                                 </div>
+        //                                             </div>
+        //                                         </div>
+        //                                     </div>
+        //                             </div>
+        //                         </div>
+        //                     </div>
+        //                 </div>`;
+        //     $('#div_sizes').append(items);
+        // }
+
+        // function removeSizeSelection(size_id) {
+        //     //console.log(shape_id);
+        //     $('#row_size_' + size_id).remove();
+        // }
+
+        //end comment by dipali gupta
 
         function newshapePacketPriceCalculation() {
 
@@ -1786,46 +1792,46 @@
                 }
             });
 
-            $('#size').multiselect({
-                maxHeight: 250,
-                includeSelectAllOption: true,
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true,
-                onChange: function(option, checked) {
+            // $('#size').multiselect({
+            //     maxHeight: 250,
+            //     includeSelectAllOption: true,
+            //     enableFiltering: true,
+            //     enableCaseInsensitiveFiltering: true,
+            //     onChange: function(option, checked) {
 
-                    productPriceCalculation();
-                    var size_id = $(option).val();
-                    var size = $(option).text();
-                    if (checked) {
-                        sizeSelection(size, size_id);
-                    } else {
-                        removeSizeSelection(size_id);
-                    }
+            //         productPriceCalculation();
+            //         var size_id = $(option).val();
+            //         var size = $(option).text();
+            //         if (checked) {
+            //             sizeSelection(size, size_id);
+            //         } else {
+            //             removeSizeSelection(size_id);
+            //         }
 
-                },
-                onSelectAll: function(options) {
+            //     },
+            //     onSelectAll: function(options) {
 
-                    if(options){
-                        $(".sizes option:selected").map(function(){ sizeSelection(this.text, this.value) });
-                    }
-                    else{
+            //         if(options){
+            //             $(".sizes option:selected").map(function(){ sizeSelection(this.text, this.value) });
+            //         }
+            //         else{
 
-                        $(".sizes option").map(function(){ removeSizeSelection(this.value) });
-                    }
-                },
-                buttonText: function(options, select) {
-                    if (options.length == 0) {
-                        return 'Select Size';
-                    } else {
-                        var selected = '';
-                        options.each(function() {
-                            selected += $(this).text() + ', ';
-                            //console.log(selected);
-                        });
-                        return selected.substr(0, selected.length - 2);
-                    }
-                }
-            });
+            //             $(".sizes option").map(function(){ removeSizeSelection(this.value) });
+            //         }
+            //     },
+            //     buttonText: function(options, select) {
+            //         if (options.length == 0) {
+            //             return 'Select Size';
+            //         } else {
+            //             var selected = '';
+            //             options.each(function() {
+            //                 selected += $(this).text() + ', ';
+            //                 //console.log(selected);
+            //             });
+            //             return selected.substr(0, selected.length - 2);
+            //         }
+            //     }
+            // });
 
 
             CKEDITOR.replace('description');
