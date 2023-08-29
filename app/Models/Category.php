@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\Models\Size;
 
 class Category extends Model
 {
@@ -23,6 +24,10 @@ class Category extends Model
     public function parent()
     {
         return $this->belongsTo(static::class, 'parent_id', 'id');
+    }
+    public function size()
+    {
+        return $this->hasMany(Size::class,'category_id');
     }
     public function limitedchildren()
     {

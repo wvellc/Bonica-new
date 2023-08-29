@@ -25,7 +25,8 @@ class SizeRequest extends FormRequest
 	{
 		return [
 			'name'			=> 'required|string|max:255',
-			'status'		=> 'required'
+			'status'		=> 'required',
+			'category'		=> 'required'
 		];
 	}
 }

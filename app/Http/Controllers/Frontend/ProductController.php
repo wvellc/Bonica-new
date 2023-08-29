@@ -515,33 +515,12 @@ class ProductController extends Controller
 
         //Get the selected ring size
         $ringSize = Size::where('id',$request->ringSize)->first();
-    
-        // Get all sizes with associated countries based on the given country ID
-        //$allSizes = Size::select('name')->get()->toArray();
-
-       // Sort the sizes in ascending order
-        //asort($allSizes);
 
         // Get the master price for sizes
         $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
                                     ->where('max_size', '>=', $ringSize->name)
                                     ->value('price');
 
-        // $sizePrice = 0;
-        // $price = 0;
-        // Calculate the cumulative price based on ring size and size price size-master-price
-        // if($ringSize->name > $allSizes[0]['name']){
-        //     foreach ($allSizes as $key => $singleSize) {
-        //         foreach ($sizeMasterPrices as $key => $sizeMasterPrice) {
-        //             if($sizeMasterPrice->size >= $ringSize->name){
-        //                 $price = $sizeMasterPrice->price;
-        //                 dd($price);
-        //             } else {
-        //                 break; // Stop adding prices once the condition is no longer met
-        //             }
-        //         }
-        //     }
-        // }
       
         $productDataArr = productPriceCalculation($productData);
 

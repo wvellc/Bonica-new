@@ -15,6 +15,7 @@ class CreateSizesTable extends Migration
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onUpdate('CASCADE')->onDelete('cascade');
             $table->string('name',190);
             $table->double('price', 8, 2)->nullable()->comment(' size price in indian rupee');
             $table->integer('sort_order')->default(0)->nullable();

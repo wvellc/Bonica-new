@@ -15,6 +15,7 @@ class CreateSizeMasterPricesTable extends Migration
     {
         Schema::create('size_master_prices', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onUpdate('CASCADE')->onDelete('cascade');
             $table->string('min_size',150);
             $table->string('mmax_size',150);
             $table->decimal('price', 10,3);
