@@ -513,51 +513,41 @@ class ProductController extends Controller
         
         //start calculation of users select size wise change price logic  
 
-        //Get the selected ring size from the database
+        //Get the selected ring size
         $ringSize = Size::where('id',$request->ringSize)->first();
-
-        $countryId = $currency['country_id'];
-
+    
         // Get all sizes with associated countries based on the given country ID
-        $allSizes = Size::select('name')->with(['country' => function($query) use ($countryId) {
-            $query->where('country_id', $countryId);
-        }])->get()->toArray();
-       
-       //// Sort the sizes in ascending order
-        usort($allSizes, function ($a, $b) {
-            $aValue = floatval($a["name"]);
-            $bValue = floatval($b["name"]);
-            
-            if ($aValue == $bValue) {
-                return 0;
-            }
-            
-            return ($aValue < $bValue) ? -1 : 1;
-        });
+        //$allSizes = Size::select('name')->get()->toArray();
+
+       // Sort the sizes in ascending order
+        //asort($allSizes);
 
         // Get the master price for sizes
-        $sizeMasterPrice = SizeMasterPrice::select('price')->first();
-        
-        $sizePrice = 0;
+        $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
+                                    ->where('max_size', '>=', $ringSize->name)
+                                    ->value('price');
 
-        // Calculate the cumulative price based on ring size and size prices
-        if($ringSize){
-            if($ringSize->name > $allSizes[0]['name']){
-                foreach ($allSizes as $key => $singleSize) {
-                    if ($singleSize['name'] < $ringSize->name) {
-                        $sizePrice += $sizeMasterPrice->price;
-                    } else {
-                        break; // Stop adding prices once the condition is no longer met
-                    }
-                }
-            }
-        }
-        
+        // $sizePrice = 0;
+        // $price = 0;
+        // Calculate the cumulative price based on ring size and size price size-master-price
+        // if($ringSize->name > $allSizes[0]['name']){
+        //     foreach ($allSizes as $key => $singleSize) {
+        //         foreach ($sizeMasterPrices as $key => $sizeMasterPrice) {
+        //             if($sizeMasterPrice->size >= $ringSize->name){
+        //                 $price = $sizeMasterPrice->price;
+        //                 dd($price);
+        //             } else {
+        //                 break; // Stop adding prices once the condition is no longer met
+        //             }
+        //         }
+        //     }
+        // }
+      
         $productDataArr = productPriceCalculation($productData);
 
-        if($sizePrice > 0){
+        if($price > 0){
             // Calculate the price increment based on the percentage of size price
-            $priceIncrement = $productDataArr['total_price'] * $sizePrice / 100;
+            $priceIncrement = $productDataArr['total_price'] * $price / 100;
             // Add the calculated price increment to the total price
             $productDataArr['total_price'] = $productDataArr['total_price'] + $priceIncrement;
         }

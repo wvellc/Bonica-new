@@ -453,3 +453,9 @@ Breadcrumbs::for('packetUpdate', function ($trail) {
 });
 
 
+# OutPut:-  Dashboard > Size Master Price Update
+Breadcrumbs::for('sizemasterpriceCreate', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Size Master Price Update', route('admin.size.index'));
+});
+

@@ -88,36 +88,11 @@ class SizeMasterPriceController extends Controller
 
     public function index()
     {
-        $sizeMasterPrice = SizeMasterPrice::find(1);
-        $size = Size::AllSize();
+        $sizeMasterPrices = SizeMasterPrice::get();
+       
+        $size = Size::pluck('name', 'name')->toArray();
         asort($size);
-        $data = array(
-            "formObj"           => $sizeMasterPrice,
-            "module"            => $this->module,
-            "page_title"        => "Update",
-            "action_url"        => $this->moduleRouteText . ".update",
-            "action_params"     => $sizeMasterPrice->id,
-            "method"            => "PUT",
-            "statusData"        => ['1' => 'Active', '0' => 'Inactive'],
-            "selectedStatusID"  => $sizeMasterPrice->status,
-            "size" => $size,
-            "country" => Country::AllCountry(),
-            "selectedSizeID"  => $sizeMasterPrice->size_id,
-            "selectedCountryID"  => $sizeMasterPrice->country_id
-        );
-        return view($this->moduleViewName . '.create', $data);
-    }
-    
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $size = Size::AllSize();
-        asort($size);
+        
         $data = array(
             "formObj"           => $this->modelObj,
             "module"            => $this->module,
@@ -125,131 +100,57 @@ class SizeMasterPriceController extends Controller
             "action_url"        => $this->moduleRouteText . ".store",
             "action_params"     => $this->modelObj->id,
             "method"            => "POST",
-            "statusData"        => ['1' => 'Active', '0' => 'Inactive'],
-            "selectedStatusID"  => 1,
-            "size" => $size,
-            "country" => Country::AllCountry(),
-            "selectedSizeID"  => null,
-            "selectedCountryID"  => null
+            "size"              => $size,
+            'sizeMasterPrices'  => $sizeMasterPrices
         );
-
+       
         return view($this->moduleViewName . '.create', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try{
-            $sizeMasterPrice = new SizeMasterPrice();
-            // $sizeMasterPrice->size_id  = $request->size;
-            // $sizeMasterPrice->country_id  = $request->country;
-            $sizeMasterPrice->price  = $request->price;
-            $sizeMasterPrice->save();
+            $priceArray = [];
+            foreach ($request->price as $key => $price) {   
+                if($price){
+                    $minSize = ($request->min_size[$key]) ? $request->min_size[$key] : null ;
+                    $maxSize = ($request->max_size[$key]) ? $request->max_size[$key] : null ;
+                    
+                    $priceArray[] = [
+                        'price' => $price,
+                        'min_size' => $minSize,
+                        'max_size' => $maxSize,
+                        'created_at'=> date("Y-m-d H:i:s"),
+                        'updated_at'=> date("Y-m-d H:i:s"),
+                    ];
+                }
+            }
+            DB::table('size_master_prices')->insert($priceArray);
 
             return redirect()->route($this->moduleRouteText . '.index')->with('success', __('messages.create_message', ['title' => 'size master price']));
         } catch (\Exception $e) {
-            return redirect()->route($this->moduleRouteText . '.create')->with('error', $e->getMessage());
+            return redirect()->route($this->moduleRouteText . '.index')->with('error', $e->getMessage());
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $sizeMasterPrice = SizeMasterPrice::find($id);
-        $size = Size::AllSize();
-        asort($size);
-        $data = array(
-            "formObj"           => $sizeMasterPrice,
-            "module"            => $this->module,
-            "page_title"        => "Update",
-            "action_url"        => $this->moduleRouteText . ".update",
-            "action_params"     => $sizeMasterPrice->id,
-            "method"            => "PUT",
-            "statusData"        => ['1' => 'Active', '0' => 'Inactive'],
-            "selectedStatusID"  => $sizeMasterPrice->status,
-            "size" => $size,
-            "country" => Country::AllCountry(),
-            "selectedSizeID"  => $sizeMasterPrice->size_id,
-            "selectedCountryID"  => $sizeMasterPrice->country_id
-        );
-        return view($this->moduleViewName . '.create', $data);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        try{
-            $sizeMasterPrice = SizeMasterPrice::find($id);
-            // $sizeMasterPrice->size_id  = $request->size;
-            // $sizeMasterPrice->country_id  = $request->country;
-            $sizeMasterPrice->price  = $request->price;
-            $sizeMasterPrice->save();
-
-            return redirect()->route($this->moduleRouteText . '.index')->with('success', __('messages.update_message', ['title' => 'size master price']));
-        } catch (\Exception $e) {
-            return redirect()->route($this->moduleRouteText . '.edit' , $id)->with('error', $e->getMessage());
+    public function deletePrices(Request $request){
+        
+        $sizeMasterPrice = SizeMasterPrice::where('id',$request->id)->first();
+        if($sizeMasterPrice){
+            $sizeMasterPrice->delete();
         }
+      
+        return response()->json(['code' => 200, 'message' => __('messages.delete_message', ['title' => 'size price']), 'msg' => 'delete']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function updateContent(Request $request)
     {
-        $sizeMasterPrice = SizeMasterPrice::find($id);
-        $sizeMasterPrice->delete();
-        return response()->json(['code' => 200, 'message' => __('messages.delete_message', ['title' => 'size master price']), 'data' => array()]);
-    }
+        $id =  $request->id;
+        $value =  $request->value;
+        $field =  $request->field;
+        
+        SizeMasterPrice::where('id', $id )->update([$field => $value]);
 
-    public function updateStatus(Request $request)
-    {
-        $sizeMasterPrice = SizeMasterPrice::where('id', request('id'))->first();
-
-        if ($sizeMasterPrice->status == 1) {
-            $dataUpdate = array(
-                "status" => 0
-            );
-            $statusMessage = "Inactive";
-            SizeMasterPrice::where('id', request('id'))->update($dataUpdate);
-        } else {
-
-            $dataUpdate = array(
-                "status" => 1
-            );
-            $statusMessage = "Active";
-            SizeMasterPrice::where('id', request('id'))->update($dataUpdate);
-        }
-        return response(['status' => 200, "msg" =>  __('messages.status_message', ['title' => $this->module,'status_type' => $statusMessage])]);
-
+        return response()->json(['code' => 200, 'message' => 'The size price has been successfully updated.', 'msg' => 'update']);
     }
 }

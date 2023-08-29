@@ -505,3 +505,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 .nav-item .nav-treeview {
     padding-left: 1rem !important;
 }
+
+.deletepricebtn{
+    top: 35px;
+}
