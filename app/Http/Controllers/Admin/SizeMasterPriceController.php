@@ -13,6 +13,7 @@ use DB;
 use Carbon\Carbon;
 use App\Models\Size;
 use App\Models\Country;
+use App\Models\Category;
 
 class SizeMasterPriceController extends Controller
 {
@@ -101,9 +102,15 @@ class SizeMasterPriceController extends Controller
             "action_params"     => $this->modelObj->id,
             "method"            => "POST",
             "size"              => $size,
-            'sizeMasterPrices'  => $sizeMasterPrices
+            'sizeMasterPrices'  => $sizeMasterPrices,
+            'selectedParentID'  => ""
         );
-       
+        
+        $data['parent_category'] = Category::where('parent_id', 0)
+                                                ->whereIn('slug',['rings','bracelets','bangles'])
+                                                ->pluck('name', 'id')
+                                                ->toArray();
+
         return view($this->moduleViewName . '.create', $data);
     }
 
@@ -115,11 +122,13 @@ class SizeMasterPriceController extends Controller
                 if($price){
                     $minSize = ($request->min_size[$key]) ? $request->min_size[$key] : null ;
                     $maxSize = ($request->max_size[$key]) ? $request->max_size[$key] : null ;
+                    $category = ($request->category[$key]) ? $request->category[$key] : null ;
                     
                     $priceArray[] = [
                         'price' => $price,
                         'min_size' => $minSize,
                         'max_size' => $maxSize,
+                        'category_id' => $category,
                         'created_at'=> date("Y-m-d H:i:s"),
                         'updated_at'=> date("Y-m-d H:i:s"),
                     ];
@@ -152,5 +161,12 @@ class SizeMasterPriceController extends Controller
         SizeMasterPrice::where('id', $id )->update([$field => $value]);
 
         return response()->json(['code' => 200, 'message' => 'The size price has been successfully updated.', 'msg' => 'update']);
+    }
+
+    public function sizeChange(Request $request){
+        $size = Size::where('category_id',$request->value)->pluck('name','name')->toArray();
+        asort($size);
+    
+        return response()->json(['code' => 200, 'data' => $size]);
     }
 }

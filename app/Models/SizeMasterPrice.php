@@ -11,6 +11,6 @@ class SizeMasterPrice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['min_size','max_size','price', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['min_size','max_size','price','category_id' ,'status', 'created_at', 'updated_at'];
 
 }

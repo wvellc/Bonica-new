@@ -45,6 +45,7 @@
                                 <tr>
                                     <th>id</th>
                                     <th>Name</th>
+                                    <th>Category</th>
                                     <th>Country</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -101,6 +102,7 @@
 			columns: [
                 { data: 'id', name: 'id', orderable: true, searchable: true },
                 { data: 'name', name: 'name', orderable: true, searchable: true },
+                { data: 'category_id', name: 'category_id', orderable: true, searchable: true },
                 { data: 'country', name: 'country', orderable: false, searchable: false },
                 { data: 'status', name: 'status', orderable: false, searchable: true },
                 { data: 'action', orderable: false, searchable: false }

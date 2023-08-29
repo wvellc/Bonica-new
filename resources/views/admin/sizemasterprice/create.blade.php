@@ -35,13 +35,21 @@
 					<!-- form start -->
 					@php $lastcount = 1; @endphp
 					<div class="card-body">
-						@foreach($sizeMasterPrices as $key => $sizeMasterPrice)
+						@foreach($sizeMasterPrices as $key => $sizeMasterPrice)	
 	                        <div class="col-12" id="divimage-{{ $sizeMasterPrice->id }}">
 								<div class="row" >
 									@php
 		                                $lastcount = $sizeMasterPrice->id;
 		                            @endphp
 		                            <div class="col-sm-3">
+		                                <div class="form-group">
+		                                    <label for="size">Category <span class="error">*</span></label>
+		                                    <div class="select-box">
+		                                        {!! Form::select('category[]', ['' => 'Select Category'] + $parent_category,$sizeMasterPrice->category_id, ['class' => 'form-control category','id' => 'category','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'category_id')"]) !!}
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <div class="col-sm-2">
 		                                <div class="form-group dollor-sign">
 		                                    <label id="price">Price </label>
 		                                    {{ Form::number('update_price[]', old('price') ? old('price') : $sizeMasterPrice->price, ['class' => 'form-control',
@@ -52,7 +60,8 @@
 		                                <div class="form-group">
 		                                    <label for="size">Select Min Size Range <span class="error">*</span></label>
 		                                    <div class="select-box">
-		                                        {!! Form::select('update_min_size[]', ['' => 'Select Min Size Range'] + $size,$sizeMasterPrice->min_size, ['class' => 'form-control','id' => 'size','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'min_size')"]) !!}
+		                                        {!! Form::select('update_min_size[]', ['' => 'Select Min Size Range']+$size ,$sizeMasterPrice->min_size, ['class' => 'form-control size_'.$sizeMasterPrice->id,'id' => 'min_size','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'min_size')"]) !!}
+		                                    
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -60,7 +69,7 @@
 		                                <div class="form-group">
 		                                    <label for="size">Select Max Size Range <span class="error">*</span></label>
 		                                    <div class="select-box">
-		                                        {!! Form::select('update_max_size[]', ['' => 'Select Max Size Range'] + $size,$sizeMasterPrice->max_size, ['class' => 'form-control','id' => 'size','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'max_size')"]) !!}
+		                                        {!! Form::select('update_max_size[]', ['' => 'Select Max Size Range']+$size,$sizeMasterPrice->max_size, ['class' => 'form-control size_'.$sizeMasterPrice->id,'id' => 'max_size','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'max_size')"]) !!}
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -71,10 +80,21 @@
 	                        </div> 
                         @endforeach
 					</div>
+					@php
+						$lastcount += 1;
+					@endphp
 					<div class="col-sm-12" id="div_images">
                         <div class="row mb-2 align-items-center" id="row-{{ $lastcount }}">
-                            <div class="col-sm-3">
-                                <div class="form-group dollor-sign">
+                        	 <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="mls">Category<span class="error">*</span></label>
+                                    <div class="select-box">
+                                    {!! Form::select('category[1]', ['' => 'Select Category'] + $parent_category,$selectedParentID, ['class' => 'form-control','id' => 'category','required','onchange'=> "updateContent($lastcount,this.value,'category_id')"]) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group ">
                                     <label id="price">Price </label>
                                     {{ Form::number('price[1]',(old('price')[1] ?? ''), ['class' => 'form-control price', 'placeholder' => 'Price', 'id' => 'price'.$lastcount]) }}
                                 </div>
@@ -83,7 +103,7 @@
                                 <div class="form-group">
                                     <label for="min_size">Select Min Size Range <span class="error">*</span></label>
                                     <div class="select-box">
-                                        {{ Form::select('min_size[1]',['' => 'Select Min Size Range']+ $size,(old('min_size')[1] ?? ''), ['class' => 'form-control', 'id' => 'min_size'.$lastcount]) }}
+                                        {{ Form::select('min_size[1]',['' => 'Select Min Size Range']+ $size,(old('min_size')[1] ?? ''), ['class' => 'form-control size_'. $lastcount, 'id' => 'min_size'.$lastcount]) }}
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +111,7 @@
                                 <div class="form-group">
                                     <label for="max_size">Select Max Size Range <span class="error">*</span></label>
                                     <div class="select-box">
-                                        {{ Form::select('max_size[1]',['' => 'Select Max Size Range']+ $size,(old('max_size')[1] ?? ''), ['class' => 'form-control', 'id' => 'max_size'.$lastcount]) }}
+                                        {{ Form::select('max_size[1]',['' => 'Select Max Size Range']+ $size,(old('max_size')[1] ?? ''), ['class' => 'form-control size_'. $lastcount, 'id' => 'max_size'.$lastcount]) }}
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +140,15 @@
 	    var riw_id = parseInt(last_count) + 1;
 	    
 	    var price_html = `<div class="row mb-2 align-items-center" id="row-${riw_id}">
-	        <div class="col-sm-3 form-group">
+	    	<div class="col-sm-3 form-group">
+	            <label for="size">Category</label>
+	            {!! Form::select('category[${riw_id}]', ['' => 'Select Category']+$parent_category, null, [ // Provide the options for the select box
+	                    'class' => 'form-control category',
+	                    'id' => 'category${riw_id}', // Use riw_id instead of parseInt(last_count) + 1
+	                    'onchange'=> 'updateContent(${riw_id}, this.value, "category_id")'
+	                ]) !!}
+	        </div>
+	        <div class="col-sm-2 form-group">
 	            <label for="price">Price</label>
 	            {!! Form::number('price[${riw_id}]', null, [
 	                    'class' => 'form-control price',
@@ -132,14 +160,14 @@
 	        <div class="col-sm-3 form-group">
 	            <label for="size">Select Min Size Range</label>
 	            {!! Form::select('min_size[${riw_id}]', ['' => 'Select Min Size Range']+$size, null, [ // Provide the options for the select box
-	                    'class' => 'form-control min_size',
+	                    'class' => 'form-control size_${riw_id}',
 	                    'id' => 'min_size${riw_id}', // Use riw_id instead of parseInt(last_count) + 1
 	                ]) !!}
 	        </div>
 	        <div class="col-sm-3 form-group">
 	            <label for="size">Select Max Size Range</label>
 	            {!! Form::select('max_size[${riw_id}]', ['' => 'Select Max Size Range']+$size, null, [ // Provide the options for the select box
-	                    'class' => 'form-control max_size',
+	                    'class' => 'form-control size_${riw_id}',
 	                    'id' => 'max_size${riw_id}', // Use riw_id instead of parseInt(last_count) + 1
 	                ]) !!}
 	        </div>
@@ -190,6 +218,36 @@
     }
 
     function updateContent(id,value,field){
+
+    	if(field == 'category_id'){
+	    	var selectBox = $(".size_"+id);
+			selectBox.empty().append('<option value="">---Select Size---</option>');
+    		$.ajax({
+	            type: "POST",
+	            url: '{!! route('admin.size-master-price.sizechange') !!}',
+	            data: {
+	                _token: "{{ csrf_token() }}",
+	                id: id,
+	                value: value,
+	                field: field,
+	            },
+	            dataType: 'JSON',
+	            success: function(response) {
+	                if (response.code == 200) {
+	                	var size = response.data;
+	                	
+					    // Loop through the new options and append them to the select box
+					    $.each(size, function(value, text) {
+					        selectBox.append($('<option>', {
+					            value: value,
+					            text: text
+					        }));
+					    });
+	                }
+	            }
+        	});
+    	}
+
     	var msg_HTML = "";
         $.ajax({
             type: "POST",

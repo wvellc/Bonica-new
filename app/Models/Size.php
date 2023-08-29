@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Country;
+use App\Models\Category;
 
 class Size extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','price', 'sort_order', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['name','price','category_id' ,'sort_order', 'status', 'created_at', 'updated_at'];
 
     public static function AllSize()
     {
@@ -28,5 +29,10 @@ class Size extends Model
     public function country()
     {
         return $this->belongsToMany(Country::class,'size_countries', 'size_id', 'country_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'category_id','id');
     }
 }

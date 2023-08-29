@@ -14,6 +14,7 @@ use Config;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Carbon\Carbon;
+use App\Models\Category;
 
 class SizeController extends Controller
 {
@@ -46,7 +47,8 @@ class SizeController extends Controller
                 $query->select('id', 'sizename');
             }])
             ->get() */
-             $model = Size::query()->with('country');
+            $model = Size::query()->with('country','category');
+
 			return DataTables::eloquent($model)
 				->addColumn('action', function (Size $row) {
 					return view(
@@ -67,6 +69,13 @@ class SizeController extends Controller
                         }
                     }
                     return implode(',',$country);
+				})
+				->editColumn('category_id', function ($row) {
+               		$category = "";
+                    if(!empty($row->category->name)){
+               			$category = $row->category->name;
+                    }
+                    return $category;
 				})
                 ->editColumn('price', function ($row) {
                     $price = "";
@@ -109,8 +118,14 @@ class SizeController extends Controller
 			"statusData" 		=> ['1' => 'Active', '0' => 'Inactive'],
 			"selectedStatusID"  => 1,
             "country" => Country::AllCountry(),
-            "selectedCountryID"  => $selectedCountryID
+            "selectedCountryID"  => $selectedCountryID,
+            "selectedParentID"  => ""
 		);
+		$data['parent_category'] = Category::where('parent_id', 0)
+												->whereIn('slug',['rings','bracelets','bangles'])
+												->pluck('name', 'id')
+												->toArray();
+											
 		return view($this->moduleViewName . '.create', $data);
 	}
 
@@ -155,8 +170,14 @@ class SizeController extends Controller
 			"statusData" 		=> ['1' => 'Active', '0' => 'Inactive'],
 			"selectedStatusID"  => $size->status,
             "country" => Country::AllCountry(),
-            "selectedCountryID"  => $selectedCountryID
+            "selectedCountryID"  => $selectedCountryID,
+            "selectedParentID"  => $size->category_id,
 		);
+		$data['parent_category'] = Category::where('parent_id', 0)
+												->whereIn('slug',['rings','bracelets','bangles'])
+												->pluck('name', 'id')
+												->toArray();
+											
 		return view($this->moduleViewName . '.create', $data);
 	}
 
@@ -188,6 +209,7 @@ class SizeController extends Controller
             //$size->price  = $request->price;
             $size->status = $request->status;
             $size->sort_order = $request->sort_order;
+            $size->category_id = $request->category;
             $size->save();
 
             SizeCountry::where('size_id', $id)->delete();
