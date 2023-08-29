@@ -4646,3 +4646,7 @@ header .dropdown-menu {margin-top:5px !important;}
 #product_price {font-family: "Jost", sans-serif;}
 .jost-fonts {font-family: "Jost", sans-serif;font-weight: 300;}
 .jost-fonts.bold{font-weight: 600;}
+
+.side-clarity p {
+  padding-top: 13px;
+}

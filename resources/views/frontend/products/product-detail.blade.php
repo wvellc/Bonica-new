@@ -175,7 +175,7 @@
                                         </div>
                                     @endif
                                     @if (count($side_diamond_claritys) > 0)
-                                    <div class="">
+                                    <div class="side-clarity">
                                         <h5>Clarity</h5>
                                         @if (count($side_diamond_claritys) > 1)
                                             <div class="select-box">
