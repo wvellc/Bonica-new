@@ -103,6 +103,8 @@ Route::group(['middleware' => ['checkrequest', 'HtmlMinifier', 'preventbackhisto
             //size master price
             Route::resource('size-master-price', SizeMasterPriceController::class);
             Route::post('size-master-price/status', [SizeMasterPriceController::class, 'updateStatus'])->name('size-master-price.statusupdate');
+            Route::post('size-master-price/delete-price', [SizeMasterPriceController::class, 'deletePrices'])->name('size-master-price.delete.prices');
+            Route::post('size-master-price/update-price', [SizeMasterPriceController::class, 'updateContent'])->name('size-master-price.price.update');
 
             //Shape
             Route::post('shape/status', [ShapeController::class, 'updateStatus'])->name('shape.statusupdate');
