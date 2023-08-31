@@ -734,7 +734,7 @@ if (!function_exists('productPriceCalculation')){
             $total_price = $total_price + (($price_percentage / 100) * $total_price);
         }
         //dd($total_price);
-        return ['total_price' => $total_price,'countryMultiplyby' => $countryMultiplyby];
+        return ['total_price' => $total_price,'countryMultiplyby' => $countryMultiplyby,'cat_id'=>$product->cat_id];
 
     }
 }

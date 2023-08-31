@@ -126,11 +126,11 @@ class ProductController extends Controller
 
         $data = array();
         /*Get Single Product Details*/
-        $product = Product::with('productImages', 'ProductShapes', 'firstProductShape', 'ProductShapes.shape', 'ProductMetalMaterial', 'ProductMetalMaterial.metal', 'ProductMetalMaterial.material', 'firstProductMetalMaterial', 'ProductSize', 'ProductSize.size');
+        $product = Product::with('productImages', 'ProductShapes', 'firstProductShape', 'ProductShapes.shape', 'ProductMetalMaterial', 'ProductMetalMaterial.metal', 'ProductMetalMaterial.material', 'firstProductMetalMaterial');
         $product = $product->where('slug', $product_slug);
         $product = $product->Active()->first();
 
-        //dd($product->ProductMetalMaterial);
+        $product->ProductSize = Size::select('name as size','id')->where('category_id',$product->cat_id)->get();
 
         $product_center_diamonds = ProductCenterDiamondPacket::where('product_id', $product->id)->with('color','clarity')->get()->toArray();
 
@@ -510,20 +510,20 @@ class ProductController extends Controller
         'metal_id' => $request->metal_id,
         'material_id' => $request->material_id];
 
-        
-        //start calculation of users select size wise change price logic  
-
-        //Get the selected ring size
-        $ringSize = Size::where('id',$request->ringSize)->first();
-
-        // Get the master price for sizes
-        $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
-                                    ->where('max_size', '>=', $ringSize->name)
-                                    ->value('price');
-
-      
         $productDataArr = productPriceCalculation($productData);
 
+        //start calculation of users select size wise change price logic  
+        $price = 0; 
+        if($request->ringSize){
+        //Get the selected ring size
+        $ringSize = Size::where('id',$request->ringSize)->first();
+            // Get the master price for sizes
+            $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
+                                    ->where('max_size', '>=', $ringSize->name)
+                                    ->where('category_id',$productDataArr['cat_id'])
+                                    ->value('price');
+        }
+        
         if($price > 0){
             // Calculate the price increment based on the percentage of size price
             $priceIncrement = $productDataArr['total_price'] * $price / 100;

@@ -116,13 +116,15 @@ class SizeMasterPriceController extends Controller
 
     public function store(Request $request)
     {
+        SizeMasterPrice::truncate();
+        
         try{
             $priceArray = [];
-            foreach ($request->price as $key => $price) {   
-                if($price){
+            foreach ($request->category as $key => $category) {   
+                if($category){
                     $minSize = ($request->min_size[$key]) ? $request->min_size[$key] : null ;
                     $maxSize = ($request->max_size[$key]) ? $request->max_size[$key] : null ;
-                    $category = ($request->category[$key]) ? $request->category[$key] : null ;
+                    $price = ($request->price[$key]) ? $request->price[$key] : null ;
                     
                     $priceArray[] = [
                         'price' => $price,
