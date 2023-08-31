@@ -515,8 +515,8 @@ class ProductController extends Controller
         //start calculation of users select size wise change price logic  
         $price = 0; 
         if($request->ringSize){
-        //Get the selected ring size
-        $ringSize = Size::where('id',$request->ringSize)->first();
+            //Get the selected ring size
+            $ringSize = Size::where('id',$request->ringSize)->first();
             // Get the master price for sizes
             $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
                                     ->where('max_size', '>=', $ringSize->name)
