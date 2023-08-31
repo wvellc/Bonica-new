@@ -236,12 +236,18 @@
                                 @if (count($product->ProductSize) > 0 && count($country_size) > 0)
 								<div class="ring-size">
 									<h5>Select your size</h5>
+                                        @php $size_arr = array();  @endphp
+                                        @foreach ($product->ProductSize as $ProductSize)
+                                        @php $size_arr[$ProductSize->id] = $ProductSize->size; @endphp
+                                        @endforeach
+                                        @php asort($size_arr); @endphp
+                                        
                                     <div class="">
                                         <div class="select-box">
                                             <select class="form-control" id="ringSize" name="ringSize" onchange="getProductPrice();">
-                                                @foreach($product->ProductSize as $ProductSize)
-                                                @if(in_array($ProductSize->id,$country_size))
-                                                <option value="{{$ProductSize->id}}" @if ($loop->first) selected @endif >{{$ProductSize->size}}</option>
+                                                @foreach($size_arr as $key => $value)
+                                                @if(in_array($key,$country_size))
+                                                <option value="{{$key}}" @if ($loop->first) selected @endif >{{$value}}</option>
                                                 @endif
                                                 @endforeach
                                             </select>

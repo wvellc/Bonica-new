@@ -351,7 +351,8 @@
 		.product-row-wrapper { flex-direction: column; justify-content: center; padding: 10px 0; }
 		.products-d-big-image-wrapper { width: 100%; text-align: center; }
 		.products-d-small-image-wrapper { width: 100%; margin-top: 30px; }
-		.pd-slider-mini-img { margin: 20px 6px; width: 90%; }
+		.pd-slider-mini-img { margin: 20px 6px; width: 90%; height:auto; }
+		.product-row-wrapper .slick-slide , .product-row-wrapper .slick-list , .product-row-wrapper .slick-track{height:auto !important}
 		.product-row-wrapper .slick-arrow { transform: translate(0,0) rotate(270deg); width: 30px; height: 30px; left: auto; right: 0; top: -15px; right: 35px; line-height: 30px; background: #eec9c2; }
 		.product-row-wrapper .catArrowRight.trans.slick-arrow { bottom: auto; top: -15px; right: 0; }
 		ul.pro-d-list-info li { width: 50%; }

@@ -6,6 +6,8 @@ use App\Models\ProductSize;
 use App\Models\ProductCenterDiamondPacket;
 use App\Models\ProductSideDiamondPacket;
 use App\Models\MaterialMetal;
+use App\Models\SizeMasterPrice;
+use App\Models\Size;
 
 if (!function_exists('countryCurrency')) {
     function countryCurrency(){
@@ -733,7 +735,26 @@ if (!function_exists('productPriceCalculation')){
         if($price_percentage != ''){
             $total_price = $total_price + (($price_percentage / 100) * $total_price);
         }
-        //dd($total_price);
+
+        $sizeWisePrice = 0; 
+        if($ringSize){
+            //Get the selected ring size
+            $ringSize = Size::where('id',$ringSize)->first();
+            // Get the master price for sizes
+            $sizeWisePrice = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
+                                    ->where('max_size', '>=', $ringSize->name)
+                                    ->where('category_id',$product['cat_id'])
+                                    ->value('price');
+        }
+        
+        if($sizeWisePrice > 0){
+            // Calculate the price increment based on the percentage of size price
+            $priceIncrement = $total_price * $sizeWisePrice / 100;
+            // Add the calculated price increment to the total price
+            $total_price = $total_price + $priceIncrement;
+        }
+        //end calculation of users select size wise change price logic  
+       
         return ['total_price' => $total_price,'countryMultiplyby' => $countryMultiplyby,'cat_id'=>$product->cat_id];
 
     }
