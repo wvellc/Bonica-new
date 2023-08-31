@@ -235,19 +235,13 @@
                                 @endif
                                 @if (count($product->ProductSize) > 0 && count($country_size) > 0)
 								<div class="ring-size">
-									<h5>Select your ring size</h5>
+									<h5>Select your size</h5>
                                     <div class="">
-                                        @php $size_arr = array();  @endphp
-                                        @foreach ($product->ProductSize as $ProductSize)
-                                        @php $size_arr[$ProductSize->size->name] = $ProductSize->size->id.'-'.$ProductSize->size->name; @endphp
-                                        @endforeach
-                                        @php ksort($size_arr); @endphp
                                         <div class="select-box">
                                             <select class="form-control" id="ringSize" name="ringSize" onchange="getProductPrice();">
-                                                @foreach($size_arr as $value)
-                                                @php $size = explode('-', $value) @endphp
-                                                @if(in_array($size[0],$country_size))
-                                                <option value="{{$size[0]}}" @if ($loop->first) selected @endif >{{$size[1]}}</option>
+                                                @foreach($product->ProductSize as $ProductSize)
+                                                @if(in_array($ProductSize->id,$country_size))
+                                                <option value="{{$ProductSize->id}}" @if ($loop->first) selected @endif >{{$ProductSize->size}}</option>
                                                 @endif
                                                 @endforeach
                                             </select>
@@ -255,11 +249,14 @@
                                     </div>
 								</div>
                                 @endif
+    
                                 @if($is_show_size_chart)
-								<div class="pd-icon-title ring-size-info-link my-3">
-									<img src="{{ asset('images/icons/products/measure-tape.svg') }}" alt="measure-tape">
-									<h5><a href="#"  data-bs-toggle="modal" data-bs-target="#{{$cat_segment}}sizemodal">Find your size</a></h5>
-								</div>
+                                    @if($cat_segment == 'rings' || $cat_segment == 'bracelets' || $cat_segment == 'bangles')
+    								<div class="pd-icon-title ring-size-info-link my-3">
+    									<img src="{{ asset('images/icons/products/measure-tape.svg') }}" alt="measure-tape">
+    									<h5><a href="#"  data-bs-toggle="modal" data-bs-target="#{{$cat_segment}}sizemodal">Find your size</a></h5>
+    								</div>
+                                    @endif
                                 @endif
 								<div class="pd-icon-title delivery-info d-sm-flex  align-items-end  flex-column flex-sm-row">
 									<div class="delivery-truck-info">

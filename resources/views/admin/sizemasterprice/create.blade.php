@@ -52,15 +52,15 @@
 		                            <div class="col-sm-2">
 		                                <div class="form-group dollor-sign">
 		                                    <label id="price">Price </label>
-		                                    {{ Form::number('update_price[]', old('price') ? old('price') : $sizeMasterPrice->price, ['class' => 'form-control',
-		                                    'placeholder' => 'Price', 'id' => 'price','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'price')"]) }}
+		                                    {{ Form::number('price[]', old('price') ? old('price') : $sizeMasterPrice->price, ['class' => 'form-control',
+		                                    'placeholder' => 'Price', 'id' => 'price']) }}
 		                                </div>
 		                            </div>                            
 		                            <div class="col-sm-3">
 		                                <div class="form-group">
 		                                    <label for="size">Select Min Size Range <span class="error">*</span></label>
 		                                    <div class="select-box">
-		                                        {!! Form::select('update_min_size[]', ['' => 'Select Min Size Range']+$size ,$sizeMasterPrice->min_size, ['class' => 'form-control size_'.$sizeMasterPrice->id,'id' => 'min_size','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'min_size')"]) !!}
+		                                        {!! Form::select('min_size[]', ['' => 'Select Min Size Range']+$size ,$sizeMasterPrice->min_size, ['class' => 'form-control size_'.$sizeMasterPrice->id,'id' => 'min_size']) !!}
 		                                    
 		                                    </div>
 		                                </div>
@@ -69,7 +69,7 @@
 		                                <div class="form-group">
 		                                    <label for="size">Select Max Size Range <span class="error">*</span></label>
 		                                    <div class="select-box">
-		                                        {!! Form::select('update_max_size[]', ['' => 'Select Max Size Range']+$size,$sizeMasterPrice->max_size, ['class' => 'form-control size_'.$sizeMasterPrice->id,'id' => 'max_size','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'max_size')"]) !!}
+		                                        {!! Form::select('max_size[]', ['' => 'Select Max Size Range']+$size,$sizeMasterPrice->max_size, ['class' => 'form-control size_'.$sizeMasterPrice->id,'id' => 'max_size']) !!}
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -89,21 +89,21 @@
                                 <div class="form-group">
                                     <label for="mls">Category<span class="error">*</span></label>
                                     <div class="select-box">
-                                    {!! Form::select('category[1]', ['' => 'Select Category'] + $parent_category,$selectedParentID, ['class' => 'form-control','id' => 'category','required','onchange'=> "updateContent($lastcount,this.value,'category_id')"]) !!}
+                                    {!! Form::select('category[]', ['' => 'Select Category'] + $parent_category,$selectedParentID, ['class' => 'form-control','id' => 'category','onchange'=> "updateContent($lastcount,this.value,'category_id')"]) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group ">
                                     <label id="price">Price </label>
-                                    {{ Form::number('price[1]',(old('price')[1] ?? ''), ['class' => 'form-control price', 'placeholder' => 'Price', 'id' => 'price'.$lastcount]) }}
+                                    {{ Form::number('price[]',(old('price')[1] ?? ''), ['class' => 'form-control price', 'placeholder' => 'Price', 'id' => 'price'.$lastcount]) }}
                                 </div>
                             </div>                            
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label for="min_size">Select Min Size Range <span class="error">*</span></label>
                                     <div class="select-box">
-                                        {{ Form::select('min_size[1]',['' => 'Select Min Size Range']+ $size,(old('min_size')[1] ?? ''), ['class' => 'form-control size_'. $lastcount, 'id' => 'min_size'.$lastcount]) }}
+                                        {{ Form::select('min_size[]',['' => 'Select Min Size Range']+ $size,(old('min_size')[1] ?? ''), ['class' => 'form-control size_'. $lastcount, 'id' => 'min_size'.$lastcount]) }}
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                 <div class="form-group">
                                     <label for="max_size">Select Max Size Range <span class="error">*</span></label>
                                     <div class="select-box">
-                                        {{ Form::select('max_size[1]',['' => 'Select Max Size Range']+ $size,(old('max_size')[1] ?? ''), ['class' => 'form-control size_'. $lastcount, 'id' => 'max_size'.$lastcount]) }}
+                                        {{ Form::select('max_size[]',['' => 'Select Max Size Range']+ $size,(old('max_size')[1] ?? ''), ['class' => 'form-control size_'. $lastcount, 'id' => 'max_size'.$lastcount]) }}
                                     </div>
                                 </div>
                             </div>
@@ -248,29 +248,29 @@
         	});
     	}
 
-    	var msg_HTML = "";
-        $.ajax({
-            type: "POST",
-            url: '{!! route('admin.size-master-price.price.update') !!}',
-            data: {
-                _token: "{{ csrf_token() }}",
-                id: id,
-                value: value,
-                field: field,
-            },
-            dataType: 'JSON',
-            success: function(data) {
-                if (data.msg == 'update') {
-                    msg_HTML = `<div class="col-xs-12 flashmessages">
-                                    <div class="alert alert-success" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <strong>${data.message}</strong>
-                                        </div>
-                                    </div>`;
-                    $('#alert_msg').html(msg_HTML);
-                }
-            }
-        });
+    	// var msg_HTML = "";
+        // $.ajax({
+        //     type: "POST",
+        //     url: '{!! route('admin.size-master-price.price.update') !!}',
+        //     data: {
+        //         _token: "{{ csrf_token() }}",
+        //         id: id,
+        //         value: value,
+        //         field: field,
+        //     },
+        //     dataType: 'JSON',
+        //     success: function(data) {
+        //         if (data.msg == 'update') {
+        //             msg_HTML = `<div class="col-xs-12 flashmessages">
+        //                             <div class="alert alert-success" role="alert">
+        //                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        //                                     <strong>${data.message}</strong>
+        //                                 </div>
+        //                             </div>`;
+        //             $('#alert_msg').html(msg_HTML);
+        //         }
+        //     }
+        // });
     }
 </script>
 @endpush
