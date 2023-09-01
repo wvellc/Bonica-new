@@ -2830,6 +2830,7 @@ input:autofill {
 .select-box select.form-control {
   padding: 10px 40px 10px 20px;
   background-image: url("../../images/down-arrow.png");
+  color: #000000 !important;
   background-repeat: no-repeat;
   background-position: right center;
 }
@@ -3781,11 +3782,15 @@ ul.pro-d-list-info li h6 {
   justify-content: space-around;
 }
 
+.ring-size.bangles {
+  width: 30%;
+}
+
 .quantity-box form.myform input {
   font-size: 21px;
   line-height: 22px;
   width: 100%;
-  color:#000;
+  color:#000 !important;P
 }
 
 .range-size-wrapper {
