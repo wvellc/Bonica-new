@@ -513,23 +513,23 @@ class ProductController extends Controller
         $productDataArr = productPriceCalculation($productData);
 
         //start calculation of users select size wise change price logic  
-        $price = 0; 
-        if($request->ringSize){
-            //Get the selected ring size
-            $ringSize = Size::where('id',$request->ringSize)->first();
-            // Get the master price for sizes
-            $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
-                                    ->where('max_size', '>=', $ringSize->name)
-                                    ->where('category_id',$productDataArr['cat_id'])
-                                    ->value('price');
-        }
+        // $price = 0; 
+        // if($request->ringSize){
+        //     //Get the selected ring size
+        //     $ringSize = Size::where('id',$request->ringSize)->first();
+        //     // Get the master price for sizes
+        //     $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
+        //                             ->where('max_size', '>=', $ringSize->name)
+        //                             ->where('category_id',$productDataArr['cat_id'])
+        //                             ->value('price');
+        // }
         
-        if($price > 0){
-            // Calculate the price increment based on the percentage of size price
-            $priceIncrement = $productDataArr['total_price'] * $price / 100;
-            // Add the calculated price increment to the total price
-            $productDataArr['total_price'] = $productDataArr['total_price'] + $priceIncrement;
-        }
+        // if($price > 0){
+        //     // Calculate the price increment based on the percentage of size price
+        //     $priceIncrement = $productDataArr['total_price'] * $price / 100;
+        //     // Add the calculated price increment to the total price
+        //     $productDataArr['total_price'] = $productDataArr['total_price'] + $priceIncrement;
+        // }
         //end calculation of users select size wise change price logic  
 
         $salesProductPrice = Product::getProductSalesPrice($request->product_id);

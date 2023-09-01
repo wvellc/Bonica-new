@@ -234,7 +234,7 @@
                                     @endif
                                 @endif
                                 @if (count($product->ProductSize) > 0 && count($country_size) > 0)
-								<div class="ring-size">
+								<div class="ring-size bangles">
 									<h5>Select your size</h5>
                                         @php $size_arr = array();  @endphp
                                         @foreach ($product->ProductSize as $ProductSize)
