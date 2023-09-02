@@ -430,3 +430,28 @@
 		}
 		.ui-widget.ui-widget-content {width:260px !important;}
 	}
+
+@media screen and (max-width:1919px){
+  .ring-size.bangles {width: 39%;}
+}
+@media screen and (max-width:1365px){
+  .ring-size.bangles {width: 44%;}
+}
+@media screen and (max-width:1279px){
+  .ring-size.bangles {width: 22%;}
+}
+@media screen and (max-width:1023px){
+  .ring-size.bangles {width: 26%;}
+}
+@media screen and (max-width:767px){
+  .ring-size.bangles {width: 32%;}
+}
+@media screen and (max-width:639px){
+  .ring-size.bangles {width: 44%;}
+}
+@media screen and (max-width:479px){
+  .ring-size.bangles {width: 59%;}
+}
+@media screen and (max-width:359px){
+  .ring-size.bangles {width: 66%;}
+}

@@ -45,7 +45,7 @@
 		                                <div class="form-group">
 		                                    <label for="size">Category <span class="error">*</span></label>
 		                                    <div class="select-box">
-		                                        {!! Form::select('category[]', ['' => 'Select Category'] + $parent_category,$sizeMasterPrice->category_id, ['class' => 'form-control category','id' => 'category','onchange'=> "updateContent($sizeMasterPrice->id,this.value,'category_id')"]) !!}
+		                                        {!! Form::select('category[]', ['' => 'Select Category'] + $parent_category,$sizeMasterPrice->category_id, ['class' => 'form-control category','data-id' => $sizeMasterPrice->id, 'id' => "category_$key",'onchange'=> "changeSizeCategoryWise($sizeMasterPrice->id,this.value,'category_id')"]) !!}
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -60,7 +60,7 @@
 		                                <div class="form-group">
 		                                    <label for="size">Select Min Size Range <span class="error">*</span></label>
 		                                    <div class="select-box">
-		                                        {!! Form::select('min_size[]', ['' => 'Select Min Size Range']+$size ,$sizeMasterPrice->min_size, ['class' => 'form-control size_'.$sizeMasterPrice->id,'id' => 'min_size']) !!}
+		                                        {!! Form::select('min_size[]', ['' => 'Select Min Size Range']+$size ,$sizeMasterPrice->min_size, ['class' => 'form-control min_size_'.$sizeMasterPrice->id,'id' => 'min_size']) !!}
 		                                    
 		                                    </div>
 		                                </div>
@@ -69,7 +69,7 @@
 		                                <div class="form-group">
 		                                    <label for="size">Select Max Size Range <span class="error">*</span></label>
 		                                    <div class="select-box">
-		                                        {!! Form::select('max_size[]', ['' => 'Select Max Size Range']+$size,$sizeMasterPrice->max_size, ['class' => 'form-control size_'.$sizeMasterPrice->id,'id' => 'max_size']) !!}
+		                                        {!! Form::select('max_size[]', ['' => 'Select Max Size Range']+$size,$sizeMasterPrice->max_size, ['class' => 'form-control max_size_'.$sizeMasterPrice->id,'id' => 'max_size']) !!}
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -89,7 +89,7 @@
                                 <div class="form-group">
                                     <label for="mls">Category<span class="error">*</span></label>
                                     <div class="select-box">
-                                    {!! Form::select('category[]', ['' => 'Select Category'] + $parent_category,$selectedParentID, ['class' => 'form-control','id' => 'category','onchange'=> "updateContent($lastcount,this.value,'category_id')"]) !!}
+                                    {!! Form::select('category[]', ['' => 'Select Category'] + $parent_category,$selectedParentID, ['class' => 'form-control','id' => 'category','onchange'=> "changeSizeCategoryWise($lastcount,this.value,'category_id')"]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                 <div class="form-group">
                                     <label for="min_size">Select Min Size Range <span class="error">*</span></label>
                                     <div class="select-box">
-                                        {{ Form::select('min_size[]',['' => 'Select Min Size Range']+ $size,(old('min_size')[1] ?? ''), ['class' => 'form-control size_'. $lastcount, 'id' => 'min_size'.$lastcount]) }}
+                                        {{ Form::select('min_size[]',['' => 'Select Min Size Range']+ $size,(old('min_size')[1] ?? ''), ['class' => 'form-control min_size_'. $lastcount, 'id' => 'min_size_'.$lastcount]) }}
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                 <div class="form-group">
                                     <label for="max_size">Select Max Size Range <span class="error">*</span></label>
                                     <div class="select-box">
-                                        {{ Form::select('max_size[]',['' => 'Select Max Size Range']+ $size,(old('max_size')[1] ?? ''), ['class' => 'form-control size_'. $lastcount, 'id' => 'max_size'.$lastcount]) }}
+                                        {{ Form::select('max_size[]',['' => 'Select Max Size Range']+ $size,(old('max_size')[1] ?? ''), ['class' => 'form-control max_size_'. $lastcount, 'id' => 'max_size_'.$lastcount]) }}
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +135,14 @@
 
 @push('js')
 <script type="text/javascript">
+	$(document).ready(function() {
+	    $('select.category').each(function() {
+	        var id = $(this).data('id');
+	        var value = $(this).val();
+	        changeSizeCategoryWise(id, value, 'category_id');
+	    });
+	});
+
 	$(".add-itemBtn").click(function() {
 	    var last_count = $('#lastcount').val();
 	    var riw_id = parseInt(last_count) + 1;
@@ -145,7 +153,7 @@
 	            {!! Form::select('category[${riw_id}]', ['' => 'Select Category']+$parent_category, null, [ // Provide the options for the select box
 	                    'class' => 'form-control category',
 	                    'id' => 'category${riw_id}', // Use riw_id instead of parseInt(last_count) + 1
-	                    'onchange'=> 'updateContent(${riw_id}, this.value, "category_id")'
+	                    'onchange'=> 'changeSizeCategoryWise(${riw_id}, this.value, "category_id")'
 	                ]) !!}
 	        </div>
 	        <div class="col-sm-2 form-group">
@@ -160,15 +168,15 @@
 	        <div class="col-sm-3 form-group">
 	            <label for="size">Select Min Size Range</label>
 	            {!! Form::select('min_size[${riw_id}]', ['' => 'Select Min Size Range']+$size, null, [ // Provide the options for the select box
-	                    'class' => 'form-control size_${riw_id}',
-	                    'id' => 'min_size${riw_id}', // Use riw_id instead of parseInt(last_count) + 1
+	                    'class' => 'form-control min_size_${riw_id}',
+	                    
 	                ]) !!}
 	        </div>
 	        <div class="col-sm-3 form-group">
 	            <label for="size">Select Max Size Range</label>
 	            {!! Form::select('max_size[${riw_id}]', ['' => 'Select Max Size Range']+$size, null, [ // Provide the options for the select box
-	                    'class' => 'form-control size_${riw_id}',
-	                    'id' => 'max_size${riw_id}', // Use riw_id instead of parseInt(last_count) + 1
+	                    'class' => 'form-control max_size_${riw_id}',
+	                    
 	                ]) !!}
 	        </div>
 	        <div class="col-sm-1">
@@ -217,60 +225,62 @@
         });
     }
 
-    function updateContent(id,value,field){
+    function changeSizeCategoryWise(id, value, field) {
+    if (field === 'category_id') {
+        var minSize = $(".min_size_" + id);
+        var maxSize = $(".max_size_" + id);
 
-    	if(field == 'category_id'){
-	    	var selectBox = $(".size_"+id);
-			selectBox.empty().append('<option value="">---Select Size---</option>');
-    		$.ajax({
-	            type: "POST",
-	            url: '{!! route('admin.size-master-price.sizechange') !!}',
-	            data: {
-	                _token: "{{ csrf_token() }}",
-	                id: id,
-	                value: value,
-	                field: field,
-	            },
-	            dataType: 'JSON',
-	            success: function(response) {
-	                if (response.code == 200) {
-	                	var size = response.data;
-	                	
-					    // Loop through the new options and append them to the select box
-					    $.each(size, function(value, text) {
-					        selectBox.append($('<option>', {
-					            value: value,
-					            text: text
-					        }));
-					    });
-	                }
-	            }
-        	});
-    	}
+        // Clear existing options in minSize and maxSize select boxes
+        minSize.empty();
+        maxSize.empty();
 
-    	// var msg_HTML = "";
-        // $.ajax({
-        //     type: "POST",
-        //     url: '{!! route('admin.size-master-price.price.update') !!}',
-        //     data: {
-        //         _token: "{{ csrf_token() }}",
-        //         id: id,
-        //         value: value,
-        //         field: field,
-        //     },
-        //     dataType: 'JSON',
-        //     success: function(data) {
-        //         if (data.msg == 'update') {
-        //             msg_HTML = `<div class="col-xs-12 flashmessages">
-        //                             <div class="alert alert-success" role="alert">
-        //                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        //                                     <strong>${data.message}</strong>
-        //                                 </div>
-        //                             </div>`;
-        //             $('#alert_msg').html(msg_HTML);
-        //         }
-        //     }
-        // });
+        // Check if the select boxes are empty before appending the default option
+        if (minSize.find('option').length === 0) {
+            minSize.append('<option value="">---Select Size---</option>');
+        }
+
+        if (maxSize.find('option').length === 0) {
+            maxSize.append('<option value="">---Select Size---</option>');
+        }
+
+        $.ajax({
+            type: "POST",
+            url: '{!! route('admin.size-master-price.sizechange') !!}',
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id,
+                value: value,
+                field: field,
+            },
+            dataType: 'JSON',
+            success: function(response) {
+                if (response.code === 200) {
+                    var size = response.data;
+                    console.log(size);
+                    var selectedSize = response.selectedSize; // Get selectedSize data
+
+                    // Loop through the new options and append them to the select boxes
+                    $.each(size, function(value, text) {
+                        minSize.append($('<option>', {
+                            value: value,
+                            text: text
+                        }));
+
+                        maxSize.append($('<option>', {
+                            value: value,
+                            text: text
+                        }));
+                    });
+
+                    // Set the selected options based on selectedSize
+                    if (selectedSize) {
+                        minSize.val(selectedSize.min_size); // Set the selected option value
+                        maxSize.val(selectedSize.max_size); // Set the selected option value
+                    }
+                }
+            }
+        });
     }
+}
 </script>
 @endpush

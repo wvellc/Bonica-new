@@ -168,7 +168,9 @@ class SizeMasterPriceController extends Controller
     public function sizeChange(Request $request){
         $size = Size::where('category_id',$request->value)->pluck('name','name')->toArray();
         asort($size);
+
+        $selectedSize = SizeMasterPrice::select('min_size','max_size')->where('category_id',$request->value)->where('id',$request->id)->first();
     
-        return response()->json(['code' => 200, 'data' => $size]);
+        return response()->json(['code' => 200, 'data' => $size,'selectedSize'=>$selectedSize]);
     }
 }
