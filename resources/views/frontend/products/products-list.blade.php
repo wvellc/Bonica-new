@@ -211,7 +211,7 @@
 @endsection
 @push('js')
     <script>
-        $('.dot-flashing').hide();
+        var isLoading = false;  
         var page = 1;
         $(function() {
 
@@ -378,14 +378,19 @@
 
         
         //gatData(page);
+        var footer = document.getElementById("footer");
+        // Get the height of the footer
+        var footerHeight = footer.offsetHeight;
 
         $(window).scroll(function() {
             var loader_value = $("#loader").val();
-            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            if (!isLoading && $(window).scrollTop() + $(window).height() >= $(document).height() - footerHeight)
+            {
             page++;
-            $('.dot-flashing').show();
+            //$('.dot-flashing').show();
             //setTimeout("gatData(page)", 100000);
                 if(loader_value == 1){
+                    isLoading = true;
                     gatData(page);
                 }else{
                     $('.dot-flashing').hide();
@@ -451,7 +456,8 @@
                             $('.total_products').html(data.totalProducts);
                             $('#prodcut-box').append(data.ProductData_Html);
                             //$('#prodcut-box').html(data.ProductData_Html);
-
+                            // Update isLoading to false after successfully loading data
+                            isLoading = false;
                             $(".pl-pro-image-box-slider-wrapper").not('.slick-initialized').slick({
                                 slidesToShow: 1,
                                 slidesToScroll: 1,
