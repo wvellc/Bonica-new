@@ -17,6 +17,7 @@ use FFMpeg;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
 use VideoThumbnail;
+use FFMpeg\Coordinate\TimeCode;
 
 class Commonhelper
 {
@@ -391,7 +392,36 @@ class Commonhelper
         }
 		if($type == 'video'){
 
-			$localVideo =  Storage::disk('public')->put($storage_path_full, file_get_contents($file));
+			/*Uploded Into S3 Bucket*/
+			Storage::disk('s3')->put($s3FilePath, file_get_contents($file));
+
+			$videoPath = $file->getPathname();
+			
+			// Use FFmpeg to extract the thumbnail from the video
+		    $ffmpeg = \FFMpeg\FFMpeg::create();
+		    $video = $ffmpeg->open($videoPath);
+		    $frame = $video->frame(TimeCode::fromSeconds(2));
+		    $frame->save($destinationPath.$imageName);
+
+			Image::make($destinationPath.$imageName)->resize(1080, 1080, function ($constraint) {
+			      $constraint->aspectRatio();
+			      $constraint->upsize();
+			    })->save($destinationPath.$imageName);
+
+			/*Uploded Video Path*/
+			$videoPath = Storage::disk('s3')->url($s3FilePath);
+			
+			Storage::disk('s3')->put($s3Directory.$imageName, file_get_contents($destinationPath.$imageName));
+
+			/*Get Image Path*/
+			$imagePath = Storage::disk('s3')->url($s3Directory.$imageName);
+
+			self::deleteFile($destinationPath . $imageName);
+
+			//comment by dipali gupta
+			// $localVideo =  Storage::disk('public')->put($storage_path_full, file_get_contents($file));
+			//end comment by dipali gupta
+
 			/*Get Video Dimension*/
 			/* $ffprobe = FFMpeg\FFProbe::create();
 			$dimension = $ffprobe
@@ -403,30 +433,31 @@ class Commonhelper
 			$width = $dimension->getWidth();
 			$height = $dimension->getHeight(); */
 
+			//comment by dipali gupta
 			/*Upload Video to S3 after resize*/
-			FFMpeg::fromDisk('public')->open($filename)
-			->resize(1080, 1080)
-			->export()
-			->toDisk('s3')
-			->inFormat((new X264('libmp3lame', 'libx264'))->setKiloBitrate($setKiloBitrate))
-			->save($s3FilePath);
+			// FFMpeg::fromDisk('public')->open($filename)
+			// ->resize(1080, 1080)
+			// ->export()
+			// ->toDisk('s3')
+			// ->inFormat((new X264('libmp3lame', 'libx264'))->setKiloBitrate($setKiloBitrate))
+			// ->save($s3FilePath);
 
-			/*Uploded Video Path*/
-			$videoPath = Storage::disk('s3')->url($s3FilePath);
+			// /*Uploded Video Path*/
+			// $videoPath = Storage::disk('s3')->url($s3FilePath);
 
-			/*Get Flash Image from video*/
-			VideoThumbnail::createThumbnail($videoPath,$destinationPath,$imageName,10,600,600);
+			// /*Get Flash Image from video*/
+			// VideoThumbnail::createThumbnail($videoPath,$destinationPath,$imageName,10,600,600);
+			// /*Upload Image to S3 From Storage*/
+			// Storage::disk('s3')->put($s3Directory.$imageName, file_get_contents($destinationPath . $imageName));
 
-			/*Upload Image to S3 From Storage*/
-			Storage::disk('s3')->put($s3Directory.$imageName, file_get_contents($destinationPath . '/' . $imageName));
+			// /*Get Image Path*/
+			// $imagePath = Storage::disk('s3')->url($s3Directory.$imageName);
 
-			/*Get Image Path*/
-			$imagePath = Storage::disk('s3')->url($s3Directory.$imageName);
+			// /*Delete Video & Image From Storage*/
+			// Storage::disk('public')->delete($filename);
 
-			/*Delete Video & Image From Storage*/
-			Storage::disk('public')->delete($filename);
-
-			self::deleteFile($destinationPath . '/' . $imageName);
+			// self::deleteFile($destinationPath . $imageName);
+			// end comment by dipali gupta
 			return array('imageName' => $imageName,'videoPath' => $videoPath,'imagePath' => $imagePath);
 		}
 		if($type == 'image'){
