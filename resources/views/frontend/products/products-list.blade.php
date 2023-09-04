@@ -212,6 +212,7 @@
 @push('js')
     <script>
         var isLoading = false;  
+        $('.dot-flashing').hide();
         var page = 1;
         $(function() {
 
@@ -387,7 +388,7 @@
             if (!isLoading && $(window).scrollTop() + $(window).height() >= $(document).height() - footerHeight)
             {
             page++;
-            //$('.dot-flashing').show();
+            $('.dot-flashing').show();
             //setTimeout("gatData(page)", 100000);
                 if(loader_value == 1){
                     isLoading = true;
