@@ -740,11 +740,13 @@ if (!function_exists('productPriceCalculation')){
         if($ringSize){
             //Get the selected ring size
             $ringSize = Size::where('id',$ringSize)->first();
+
             // Get the master price for sizes
-            $sizeWisePrice = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
-                                    ->where('max_size', '>=', $ringSize->name)
+            $sizeWisePrice = SizeMasterPrice::where('min_value', '<=', $ringSize->name)
+                                    ->where('max_value', '>=', $ringSize->name)
                                     ->where('category_id',$product['cat_id'])
                                     ->value('price');
+
         }
         
         if($sizeWisePrice > 0){
