@@ -381,7 +381,7 @@
         //gatData(page);
         var footer = document.getElementById("footer");
         // Get the height of the footer
-        var footerHeight = footer.offsetHeight;
+        var footerHeight = parseInt(footer.offsetHeight) + parseInt(50);
 
         $(window).scroll(function() {
             var loader_value = $("#loader").val();
