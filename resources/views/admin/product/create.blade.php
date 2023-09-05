@@ -959,13 +959,22 @@
                                                                     ]) !!}
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-1">
                                                                 {!! Form::number('edit_sort_order[]', $productImage->sort_order, [
                                                                     'class' => 'form-control',
                                                                     'placeholder' => 'Sort Order',
                                                                     'id' => 'sort_order',
                                                                     'onblur' => "updateImageAttribute($productImage->id,this.value,'sort_order')",
                                                                 ]) !!}
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <div class="select-box">
+                                                                    {!! Form::select('edit_video_type[]', ['' => 'Select Video type'] + $video_type, $productImage->video_type, [
+                                                                        'class' => 'form-control',
+                                                                        'id' => 'cat_id',
+                                                                        'onchange' => "updateImageAttribute($productImage->id,this.value,'video_type')",
+                                                                    ]) !!}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -977,7 +986,7 @@
                                         <div class="mt-3" id="div_images">
                                             <div class="row mb-2 align-items-center" id="row-{{ $lastcount }}">
 
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-3">
                                                     <input type="file" name="images[1][]" class="form-control"
                                                         id="image" multiple>
                                                 </div>
@@ -993,6 +1002,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="select-box">
                                                         {!! Form::select('metal_arr[1]', ['' => 'Select Metal'] + $metal_arr, null, [
+                                                            'class' => 'form-control',
+                                                            'id' => 'cat_id',
+                                                        ]) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="select-box">
+                                                        {!! Form::select('video_type[1]', ['' => 'Select Video Type'] + $video_type, null, [
                                                             'class' => 'form-control',
                                                             'id' => 'cat_id',
                                                         ]) !!}
@@ -1944,7 +1961,7 @@
 
                 var image_html = `<div class="row mb-2  align-items-center" id="row-${riw_id}">
 
-                <div class="col-sm-5">
+                <div class="col-sm-3">
                     <input type="file" name="images[${riw_id}][]" class="form-control" id="image" multiple>
                 </div>
                 <div class="col-sm-3">
@@ -1958,6 +1975,14 @@
                 <div class="col-sm-3">
                     <div class="select-box">
                     {!! Form::select('metal_arr[${riw_id}]', ['' => 'Select Metal'] + $metal_arr, null, [
+                        'class' => 'form-control',
+                        'id' => 'cat_id',
+                    ]) !!}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="select-box">
+                    {!! Form::select('video_type[${riw_id}]', ['' => 'Select Video Type'] + $video_type, null, [
                         'class' => 'form-control',
                         'id' => 'cat_id',
                     ]) !!}
