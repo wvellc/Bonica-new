@@ -620,11 +620,16 @@ class ProductController extends Controller
         if (count($image_paths) > 0) {
             foreach ($image_paths as $key => $productImage) {
                 $ProductImageHtml .= '<div class="item">';
-                if ($is_360video[$key]) {
+                if ($is_360video[$key] == 1) {
 
                     $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
                                                                 <img src="' . $productImage . '" alt="ring">
                                                                 <img src="' . asset('images/icons/360-degree-icon.svg') . '" alt="ring" class="rotate-icon">
+                                                            </div>';
+                }else if ($is_360video[$key] == 2) {
+
+                    $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
+                                                                <img src="' . $productImage . '" alt="ring">
                                                             </div>';
                 } else {
                     $ProductImageHtml .= '<div class="pd-slider-mini-img">
