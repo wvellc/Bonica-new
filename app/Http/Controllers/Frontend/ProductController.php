@@ -130,7 +130,7 @@ class ProductController extends Controller
         $product = $product->where('slug', $product_slug);
         $product = $product->Active()->first();
 
-        $product->ProductSize = Size::select('name as size','id')->where('category_id',$product->cat_id)->get();
+        $product->ProductSize = Size::select('name as size','id')->Active()->where('category_id',$product->cat_id)->get();
 
         $product_center_diamonds = ProductCenterDiamondPacket::where('product_id', $product->id)->with('color','clarity')->get()->toArray();
 

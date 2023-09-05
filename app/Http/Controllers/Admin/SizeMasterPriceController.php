@@ -91,7 +91,7 @@ class SizeMasterPriceController extends Controller
     {
         $sizeMasterPrices = SizeMasterPrice::get();
        
-        $size = Size::pluck('name', 'name')->toArray();
+        $size = Size::active()->where('status',1)->pluck('name', 'name')->toArray();
         asort($size);
         
         $data = array(
@@ -122,6 +122,18 @@ class SizeMasterPriceController extends Controller
             $priceArray = [];
             foreach ($request->category as $key => $category) {   
                 if($category){
+                    preg_match('/(\d+(?:\.\d+)?)\s*\[\d+\.\d+(?:\s*(?:mm|cm))?\]/', $request->min_size[$key], $minValueArr);
+                    preg_match('/(\d+(?:\.\d+)?)\s*\[\d+\.\d+(?:\s*(?:mm|cm))?\]/', $request->max_size[$key], $maxValueArr);
+
+                    $minValue = 0;
+                    $maxValue = 0;
+                    if (count($minValueArr) === 2) {
+                        $minValue = $minValueArr[1] ;
+                    }
+                    if(count($maxValueArr) === 2){
+                        $maxValue = $maxValueArr[1];
+                    }
+
                     $minSize = ($request->min_size[$key]) ? $request->min_size[$key] : null ;
                     $maxSize = ($request->max_size[$key]) ? $request->max_size[$key] : null ;
                     $price = ($request->price[$key]) ? $request->price[$key] : null ;
@@ -129,7 +141,9 @@ class SizeMasterPriceController extends Controller
                     $priceArray[] = [
                         'price' => $price,
                         'min_size' => $minSize,
+                        'min_value' => $minValue,
                         'max_size' => $maxSize,
+                        'max_value' => $maxValue,
                         'category_id' => $category,
                         'created_at'=> date("Y-m-d H:i:s"),
                         'updated_at'=> date("Y-m-d H:i:s"),
@@ -166,7 +180,7 @@ class SizeMasterPriceController extends Controller
     }
 
     public function sizeChange(Request $request){
-        $size = Size::where('category_id',$request->value)->pluck('name','name')->toArray();
+        $size = Size::where('category_id',$request->value)->active()->pluck('name','name')->toArray();
         asort($size);
 
         $selectedSize = SizeMasterPrice::select('min_size','max_size')->where('category_id',$request->value)->where('id',$request->id)->first();
