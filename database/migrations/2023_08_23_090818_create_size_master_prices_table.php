@@ -17,7 +17,9 @@ class CreateSizeMasterPricesTable extends Migration
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained('categories')->onUpdate('CASCADE')->onDelete('cascade');
             $table->string('min_size',150);
-            $table->string('mmax_size',150);
+            $table->float('min_value',8,2);
+            $table->string('max_size',150);
+            $table->float('max_value',8,2);
             $table->decimal('price', 10,3);
             $table->boolean('status', 1)->default(1)->comment('1-Active, 0-Inactive');
             $table->timestamps();
