@@ -240,7 +240,7 @@
                                         @foreach ($product->ProductSize as $ProductSize)
                                         @php $size_arr[$ProductSize->id] = $ProductSize->size; @endphp
                                         @endforeach
-                                        @php asort($size_arr); @endphp
+                                        @php ksort($size_arr); @endphp
                                         
                                     <div class="">
                                         <div class="select-box">
