@@ -459,6 +459,7 @@
 }
 @media screen and (max-width:479px){
   .ring-size.bangles {width: 59%;}
+  #btnNewslatter {max-width: 100%;}
 }
 @media screen and (max-width:359px){
   .ring-size.bangles {width: 66%;}

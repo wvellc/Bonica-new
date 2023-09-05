@@ -28,7 +28,7 @@
                             <h5>Contact Us</h5>
                             <div class="toggle-arrow"></div>
                         </div>
-                        <ul class="foot-col-data">
+                        <ul class="foot-col-data footer-contact-list">
                                 <li><a href="mailto:jaysheel@bonicajewels.com" title="Mail Us"><img
                                         src="{{ asset('images/icons/email.svg') }}"
                                         alt="Mail Us">jaysheel@bonicajewels.com</a>
