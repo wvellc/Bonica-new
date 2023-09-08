@@ -424,7 +424,7 @@ hr {
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
-  color: #000;
+  color: #fff;
   background-color: var(--darkpeach);
   border-color: var(--darkpeach);
 }
@@ -4652,7 +4652,7 @@ li.ui-menu-item {
     font-weight: 500;
 }
 
-.center-dropdowns .b-dropdown.f-item {width:26%;}
+.center-dropdowns .b-dropdown.f-item {width:35%;}
 .center-dropdowns .b-dropdown.color.f-item , .center-dropdowns .b-dropdown.clarity.f-item {width:18%;}
 .ring-size {width: 24%;}
 header .dropdown-menu {margin-top:5px !important;}

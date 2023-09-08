@@ -641,7 +641,30 @@ class ProductController extends Controller
                                             </div>';
         }
 
+<<<<<<< HEAD
             $ProductImageHtml .= ''.$handImageHtml.'
+=======
+            $ProductImageHtml .= '<div class="col-sm-12 col-md-6">
+                                    <div class="hand-wrapper">
+                                        <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
+                                        <div class="box-diamond-on-hand">
+                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(2.20);">
+                                        </div>
+                                        
+                                        </div>
+                                   
+                                    <div class="carat-size d-flex align-items-center justify-content-between pb-2">
+                                        <p class="pb-0">0.5 ct</p>
+                                        <p>4 ct</p>
+                                        </div>
+                                        <div class="diamondOnhand-wrapper mb-4">
+                                            <input class="range-slider__range" id="myRange" type="range" value="3" min="0.5" max="4" step="0.25">
+                                        </div>
+                                        <p class="text-center">
+                                            Shown with <b ><span id="caratValue">3</span> carat</b> Diamond
+                                        </p>
+                                    </div>
+>>>>>>> 53e1595e7131528c9e2a76e93f77aabd038ba8eb
                                 </div>';
 
 		 						// <div class="products-d-small-image-wrapper">
