@@ -3264,7 +3264,7 @@ section.new-inner-banner-section h2 {
   width: 100%;
   margin-left: -100px;
   background: #fff;
-  z-index: 1;
+  z-index: 0;
   position: relative;
 }
 
@@ -4665,7 +4665,6 @@ header .dropdown-menu {margin-top:5px !important;}
   padding-top: 13px;
 }*/
 
-size-master-price-change
 .product-row-wrapper .col-sm-6{
     width: 49% !important;
     margin-bottom: 10px !important;
@@ -4674,7 +4673,7 @@ size-master-price-change
 
 .carat-size {width: 75%;margin: 0 auto}
 
-.detials-wrapper-box p{font-size: 20px}
+.detials-wrapper-box p{font-size: 18px}
 
 /* Collpased Footer for mobile view */
 .f-link {margin: 0;display: none;cursor: pointer;}
