@@ -617,7 +617,7 @@ class ProductController extends Controller
                                             </div>';
         }
 
-            $ProductImageHtml .= '<div class="col-sm-6">
+            $ProductImageHtml .= '<div class="col-sm-12 col-md-6">
                                     <div class="hand-wrapper">
                                         <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
                                         <div class="box-diamond-on-hand">
