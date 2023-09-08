@@ -547,6 +547,7 @@ class ProductController extends Controller
         $shape_id = ($request->shape_id) ? $request->shape_id : 0;
         $metal_id = ($request->metal_id) ? $request->metal_id : 0;
         $material_id = ($request->material_id) ? $request->material_id : 0;
+        $cat_segment = ($request->cat_segment) ? $request->cat_segment : "";
 
 
         $materialMetal = ProductMetalMaterial::with("material")->where("product_id",$product_id)->where("metal_id",$metal_id)->get();
@@ -554,7 +555,7 @@ class ProductController extends Controller
         $product = Product::with('ProductShapes', 'firstProductShape', 'ProductShapes.shape',);
         $product = $product->where('id', $product_id);
         $product = $product->Active()->first();
-        
+       
         $diamondShape = strtolower($product->ProductShapes[0]['shape']['name']);
 
         $materialMetalHTML = "";
@@ -588,7 +589,30 @@ class ProductController extends Controller
         $is_360video = $productImages['is_360video'];
         $product_first_image = $productImages['product_first_image'];
 
+        $handImageHtml = '';
 
+        if($cat_segment == 'rings'){
+            $handImageHtml = '  <div class="col-sm-6">
+                                    <div class="hand-wrapper">
+                                        <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
+                                        <div class="box-diamond-on-hand">
+                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(2.20);">
+                                        </div>
+                                        
+                                    </div>
+                                   
+                                    <div class="carat-size d-flex align-items-center justify-content-between pb-2">
+                                        <p class="pb-0">0.5 ct</p>
+                                        <p>4 ct</p>
+                                    </div>
+                                    <div class="diamondOnhand-wrapper mb-4">
+                                        <input class="range-slider__range" id="myRange" type="range" value="3" min="0.5" max="4" step="0.25">
+                                    </div>
+                                    <p class="text-center">
+                                        Shown with <b ><span id="caratValue">3</span> carat</b> Diamond
+                                    </p>
+                                </div>';
+        }
 
         $ProductImageHtml = '';
         $ProductImageHtml .= '<div class="row">';
@@ -617,26 +641,7 @@ class ProductController extends Controller
                                             </div>';
         }
 
-            $ProductImageHtml .= '<div class="col-sm-12 col-md-6">
-                                    <div class="hand-wrapper">
-                                        <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
-                                        <div class="box-diamond-on-hand">
-                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(2.20);">
-                                        </div>
-                                        
-                                        </div>
-                                   
-                                    <div class="carat-size d-flex align-items-center justify-content-between pb-2">
-                                        <p class="pb-0">0.5 ct</p>
-                                        <p>4 ct</p>
-                                        </div>
-                                        <div class="diamondOnhand-wrapper mb-4">
-                                            <input class="range-slider__range" id="myRange" type="range" value="3" min="0.5" max="4" step="0.25">
-                                        </div>
-                                        <p class="text-center">
-                                            Shown with <b ><span id="caratValue">3</span> carat</b> Diamond
-                                        </p>
-                                    </div>
+            $ProductImageHtml .= ''.$handImageHtml.'
                                 </div>';
 
 		 						// <div class="products-d-small-image-wrapper">
