@@ -308,7 +308,7 @@
 								</div>
                                 <div class="col-md-12">
                                     <div class="pr-d-desc mt-5 mt-2">
-                                        <h4>Description</h4>
+                                        <h5>Description</h5>
                                         {!! $product->description !!}
                                     </div>
                                 </div>
@@ -565,61 +565,6 @@ $(function ()
     //     //lazyLoad: 'ondemand'
     // });
 });
-// var slider = document.getElementById("myRange");
-// slider.oninput = function() {
-
-//         var zommSize = this.value;
-//         var range_zomm_size = 2;
-//         if(zommSize == 0.5){
-//             range_zomm_size = 1.6;
-//         }
-//         else if(zommSize == 0.75){
-//             range_zomm_size = 1.65;
-//         }
-//         else if(zommSize == 1){
-//             range_zomm_size = 1.70;
-//         }
-//         else if(zommSize == 1.25){
-//             range_zomm_size = 1.75;
-//         }
-//         else if(zommSize == 1.5){
-//             range_zomm_size = 1.80;
-//         }
-//         else if(zommSize == 1.75){
-//             range_zomm_size = 1.85;
-//         }
-//         else if(zommSize == 2){
-//             range_zomm_size = 1.90;
-//         }
-//         else if(zommSize == 2.25){
-//             range_zomm_size = 1.95;
-//         }
-//         else if(zommSize == 2.5){
-//             range_zomm_size = 2;
-//         }
-//         else if(zommSize == 2.75){
-//             range_zomm_size = 2.10;
-//         }
-//         else if(zommSize == 3){
-//             range_zomm_size = 2.20;
-//         }
-//         else if(zommSize == 3.25){
-//             range_zomm_size = 2.40;
-//         }
-//         else if(zommSize == 3.5){
-//             range_zomm_size = 2.60;
-//         }
-//         else if(zommSize == 3.75){
-//             range_zomm_size = 2.80;
-//         }
-//         else if(zommSize == 4){
-//             range_zomm_size = 3;
-//         }
-
-//         //console.log('zommSize =>',range_zomm_size);
-//         document.getElementById('diamondOnhand').style.transform = "scale("+range_zomm_size+")";
-//         $('#caratValue').html(zommSize);
-//     }
 
 
  function addTocart(){
@@ -898,5 +843,61 @@ function getProductPriceImage()
     //     //lazyLoad: 'ondemand'
     // });
 
+    var slider = document.getElementById("myRange");
+    slider.oninput = function() {
+
+        var zommSize = this.value;
+
+        var range_zomm_size = 2;
+        if(zommSize == 0.5){
+            range_zomm_size = 1.6;
+        }
+        else if(zommSize == 0.75){
+            range_zomm_size = 1.65;
+        }
+        else if(zommSize == 1){
+            range_zomm_size = 1.70;
+        }
+        else if(zommSize == 1.25){
+            range_zomm_size = 1.75;
+        }
+        else if(zommSize == 1.5){
+            range_zomm_size = 1.80;
+        }
+        else if(zommSize == 1.75){
+            range_zomm_size = 1.85;
+        }
+        else if(zommSize == 2){
+            range_zomm_size = 1.90;
+        }
+        else if(zommSize == 2.25){
+            range_zomm_size = 1.95;
+        }
+        else if(zommSize == 2.5){
+            range_zomm_size = 2;
+        }
+        else if(zommSize == 2.75){
+            range_zomm_size = 2.10;
+        }
+        else if(zommSize == 3){
+            range_zomm_size = 2.20;
+        }
+        else if(zommSize == 3.25){
+            range_zomm_size = 2.40;
+        }
+        else if(zommSize == 3.5){
+            range_zomm_size = 2.60;
+        }
+        else if(zommSize == 3.75){
+            range_zomm_size = 2.80;
+        }
+        else if(zommSize == 4){
+            range_zomm_size = 3;
+        }
+
+        console.log('zommSize =>',zommSize);
+        document.getElementById('diamondOnhand').style.transform = "scale("+range_zomm_size+")";
+        $('#caratValue').html(zommSize);
+    }
 </script>
 @endpush
