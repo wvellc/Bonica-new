@@ -283,9 +283,7 @@
                                         </p>
 									</div>
 
-									<div>
-										<a href="{{ route('frontend.appointment') }}" class="btn mt-3 mt-sm-0 ms-sm-3  btn-outline-primary ">Booking  Appointment</a>
-									</div>
+									
 								</div>
 								<div class="quantity-box pb-3 d-flex align-items-end">
 									<div>
@@ -302,10 +300,11 @@
 
 
 								</div>
-								<div class=" d-flex  align-items-center flex-row">
-									<a href="JavaScript:void(0);" onclick="addTocart()" class="btn btn-primary mt-2 btn-cart-img">Add to Bag</a>
-
+								<div class="d-flex align-items-center flex-row add-btns-group">
+									<a href="JavaScript:void(0);" onclick="addTocart()" class="btn btn-primary btn-cart-img">Add to Bag</a>
+                                    <a href="{{ route('frontend.appointment') }}" class="btn mt-3 mt-sm-0 ms-sm-3 btn-outline-primary">Booking  Appointment</a>
 								</div>
+                                
                                 <div class="col-md-12">
                                     <div class="pr-d-desc mt-5 mt-2">
                                         <h5>Description</h5>
