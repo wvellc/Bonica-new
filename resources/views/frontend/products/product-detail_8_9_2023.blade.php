@@ -38,12 +38,11 @@
 					</div>
 
 					<div class="row mt-4">
-						<div class="col-md-12 col-xl-8">
-                            <div id="product_image-loading"></div>
+						<div class="col-md-12 col-xl-7">
+                            <div class="product-row-wrapper" id="product_image-loading"></div>
 							<div class="product-row-wrapper" id="product_image"></div>
-                           
 						</div>
-						<div class="col-md-12 col-xl-4">
+						<div class="col-md-12 col-xl-5">
 							<div class="detials-wrapper-box">
 								<div class="d-flex justify-content-between">
 									<h3>{{$product->name}}</h3>
@@ -92,12 +91,8 @@
 														@endforeach
 													</select>                                           
                                             	@else
-                                                @php
-                                                    $shape = strtolower($product->ProductShapes[0]['shape']['name']);
-                                                @endphp
-                                                <img src="{{ asset('images/icons/products/'.$shape.'.svg') }}"  alt="Image" class="cart-btn-img" />
                                                 <p style="font-size: 15px;font-weight: 500;">{{$product->ProductShapes[0]['shape']['name']}}</p>
-                                                <input type="hidden" data-id="{{$product->ProductShapes[0]['shape']['name']}}" name="shape" id="shape" value="{{$product->ProductShapes[0]['shape_id']}}">
+                                                <input type="hidden" data-name="{{$product->ProductShapes[0]['shape']['name']}}" name="shape" id="shape" value="{{$product->ProductShapes[0]['shape_id']}}">
                                                 @endif
                                             </div>
 										</div>
@@ -303,15 +298,10 @@
 
 								</div>
 								<div class=" d-flex  align-items-center flex-row">
-									<a href="JavaScript:void(0);" onclick="addTocart()" class="btn btn-primary mt-2 btn-cart-img">Add to Bag</a>
+									<a href="JavaScript:void(0);" onclick="addTocart()" class="btn btn-primary mt-2 btn-cart-img"><img src="{{ asset('images/icons/cart.svg') }}"  alt="Image" class="cart-btn-img" />Add to Bag</a>
 
 								</div>
-                                <div class="col-md-12">
-                                    <div class="pr-d-desc mt-5 mt-2">
-                                        <h4>Description</h4>
-                                        {!! $product->description !!}
-                                    </div>
-                                </div>
+
 							</div>
 						</div>
 					</div>
@@ -320,7 +310,13 @@
 			<section class="section pd-section">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="pr-d-desc">
+								<h5>Description</h5>
+								{!! $product->description !!}
+							</div>
+						</div>
+						<div class="col-md-6">
 							<div class=" mt-4  mt-md-0">
 								<h5>Details</h5>
 								<ul class="pro-d-list-info">
@@ -395,6 +391,48 @@
 					</div>
 				</div>
 			</section>
+            @if(count($product->ProductShapes) > 0)
+                @if($cat_segment == 'rings')
+                @php
+                    $productShapes = strtolower($product->ProductShapes[0]['shape']['name']);
+                @endphp
+                <section class="section diamond-section">
+                    <div class="container-fluid p-0">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-6 text-center">
+                                <div class="hand-wrapper">
+                                    <img id="hand" src="{{ asset('images/hand.png') }}" alt="image" class="v-hand" >
+                                    <div class="box-diamond-on-hand">
+                                        <img id="diamondOnhand" src="{{ asset('images/shapes/'.$productShapes.'.png') }}" alt="image" class="diamond-on-hand" style="transform: scale(2.20);">
+                                    </div>
+                                    <span>Shown with ring size 6</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6  col-xl-5">
+                                <div class="px-4 range-size-wrapper">
+                                    <div class="d-flex align-items-center justify-content-between pb-5">
+                                        <p class="pb-0">0.5 ct</p>
+                                        <p>4 ct</p>
+                                    </div>
+                                    <div class="diamondOnhand-wrapper mb-5">
+
+                                        <input class="range-slider__range" id="myRange" type='range' value="3" min="0.5" max="4" step="0.25">
+                                    </div>
+                                    <p class="text-center">
+                                        Shown with <b ><span id="caratValue">3</span> carat</b> Diamond
+                                    </p>
+
+                                    <!-- <div class="slider-wrapper">
+                                        <div id="employees"></div>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                @endif
+            @endif
 			<section class="section assurance-section">
 				<div class="container">
 					<div class="row align-items-center justify-content-between">
@@ -549,77 +587,77 @@ $(function ()
     getProductPrice();
     getProductPriceImage();
 
-    //  $('.pl-pro-image-box-slider-wrapper').slick({
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     dots: false,
-    //     infinite: true,
-    //     prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-left"></i></div>',
-    //     nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-right"></i></div>',
-    //     arrows: true,
-    //     speed: 500,
-    //     fade: true,
-    //     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
-    //     // autoplay: true,
-    //     // autoplaySpeed: 3000,
-    //     //lazyLoad: 'ondemand'
-    // });
+     $('.pl-pro-image-box-slider-wrapper').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false,
+        infinite: true,
+        prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-left"></i></div>',
+        nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-right"></i></div>',
+        arrows: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+        // autoplay: true,
+        // autoplaySpeed: 3000,
+        //lazyLoad: 'ondemand'
+    });
 });
-// var slider = document.getElementById("myRange");
-// slider.oninput = function() {
+var slider = document.getElementById("myRange");
+slider.oninput = function() {
 
-//         var zommSize = this.value;
-//         var range_zomm_size = 2;
-//         if(zommSize == 0.5){
-//             range_zomm_size = 1.6;
-//         }
-//         else if(zommSize == 0.75){
-//             range_zomm_size = 1.65;
-//         }
-//         else if(zommSize == 1){
-//             range_zomm_size = 1.70;
-//         }
-//         else if(zommSize == 1.25){
-//             range_zomm_size = 1.75;
-//         }
-//         else if(zommSize == 1.5){
-//             range_zomm_size = 1.80;
-//         }
-//         else if(zommSize == 1.75){
-//             range_zomm_size = 1.85;
-//         }
-//         else if(zommSize == 2){
-//             range_zomm_size = 1.90;
-//         }
-//         else if(zommSize == 2.25){
-//             range_zomm_size = 1.95;
-//         }
-//         else if(zommSize == 2.5){
-//             range_zomm_size = 2;
-//         }
-//         else if(zommSize == 2.75){
-//             range_zomm_size = 2.10;
-//         }
-//         else if(zommSize == 3){
-//             range_zomm_size = 2.20;
-//         }
-//         else if(zommSize == 3.25){
-//             range_zomm_size = 2.40;
-//         }
-//         else if(zommSize == 3.5){
-//             range_zomm_size = 2.60;
-//         }
-//         else if(zommSize == 3.75){
-//             range_zomm_size = 2.80;
-//         }
-//         else if(zommSize == 4){
-//             range_zomm_size = 3;
-//         }
+        var zommSize = this.value;
+        var range_zomm_size = 2;
+        if(zommSize == 0.5){
+            range_zomm_size = 1.6;
+        }
+        else if(zommSize == 0.75){
+            range_zomm_size = 1.65;
+        }
+        else if(zommSize == 1){
+            range_zomm_size = 1.70;
+        }
+        else if(zommSize == 1.25){
+            range_zomm_size = 1.75;
+        }
+        else if(zommSize == 1.5){
+            range_zomm_size = 1.80;
+        }
+        else if(zommSize == 1.75){
+            range_zomm_size = 1.85;
+        }
+        else if(zommSize == 2){
+            range_zomm_size = 1.90;
+        }
+        else if(zommSize == 2.25){
+            range_zomm_size = 1.95;
+        }
+        else if(zommSize == 2.5){
+            range_zomm_size = 2;
+        }
+        else if(zommSize == 2.75){
+            range_zomm_size = 2.10;
+        }
+        else if(zommSize == 3){
+            range_zomm_size = 2.20;
+        }
+        else if(zommSize == 3.25){
+            range_zomm_size = 2.40;
+        }
+        else if(zommSize == 3.5){
+            range_zomm_size = 2.60;
+        }
+        else if(zommSize == 3.75){
+            range_zomm_size = 2.80;
+        }
+        else if(zommSize == 4){
+            range_zomm_size = 3;
+        }
 
-//         //console.log('zommSize =>',range_zomm_size);
-//         document.getElementById('diamondOnhand').style.transform = "scale("+range_zomm_size+")";
-//         $('#caratValue').html(zommSize);
-//     }
+        //console.log('zommSize =>',range_zomm_size);
+        document.getElementById('diamondOnhand').style.transform = "scale("+range_zomm_size+")";
+        $('#caratValue').html(zommSize);
+    }
 
 
  function addTocart(){
@@ -679,76 +717,76 @@ $(function ()
         });
 
  }
-// function slickslider(){
-//         $('.product-row-wrapper .slider-for').slick({
-//             slidesToShow: 1,
-//             slidesToScroll: 1,
-//             arrows: false,
-//             fade: true,
-//             asNavFor: '.product-row-wrapper .slider-nav'
-//         });
-//         $('.product-row-wrapper .slider-nav').slick({
-//             slidesToShow:3,
-// 				slidesToScroll: 1,
-// 				asNavFor: '.product-row-wrapper .slider-for',
-// 				dots: false,
-// 				vertical:true,
-// 				prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-up"></i></div>',
-// 				nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-down"></i></div>',
-// 				arrows: true,
-// 				centerMode: false,
-// 				focusOnSelect: true,
-//                 adaptiveHeight: true,
+function slickslider(){
+        $('.product-row-wrapper .slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.product-row-wrapper .slider-nav'
+        });
+        $('.product-row-wrapper .slider-nav').slick({
+            slidesToShow:3,
+				slidesToScroll: 1,
+				asNavFor: '.product-row-wrapper .slider-for',
+				dots: false,
+				vertical:true,
+				prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-up"></i></div>',
+				nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-down"></i></div>',
+				arrows: true,
+				centerMode: false,
+				focusOnSelect: true,
+                adaptiveHeight: true,
 
-// 				responsive: [
-// 				{
-// 					breakpoint: 1300,
-// 					settings: {
-// 						slidesToShow: 3,
-// 						slidesToScroll: 1
-// 					}
-// 				},
-// 				{
-// 					breakpoint: 991,
-// 					settings: {
-// 						slidesToShow: 3,
-// 						slidesToScroll: 1
-// 					}
-// 				},
-// 				{
-// 					breakpoint: 768,
-// 					settings: {
-// 						slidesToShow: 3,
-// 						slidesToScroll: 1
-// 					}
-// 				},
-// 				{
-// 					breakpoint: 767,
-// 					settings: {
-// 						slidesToShow: 3,
-// 						slidesToScroll: 1,
-// 						vertical:false,
-// 						dots:false
-// 					}
-// 				}
-// 				]
+				responsive: [
+				{
+					breakpoint: 1300,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1
+					}
+				},
+				{
+					breakpoint: 991,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1
+					}
+				},
+				{
+					breakpoint: 768,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1
+					}
+				},
+				{
+					breakpoint: 767,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1,
+						vertical:false,
+						dots:false
+					}
+				}
+				]
 
-//         });
-//         $('[data-fancybox="gallery"]').fancybox({
-//             buttons: [
-//             // "slideShow",
-//             // "thumbs",
-//             "zoom",
-//             "fullScreen",
-//             // "share",
-//             "close"
-//             ],
-//             wheel : false,
-//             'scrolling': 'no',
-//             loop: true,
-//             protect: true
-//         });
-// }
+        });
+        $('[data-fancybox="gallery"]').fancybox({
+            buttons: [
+            // "slideShow",
+            // "thumbs",
+            "zoom",
+            "fullScreen",
+            // "share",
+            "close"
+            ],
+            wheel : false,
+            'scrolling': 'no',
+            loop: true,
+            protect: true
+        });
+}
 function getProductPrice()
 {
 
@@ -815,10 +853,10 @@ function getProductPriceImage()
             start_time: new Date().getTime(),
             beforeSend: function() {
             $('#product_image').html('');
-             //$('#product_image-loading').html('<div class="slider-main-page-loader">
-				// 					<img src="{{asset('images/loader-slider.gif')}}" alt="">
-				// 				</div>');
-                // $(".main-page-loader").css("display", "flex");
+             $('#product_image-loading').html('<div class="slider-main-page-loader">
+									<img src="{{asset('images/loader-slider.gif')}}" alt="">
+								</div>');
+                //$(".main-page-loader").css("display", "flex");
                 //$(".slider-nav").css("display", "none");
                 //$("#prodcut-box").html('<img src="{{asset('images/spinner2.gif')}}" alt="spinner"/>');
             },
@@ -862,15 +900,26 @@ function getProductPriceImage()
                         function() {
                             $('#product_image-loading').html('');
                             $('#product_image').html(data.ProductImageHtml);
-                          
+                            slickslider();
+
+                            if(window.screen.width > 1300 && window.screen.width < 1370){
+                                $(".products-d-small-image-wrapper .slick-list").attr("style", "height: 522px;");
+                                $(".products-d-small-image-wrapper .slick-list .slick-track").attr("style", "opacity: 1; height: 1740px;");
+                            }
+                            else{
+                                $(".products-d-small-image-wrapper .slick-list").attr("style", "height: 711px;");
+                                $(".products-d-small-image-wrapper .slick-list .slick-track").attr("style", "opacity: 1; height: 2370px;");
+                            }
+
+
+
                             //$(".slider-nav").css("display", "block")
                         }, taketime);
                     var getnameShape = $( "#shape option:selected" ).text().toLowerCase();
-    
                     if(getnameShape == ""){
-                        var getnameShape = $( "#shape").attr('data-id').toLowerCase();
+                        var getnameShape = $( "#shape").getAttribute('data-name').toLowerCase();
                     }
-
+                    //console.log(getnameShape);
                     $('#diamondOnhand').attr('src', "{{asset('images/shapes')}}/"+getnameShape+'.png');
                     
                 }
@@ -882,21 +931,21 @@ function getProductPriceImage()
         });
     }
 
-    // $('.pl-pro-image-box-slider-wrapper').slick({
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     dots: false,
-    //     infinite: true,
-    //     prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-left"></i></div>',
-    //     nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-right"></i></div>',
-    //     arrows: true,
-    //     speed: 500,
-    //     fade: true,
-    //     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
-    //     // autoplay: true,
-    //     // autoplaySpeed: 3000,
-    //     //lazyLoad: 'ondemand'
-    // });
+    $('.pl-pro-image-box-slider-wrapper').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false,
+        infinite: true,
+        prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-left"></i></div>',
+        nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-right"></i></div>',
+        arrows: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+        // autoplay: true,
+        // autoplaySpeed: 3000,
+        //lazyLoad: 'ondemand'
+    });
 
 </script>
 @endpush
