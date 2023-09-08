@@ -198,11 +198,12 @@
 		.order-history-box-image { max-width: 160px; }
 		.tab-content .card-body { padding-left: 20px; }
 		.tab-container .nav-tabs li.nav-item a { font-size: 20px; }
-		.tab-container .nav-tabs { /*padding: 20px;*/ /*max-width: 250px;*/ }
+		/* .tab-container .nav-tabs { padding: 20px; max-width: 250px; } */
 		.tabs-wrapper { max-width: 250px; }
 		.blog-box-info-wrapper { max-width: 50%; padding: 25px 15px ; }
 		.blog-list-wrapper a { font-size: 13px; line-height: 200%; padding: 10px 11px; }
 		.box-diamond-on-hand { top: 36.9%; }
+		
 	}
 	@media screen and (max-width:991px){
 		.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl { max-width: 100%; }
@@ -374,6 +375,7 @@
 		}*/
 		section.inner-banner-section {min-height:auto;}
 		
+		
 
 	}
 
@@ -448,9 +450,16 @@
 }
 @media screen and (max-width:639px){
   .ring-size.bangles {width: 44%;}
+  .f-link {display:block;border-top: 1px solid #eec9c2;padding: 10px 0;}
+  .footer-info {margin-top: 0;}
+  .web-footer {display: none;}
+  ul.footer-social-links li {margin: 15px 10px 20px 0;}
+  .contact .f-link {padding-bottom: 0;}
+  .top-footer {padding: 20px 0;}
 }
 @media screen and (max-width:479px){
   .ring-size.bangles {width: 59%;}
+  #btnNewslatter {max-width: 100%;}
 }
 @media screen and (max-width:359px){
   .ring-size.bangles {width: 66%;}
