@@ -1043,11 +1043,11 @@ ul.footer-social-links li {
   text-align: center;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #000000;
-  max-width: 272px;
+  color: #fff;
+  max-width: 230px;
   left: 0px;
   top: 0px;
-  background: #eec9c2;
+  background: #000;
   border: 0;
   border-radius: 0;
   width: 100%;
@@ -2030,13 +2030,16 @@ section.inner-banner-section {
 
 .btn-primary.btn-cart-img:hover,
 .btn-primary.btn-cart-img:focus {
-  color: #000;
+  color: #fff;
 }
 
 img.cart-btn-img {
   width: 23px !important;
-  margin: -6px 10px 0 0 !important;
+  margin-right: 5px;
+  display: inline-block;
+  vertical-align: middle;
 }
+.select-box p {display: inline-block;vertical-align: middle;}
 
 .filter-section a {
   font-weight: 400;
@@ -3425,7 +3428,6 @@ img.right-checked {
 .product-row-wrapper {
   display: flex;
   justify-content: space-between;
-  padding: 20px 15px 20px 0;
 }
 
 .products-d-small-image-wrapper {
@@ -3516,8 +3518,9 @@ ul.pro-d-list-info li h6 {
   display: block;
   background: #000000;
   border-radius: 100px;
-  height: 10px;
-  width: 100%;
+  height: 5px;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .diamondOnhand-wrapper img {
@@ -3538,6 +3541,7 @@ ul.pro-d-list-info li h6 {
   position: relative;
   max-width: 1000px;
   width: 100%;
+  padding-top:1%;
 }
 
 .box-diamond-on-hand {
@@ -3631,8 +3635,10 @@ ul.pro-d-list-info li h6 {
   padding: 6px 10px;
 }
 .detials-wrapper-box h4{
-  margin-bottom: 0;
+  margin-bottom: 20px;text-transform: capitalize;
 }
+
+
 
 .detials-wrapper-box h5 {
   font-weight: 400;
@@ -3661,9 +3667,10 @@ ul.pro-d-list-info li h6 {
   color: #000000;
   width: 45px;
   height: 45px;
-  background: #fcf5f4;
+  background: transparent;
   border: 0;
   margin: 4px 5px 4px 0;
+  border: 1px solid rgb(216, 214, 209);
 }
 
 .square-radio-design .blank-label {
@@ -3671,7 +3678,8 @@ ul.pro-d-list-info li h6 {
 }
 
 .square-radio-design input[type="radio"]:checked + label {
-  background: #eec9c2;
+  background-color: transparent;
+  border: 1px solid #000;
 }
 
 .pd-icon-title {
@@ -3774,7 +3782,7 @@ ul.pro-d-list-info li h6 {
 
 .quantity-box form.myform {
   background: #fcf5f4;
-  max-width: 200px;
+  max-width: 180px;
   text-align: center;
   height: 45px;
   display: flex;
@@ -4656,3 +4664,13 @@ header .dropdown-menu {margin-top:5px !important;}
 /*.side-clarity p {
   padding-top: 13px;
 }*/
+
+.product-row-wrapper .col-sm-6{
+    width: 49% !important;
+    margin-bottom: 10px !important;
+    padding-right: 0px !important;
+}
+
+.carat-size {width: 75%;margin: 0 auto}
+
+.detials-wrapper-box p{font-size: 20px}

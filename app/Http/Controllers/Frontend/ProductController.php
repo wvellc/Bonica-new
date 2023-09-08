@@ -550,7 +550,13 @@ class ProductController extends Controller
 
 
         $materialMetal = ProductMetalMaterial::with("material")->where("product_id",$product_id)->where("metal_id",$metal_id)->get();
+
+        $product = Product::with('ProductShapes', 'firstProductShape', 'ProductShapes.shape',);
+        $product = $product->where('id', $product_id);
+        $product = $product->Active()->first();
         
+        $diamondShape = strtolower($product->ProductShapes[0]['shape']['name']);
+
         $materialMetalHTML = "";
         // $materialMetalHTML1 = array();
         if(!empty($materialMetal)){
@@ -585,11 +591,10 @@ class ProductController extends Controller
 
 
         $ProductImageHtml = '';
-        $ProductImageHtml .= '<div class="products-d-big-image-wrapper">
-									<div class="slider slider-for">';
+        $ProductImageHtml .= '<div class="row">';
         if (count($image_paths) > 0) {
             foreach ($image_paths as $key => $productImage) {
-                $ProductImageHtml .= '<div class="item">
+                $ProductImageHtml .= '<div class="col-sm-6">
                                                     <div class="pd-slider-large-img">';
                 if ($is_360video[$key]) {
                     $ProductImageHtml .= '<video src="' . $video_paths[$key] . '" loop muted autoplay></video>';
@@ -603,7 +608,7 @@ class ProductController extends Controller
                                                 </div>';
             }
         } else {
-            $ProductImageHtml .= '<div class="item">
+            $ProductImageHtml .= '<div class="col-sm-6">
                                                 <div class="pd-slider-large-img">
                                                     <a href="' . asset('images/no_image.png') . '" data-fancybox="gallery" class="d-block" >
                                                         <img src="' . asset('images/no_image.png') . '" alt="ring">
@@ -612,42 +617,62 @@ class ProductController extends Controller
                                             </div>';
         }
 
-        $ProductImageHtml .= '</div>
-								</div>
-								<div class="products-d-small-image-wrapper">
-									<div class="slider slider-nav">';
+            $ProductImageHtml .= '<div class="col-sm-6">
+                                    <div class="hand-wrapper">
+                                        <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
+                                        <div class="box-diamond-on-hand">
+                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(2.20);">
+                                        </div>
+                                        
+                                        </div>
+                                   
+                                    <div class="carat-size d-flex align-items-center justify-content-between pb-2">
+                                        <p class="pb-0">0.5 ct</p>
+                                        <p>4 ct</p>
+                                        </div>
+                                        <div class="diamondOnhand-wrapper mb-4">
+                                            <input class="range-slider__range" id="myRange" type="range" value="3" min="0.5" max="4" step="0.25">
+                                        </div>
+                                        <p class="text-center">
+                                            Shown with <b ><span id="caratValue">3</span> carat</b> Diamond
+                                        </p>
+                                    </div>
+                                </div>';
 
-        if (count($image_paths) > 0) {
-            foreach ($image_paths as $key => $productImage) {
-                $ProductImageHtml .= '<div class="item">';
-                if ($is_360video[$key] == 1) {
+		 						// <div class="products-d-small-image-wrapper">
+		 						// 	<div class="slider slider-nav">';
 
-                    $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
-                                                                <img src="' . $productImage . '" alt="ring">
-                                                                <img src="' . asset('images/icons/360-degree-icon.svg') . '" alt="ring" class="rotate-icon">
-                                                            </div>';
-                }else if ($is_360video[$key] == 2) {
+        // if (count($image_paths) > 0) {
+        //     foreach ($image_paths as $key => $productImage) {
+        //         $ProductImageHtml .= '<div class="item">';
+        //         if ($is_360video[$key] == 1) {
 
-                    $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
-                                                                <img src="' . $productImage . '" alt="ring">
-                                                            </div>';
-                } else {
-                    $ProductImageHtml .= '<div class="pd-slider-mini-img">
-                                                                <img src="' . $productImage . '" alt="ring">
-                                                            </div>';
-                }
+        //             $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
+        //                                                         <img src="' . $productImage . '" alt="ring">
+        //                                                         <img src="' . asset('images/icons/360-degree-icon.svg') . '" alt="ring" class="rotate-icon">
+        //                                                     </div>';
+        //         }else if ($is_360video[$key] == 2) {
 
-                $ProductImageHtml .= '</div>';
-            }
-        } else {
-            $ProductImageHtml .= '<div class="item">
-                                                    <div class="pd-slider-mini-img">
-                                                        <img src="' . asset('images/no_image.png') . '" alt="ring">
-                                                    </div>
-                                                </div>';
-        }
-        $ProductImageHtml .= '</div>
-								</div>';
+        //             $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
+        //                                                         <img src="' . $productImage . '" alt="ring">
+        //                                                     </div>';
+        //         } else {
+        //             $ProductImageHtml .= '<div class="pd-slider-mini-img">
+        //                                                         <img src="' . $productImage . '" alt="ring">
+        //                                                     </div>';
+        //         }
+
+        //         $ProductImageHtml .= '</div>';
+        //     }
+        // } else {
+        //     $ProductImageHtml .= '<div class="item">
+        //                                             <div class="pd-slider-mini-img">
+        //                                                 <img src="' . asset('images/no_image.png') . '" alt="ring">
+        //                                             </div>
+        //                                         </div>';
+        // }
+        // $ProductImageHtml .= '</div>
+		// 						</div>';
 
         return response()->json(['msg' => 'success', 'ProductImageHtml' => $ProductImageHtml,'materialMetalHTML' => $materialMetalHTML]);
     }
