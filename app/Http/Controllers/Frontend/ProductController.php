@@ -18,6 +18,7 @@ use App\Models\ProductSideDiamondPacket;
 use App\Models\SizeMasterPrice;
 use App\Models\Size;
 use App\Models\Country;
+use App\Models\Shape;
 
 use Cookie;
 
@@ -552,11 +553,9 @@ class ProductController extends Controller
 
         $materialMetal = ProductMetalMaterial::with("material")->where("product_id",$product_id)->where("metal_id",$metal_id)->get();
 
-        $product = Product::with('ProductShapes', 'firstProductShape', 'ProductShapes.shape',);
-        $product = $product->where('id', $product_id);
-        $product = $product->Active()->first();
-       
-        $diamondShape = strtolower($product->ProductShapes[0]['shape']['name']);
+        $shape = Shape::where('id',$shape_id)->first();
+
+        $diamondShape = strtolower($shape->name);
 
         $materialMetalHTML = "";
         // $materialMetalHTML1 = array();
@@ -596,7 +595,7 @@ class ProductController extends Controller
                                     <div class="hand-wrapper">
                                         <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
                                         <div class="box-diamond-on-hand">
-                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(2.20);">
+                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(1.70);">
                                         </div>
                                         
                                     </div>

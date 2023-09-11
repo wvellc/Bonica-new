@@ -1766,10 +1766,10 @@ section.inner-banner-section {
 
 .pl-pro-info-box h6 {
   font-weight: 300;
-  font-size: 20px;
-  line-height: 25px;
+  font-size: 18px;
+  line-height: 22px;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: #000000;
   margin: 10px 0 0;
 }
@@ -4673,7 +4673,7 @@ header .dropdown-menu {margin-top:5px !important;}
 
 .carat-size {width: 75%;margin: 0 auto}
 
-.detials-wrapper-box p{font-size: 18px}
+.detials-wrapper-box p{font-size: 16px}
 
 /* Collpased Footer for mobile view */
 .f-link {margin: 0;display: none;cursor: pointer;}
