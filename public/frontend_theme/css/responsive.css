@@ -437,7 +437,10 @@
   .ring-size.bangles {width: 39%;}
   .add-btns-group a{max-width: unset;width: auto;}
   .add-btns-group .btn-primary {padding: 12px 35px;}
+  .add-btns-group a { max-width: unset; width: auto;}
 }
+
+
 @media screen and (max-width:1365px){
   .ring-size.bangles {width: 44%;}
   .add-btns-group {flex-direction: column !important;align-items: start !important;}

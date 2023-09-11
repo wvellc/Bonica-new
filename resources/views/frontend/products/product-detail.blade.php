@@ -269,22 +269,6 @@
     								</div>
                                     @endif
                                 @endif
-								<div class="pd-icon-title delivery-info d-sm-flex  align-items-end  flex-column flex-sm-row">
-									<div class="delivery-truck-info">
-										<img class="truck-img" src="{{ asset('images/icons/products/delivery.svg') }}" alt="delivery">
-										<h5 class="mt-0"><a href="#">Free Delivery</a></h5>
-										<p>
-
-                                            @if ($product->free_delivery)
-                                                {{$product->free_delivery}}
-                                            @else
-                                            usually takes 7 days to deliver
-                                            @endif
-                                        </p>
-									</div>
-
-									
-								</div>
 								<div class="quantity-box pb-3 d-flex align-items-end">
 									<div>
 										<h5>Quantity</h5>
@@ -303,8 +287,22 @@
 								<div class="d-flex align-items-center flex-row add-btns-group">
 									<a href="JavaScript:void(0);" onclick="addTocart()" class="btn btn-primary btn-cart-img">Add to Bag</a>
                                     <a href="{{ route('frontend.appointment') }}" class="btn mt-3 mt-sm-0 ms-sm-3 btn-outline-primary">Booking  Appointment</a>
+
 								</div>
-                                
+                                <div class="pd-icon-title delivery-info d-sm-flex  align-items-end  flex-column flex-sm-row mt-4">
+                                    <div class="delivery-truck-info">
+                                        <img class="truck-img" src="{{ asset('images/icons/products/delivery.svg') }}" alt="delivery">
+                                        <h5 class="mt-0"><a href="#">Free Delivery</a></h5>
+                                        <p>
+
+                                            @if ($product->free_delivery)
+                                                {{$product->free_delivery}}
+                                            @else
+                                            usually takes 7 days to deliver
+                                            @endif
+                                        </p>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="pr-d-desc mt-5 mt-2">
                                         <h5>Description</h5>
@@ -564,61 +562,65 @@ $(function ()
     //     //lazyLoad: 'ondemand'
     // });
 });
- var slider = document.getElementById("myRange");
-    slider.oninput = function() {
 
-        var zommSize = this.value;
+    function sizeSlider(){
+        var slider = document.getElementById("myRange");
+        if (slider) { 
+            slider.oninput = function() {
 
-        var range_zomm_size = 2;
-        if(zommSize == 0.5){
-            range_zomm_size = 1.6;
-        }
-        else if(zommSize == 0.75){
-            range_zomm_size = 1.65;
-        }
-        else if(zommSize == 1){
-            range_zomm_size = 1.70;
-        }
-        else if(zommSize == 1.25){
-            range_zomm_size = 1.75;
-        }
-        else if(zommSize == 1.5){
-            range_zomm_size = 1.80;
-        }
-        else if(zommSize == 1.75){
-            range_zomm_size = 1.85;
-        }
-        else if(zommSize == 2){
-            range_zomm_size = 1.90;
-        }
-        else if(zommSize == 2.25){
-            range_zomm_size = 1.95;
-        }
-        else if(zommSize == 2.5){
-            range_zomm_size = 2;
-        }
-        else if(zommSize == 2.75){
-            range_zomm_size = 2.10;
-        }
-        else if(zommSize == 3){
-            range_zomm_size = 2.20;
-        }
-        else if(zommSize == 3.25){
-            range_zomm_size = 2.40;
-        }
-        else if(zommSize == 3.5){
-            range_zomm_size = 2.60;
-        }
-        else if(zommSize == 3.75){
-            range_zomm_size = 2.80;
-        }
-        else if(zommSize == 4){
-            range_zomm_size = 3;
-        }
+            var zommSize = this.value;
 
-        console.log('zommSize =>',range_zomm_size);
-        document.getElementById('diamondOnhand').style.transform = "scale("+range_zomm_size+")";
-        $('#caratValue').html(zommSize);
+            var range_zomm_size = 2;
+            if(zommSize == 0.5){
+                range_zomm_size = 1.2;
+            }
+            else if(zommSize == 0.75){
+                range_zomm_size = 1.25;
+            }
+            else if(zommSize == 1){
+                range_zomm_size = 1.30;
+            }
+            else if(zommSize == 1.25){
+                range_zomm_size = 1.35;
+            }
+            else if(zommSize == 1.5){
+                range_zomm_size = 1.40;
+            }
+            else if(zommSize == 1.75){
+                range_zomm_size = 1.45;
+            }
+            else if(zommSize == 2){
+                range_zomm_size = 1.50;
+            }
+            else if(zommSize == 2.25){
+                range_zomm_size = 1.55;
+            }
+            else if(zommSize == 2.5){
+                range_zomm_size = 1.60;
+            }
+            else if(zommSize == 2.75){
+                range_zomm_size = 1.65;
+            }
+            else if(zommSize == 3){
+                range_zomm_size = 1.70;
+            }
+            else if(zommSize == 3.25){
+                range_zomm_size = 1.75;
+            }
+            else if(zommSize == 3.5){
+                range_zomm_size = 1.80;
+            }
+            else if(zommSize == 3.75){
+                range_zomm_size = 1.85;
+            }
+            else if(zommSize == 4){
+                range_zomm_size = 1.90;
+            }
+
+            document.getElementById('diamondOnhand').style.transform = "scale("+range_zomm_size+")";
+            $('#caratValue').html(zommSize);
+            }
+        }
     }
 
 
@@ -874,7 +876,11 @@ function getProductPriceImage()
                     }
 
                     $('#diamondOnhand').attr('src', "{{asset('images/shapes')}}/"+getnameShape+'.png');
-                    
+
+                    setTimeout(
+                        function() {
+                           sizeSlider();
+                        }, taketime);
                 }
             },
             error:function (response) {
