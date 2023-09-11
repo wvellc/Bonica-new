@@ -1,5 +1,5 @@
-/* font-family: 'Outfit', sans-serif;*/
 /* font-family: 'Jost', sans-serif;*/
+/* font-family: 'Outfit', sans-serif;*/
 /* Peach #EEC9C2*/
 /* Drak purple #602D23*/
 /* dark peach #C36D5F*/
@@ -2035,9 +2035,10 @@ section.inner-banner-section {
 
 img.cart-btn-img {
   width: 23px !important;
-  margin-right: 5px;
+  margin: 0 auto;
+  margin-right: 10px;
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
 }
 .select-box p {display: inline-block;vertical-align: middle;}
 
@@ -4684,3 +4685,7 @@ header .dropdown-menu {margin-top:5px !important;}
 .f-link ul.foot-col-data.menushowtoggle {display: block;transition: all 0.5s linear;}
 .f-title.menushow h5 {margin-bottom: 10px;color: #c36d5f;}
 .f-title.menushow .toggle-arrow{rotate: -45deg;transition: rotate 0.5s;}
+
+.onhover-pl-product-box-wrapper .btn-white.btn-cart-img {
+  color: #000;
+}
