@@ -612,7 +612,7 @@ class ProductController extends Controller
                                     <div class="hand-wrapper">
                                         <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
                                         <div class="box-diamond-on-hand">
-                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(1.70);">
+                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(1.90);">
                                         </div>
                                         
                                     </div>
@@ -622,7 +622,7 @@ class ProductController extends Controller
                                         <p>4 ct</p>
                                     </div>
                                     <div class="diamondOnhand-wrapper mb-4">
-                                        <input class="range-slider__range" id="myRange" type="range" value="3" min="0.5" max="4" step="0.25">
+                                        <input class="range-slider__range" id="myRange" type="range" value="4" min="0.5" max="4" step="0.25">
                                     </div>
                                     <p class="text-center">
                                         Shown with <b ><span id="caratValue">3</span> carat</b> Diamond
