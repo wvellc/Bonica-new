@@ -560,6 +560,7 @@ class ProductController extends Controller
         $metal_id = ($request->metal_id) ? $request->metal_id : 0;
         $material_id = ($request->material_id) ? $request->material_id : 0;
         $cat_segment = ($request->cat_segment) ? $request->cat_segment : "";
+        $event = ($request->event) ? $request->event : "";
 
 
         $materialMetal = ProductMetalMaterial::with("material")->where("product_id",$product_id)->where("metal_id",$metal_id)->get();
@@ -595,10 +596,10 @@ class ProductController extends Controller
         //echo $product_id.' = '.$metal_id.' = '.$shape_id;
 
         //comment by dipali 
-        $productImages = productImages($product_id, $metal_id, $shape_id);
+        //$productImages = productImages($product_id, $metal_id, $shape_id);
         //end
         //added by dipali
-        $productImages = proirityProductImages($product_id, $metal_id, $shape_id);
+        $productImages = proirityProductImages($product_id, $metal_id, $shape_id,$event);
         //end
         $image_paths = $productImages['image_paths'];
         $video_paths = $productImages['video_paths'];

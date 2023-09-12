@@ -565,54 +565,14 @@ if (!function_exists('productImages')){
     }
 }
 if (!function_exists('proirityProductImages')){
-    function proirityProductImages($product_id,$metal_id, $shape_id) {
-        $images = \App\Models\ProductImage::where('product_id', $product_id)->where('metal_display_priority_id', 1)->orderBy("sort_order","ASC")->get()->toArray();
+    function proirityProductImages($product_id,$metal_id, $shape_id , $event = null) {
         $image_paths = array();
         $video_paths = array();
         $is_360video = array();
         $product_first_image = '';
         $product_list_first_image = '';
         $product_first_image_paths = array();
-
-
-        if(count($images) > 0){
-            $count = 1;
-            foreach ($images as  $productimg) {
-                //if($productimg['shape_id'] == $shape_id && $productimg['metal_id'] == $metal_id){
-                if($count == 1)
-                $product_first_image = $productimg['image_path'];
-                $image_paths[] = $productimg['image_path'];
-                $video_paths[] = $productimg['video_path'];
-                $is_360video[] = $productimg['video_type'];
-
-                if($product_list_first_image == '' && $productimg['type'] == 0){
-                    $product_list_first_image = $productimg['image_path'];
-                }
-                if($productimg['type'] == 0){
-                    $product_first_image_paths[] = $productimg['image_path'];
-                }
-                $count++;
-                //}
-            }
-            /*if not match shape and metal */
-            $count = 1;
-            if(count($image_paths) == 0){
-                foreach ($images as  $productimg) {
-                    if($count == 1)
-                    $product_first_image = $productimg['image_path'];
-                    $image_paths[] = $productimg['image_path'];
-                    $video_paths[] = $productimg['video_path'];
-                    $is_360video[] = $productimg['video_type'];
-                    if($product_list_first_image == '' && $productimg['type'] == 0){
-                        $product_list_first_image = $productimg['image_path'];
-                    }
-                    if($productimg['type'] == 0){
-                        $product_first_image_paths[] = $productimg['image_path'];
-                    }
-                    $count++;
-                }
-            }
-        }else{
+        if($event == 'onClick'){
             $images = \App\Models\ProductImage::where([['product_id', $product_id],['metal_id', $metal_id],['shape_id', $shape_id]])->orderBy("sort_order","ASC")->get()->toArray();
             $count = 1;
             foreach ($images as  $productimg) {
@@ -650,8 +610,48 @@ if (!function_exists('proirityProductImages')){
                     $count++;
                 }
             }
+        }else{
+            $images = \App\Models\ProductImage::where('product_id', $product_id)->where('metal_display_priority_id', 1)->orderBy("sort_order","ASC")->get()->toArray();
+
+            if(count($images) > 0){
+                $count = 1;
+                foreach ($images as  $productimg) {
+                    //if($productimg['shape_id'] == $shape_id && $productimg['metal_id'] == $metal_id){
+                    if($count == 1)
+                    $product_first_image = $productimg['image_path'];
+                    $image_paths[] = $productimg['image_path'];
+                    $video_paths[] = $productimg['video_path'];
+                    $is_360video[] = $productimg['video_type'];
+
+                    if($product_list_first_image == '' && $productimg['type'] == 0){
+                        $product_list_first_image = $productimg['image_path'];
+                    }
+                    if($productimg['type'] == 0){
+                        $product_first_image_paths[] = $productimg['image_path'];
+                    }
+                    $count++;
+                    //}
+                }
+                /*if not match shape and metal */
+                $count = 1;
+                if(count($image_paths) == 0){
+                    foreach ($images as  $productimg) {
+                        if($count == 1)
+                        $product_first_image = $productimg['image_path'];
+                        $image_paths[] = $productimg['image_path'];
+                        $video_paths[] = $productimg['video_path'];
+                        $is_360video[] = $productimg['video_type'];
+                        if($product_list_first_image == '' && $productimg['type'] == 0){
+                            $product_list_first_image = $productimg['image_path'];
+                        }
+                        if($productimg['type'] == 0){
+                            $product_first_image_paths[] = $productimg['image_path'];
+                        }
+                        $count++;
+                    }
+                }
+            }
         }
-       
         return array('product_first_image' => $product_first_image,'image_paths' => $image_paths,'product_list_first_image' => $product_list_first_image,'product_first_image_paths' => $product_first_image_paths,'video_paths' => $video_paths,'is_360video' => $is_360video);
     }
 }
