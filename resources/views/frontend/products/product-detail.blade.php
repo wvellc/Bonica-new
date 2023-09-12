@@ -86,7 +86,7 @@
 											<div class="select-box">
 												<h5>Diamond Shape</h5>
                                             	@if(count($product->ProductShapes) > 1)
-													<select class="form-control" id="shape" name="shape" onchange="getProductPrice(); getProductPriceImage();">
+													<select class="form-control" id="shape" name="shape" onchange="getProductPrice(); getProductPriceImage('onChange');">
 														@foreach ($product->ProductShapes as $productshape)
 														<option value="{{$productshape->shape->id}}" @if ($product->firstProductShape->shape_id == $productshape->shape->id) selected @endif >{{$productshape->shape->name}}</option>
 														@endforeach
@@ -219,7 +219,7 @@
 									<h5>Metal</h5>
 									<div class="metal-list">
                                         @foreach ($metal_arr as $key => $metal)
-										<input onclick="getProductPriceImage();" type="radio" @if ($product->metal_display_priority_id == $key) checked @endif id="metal_{{$key}}" name="metal" value="{{$key}}" />
+										<input onclick="getProductPriceImage('onClick');" type="radio" @if ($product->metal_display_priority_id == $key) checked @endif id="metal_{{$key}}" name="metal" value="{{$key}}" />
 										<label for="metal_{{$key}}"><span class="color-gold" style="background-color:{{$metal['bgcolor']}};"></span> {{$metal['name']}}</label>
                                         @endforeach
 									</div>
@@ -543,7 +543,7 @@
 $(function ()
 {
     getProductPrice();
-    getProductPriceImage();
+    getProductPriceImage('onLoad');
 
     //  $('.pl-pro-image-box-slider-wrapper').slick({
     //     slidesToShow: 1,
@@ -795,12 +795,13 @@ function getProductPrice()
         }
     });
 }
-function getProductPriceImage()
+function getProductPriceImage(event)
 {
     var shape_id = $('#shape').val();
     var cat_segment = $('#cat_segment').val();
     var metal_id = $('input[name="metal"]:checked').val();
     var material_id = $('input[name="material"]:checked').val();
+    var event = event;
 
     var url = '{!! route("frontend.get-product-price-image") !!}';
     $.ajax({
@@ -813,6 +814,7 @@ function getProductPriceImage()
                 metal_id : metal_id,
                 material_id : material_id,
                 cat_segment : cat_segment,
+                event : event,
             },
             dataType: 'JSON',
             start_time: new Date().getTime(),
