@@ -4689,3 +4689,5 @@ header .dropdown-menu {margin-top:5px !important;}
 .onhover-pl-product-box-wrapper .btn-white.btn-cart-img {
   color: #000;
 }
+
+.onhover-pl-product-box-wrapper img.cart-btn-img {vertical-align: top;}
