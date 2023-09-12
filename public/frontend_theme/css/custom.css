@@ -2036,9 +2036,9 @@ section.inner-banner-section {
 img.cart-btn-img {
   width: 23px !important;
   margin: 0 auto;
-  margin-right: 10px;
+  margin-right: 5px;
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
 }
 .select-box p {display: inline-block;vertical-align: middle;}
 
