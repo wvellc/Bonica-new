@@ -3,7 +3,10 @@
     $shape_id = 0;
     $metal_id = 0;
     $material_id = 0;
-    if($product->firstProductMetalMaterial){
+    if($product->metal_display_priority_id){
+        $metal_id = $product->metal_display_priority_id;
+        $material_id = $product->firstProductMetalMaterial->material_id;
+    }else if($product->firstProductMetalMaterial){
         //$product_price = $product_price + $product->firstProductMetalMaterial->price;
         $metal_id = $product->firstProductMetalMaterial->metal_id;
         $material_id = $product->firstProductMetalMaterial->material_id;
