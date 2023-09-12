@@ -516,6 +516,7 @@ if (!function_exists('productImages')){
     function productImages($product_id, $metal_id , $shape_id) {
 
         $images = \App\Models\ProductImage::where([['product_id', $product_id],['metal_id', $metal_id],['shape_id', $shape_id]])->orderBy("sort_order","ASC")->get()->toArray();
+
         $image_paths = array();
         $video_paths = array();
         $is_360video = array();
