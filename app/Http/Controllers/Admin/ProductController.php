@@ -158,6 +158,7 @@ class ProductController extends Controller
             "selectedcatID"  => null,
             "selectedsubcatID"  => null,
             "selectMetalDisplayPrio"=>null,
+            "selectedVideoType"=>null,
         );
         $data['category'] = Category::where('parent_id', 0)->pluck('name', 'id')->toArray();
         $data['metals'] = Metal::select('id', 'name')->Active()->get();
@@ -222,7 +223,7 @@ class ProductController extends Controller
         //$data['selected_shape'] = array();
 
         $materialmetal = MaterialMetal::query()->with('metal','material')->get()->toArray();
-
+        $data['video_type'] = [1=>'360 video',2=>'Non 360 video'];
         $materialmetal_arr = array();
         if(count($materialmetal) > 0){
             foreach( $materialmetal as $key => $value){
@@ -283,6 +284,7 @@ class ProductController extends Controller
             "selectedcatID"  => $product->cat_id,
             "selectedsubcatID"  => $product->sub_cat_id,
             "selectMetalDisplayPrio"=>$product->metal_display_priority_id,
+            "selectedVideoType"=>$product->video_type,
         );
 
         $data['category'] = Category::where('parent_id', 0)->pluck('name', 'id')->toArray();
@@ -377,6 +379,7 @@ class ProductController extends Controller
         $data['selected_materialmetal'] = $selected_materialmetal_arr;
 
         $data['productImages'] = ProductImage::where('product_id', $id)->get();
+        $data['video_type'] = [1=>'360 video',2=>'Non 360 video'];
 
         $data['countrys'] = Country::select('id','name')->whereNotIn('slug', ['india'])->orderBy('sort_order', 'asc')->get();
         $data['countrymultiplyby']  = ['1' => 1,'2' => 1,'3' => 1,'4' => 1,'5' => 1,'6' => 1,'7' => 1];
@@ -621,7 +624,6 @@ class ProductController extends Controller
                             $imageName = $video['imageName'];
                             $videoPath = $video['videoPath'];
                             $imagePath = $video['imagePath'];
-                            $video_type = 1;
                             $type = 1;
                         }
                         if($filetype[0] == 'image')
@@ -633,6 +635,7 @@ class ProductController extends Controller
                         }
                         $shape_id = ($request->shape_arr[$key]) ? $request->shape_arr[$key] : null ;
                         $metal_id = ($request->metal_arr[$key]) ? $request->metal_arr[$key] : null ;
+                        $video_type = ($request->video_type[$key]) ? $request->video_type[$key] : 0 ;
                 
                         $image_data = array('product_id' => $product->id, 'shape_id' =>  $shape_id, 'metal_id' =>  $metal_id, 'image' =>  $imageName, 'image_path' =>  $imagePath ,'video_path' => $videoPath, 'video_type' =>  $video_type, 'type' =>  $type, 'sort_order' =>  1 + $index,'metal_display_priority_id'=>0);
                         ProductImage::create($image_data);

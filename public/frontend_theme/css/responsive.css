@@ -86,7 +86,7 @@
 	.product-title { padding: 10px 30px; }
 	.video-banner-wrapper .hero-banner-info p { font-size: 26px; line-height: 30px; max-width: 680px; padding-bottom: 10px; }
 	.btn-primary.btn-xl-large { max-width: 328px; padding: 20px 30px; font-size: 20px; }
-	.btn-primary { font-size: 18px; line-height: 30px; max-width: 246px; padding: 12px 10px; }
+	.btn-primary { font-size: 16px; line-height: 30px; max-width: 246px; padding: 12px 10px; }
 	.first, .wrapper, .last{ height: 550px; }
 	.pl-product-box-wrapper img { max-width: 149px; width: 100%; margin: 7px auto; }
 	.pl-pro-info-box h6.price,.pl-pro-info-box h6{ font-size: 16px; line-height: 20px; }
@@ -198,11 +198,12 @@
 		.order-history-box-image { max-width: 160px; }
 		.tab-content .card-body { padding-left: 20px; }
 		.tab-container .nav-tabs li.nav-item a { font-size: 20px; }
-		.tab-container .nav-tabs { /*padding: 20px;*/ /*max-width: 250px;*/ }
+		/* .tab-container .nav-tabs { padding: 20px; max-width: 250px; } */
 		.tabs-wrapper { max-width: 250px; }
 		.blog-box-info-wrapper { max-width: 50%; padding: 25px 15px ; }
 		.blog-list-wrapper a { font-size: 13px; line-height: 200%; padding: 10px 11px; }
 		.box-diamond-on-hand { top: 36.9%; }
+		
 	}
 	@media screen and (max-width:991px){
 		.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl { max-width: 100%; }
@@ -351,7 +352,8 @@
 		.product-row-wrapper { flex-direction: column; justify-content: center; padding: 10px 0; }
 		.products-d-big-image-wrapper { width: 100%; text-align: center; }
 		.products-d-small-image-wrapper { width: 100%; margin-top: 30px; }
-		.pd-slider-mini-img { margin: 20px 6px; width: 90%; }
+		.pd-slider-mini-img { margin: 20px 6px; width: 90%; height:auto; }
+		.product-row-wrapper .slick-slide , .product-row-wrapper .slick-list , .product-row-wrapper .slick-track{height:auto !important}
 		.product-row-wrapper .slick-arrow { transform: translate(0,0) rotate(270deg); width: 30px; height: 30px; left: auto; right: 0; top: -15px; right: 35px; line-height: 30px; background: #eec9c2; }
 		.product-row-wrapper .catArrowRight.trans.slick-arrow { bottom: auto; top: -15px; right: 0; }
 		ul.pro-d-list-info li { width: 50%; }
@@ -372,6 +374,7 @@
 			width: 608px;
 		}*/
 		section.inner-banner-section {min-height:auto;}
+		
 		
 
 	}
@@ -429,3 +432,55 @@
 		}
 		.ui-widget.ui-widget-content {width:260px !important;}
 	}
+
+@media screen and (max-width:1919px){
+  .ring-size.bangles {width: 39%;}
+  .add-btns-group a{max-width: unset;width: auto;}
+  .add-btns-group .btn-primary {padding: 12px 35px;}
+  .add-btns-group a { max-width: unset; width: auto;}
+}
+
+
+@media screen and (max-width:1365px){
+  .ring-size.bangles {width: 44%;}
+  .add-btns-group {flex-direction: column !important;align-items: start !important;}
+  .add-btns-group a {width: 100%;}
+  .btn-cart-img {margin-bottom: 10px;}
+  .add-btns-group .btn-outline-primary {margin-left: 0 !important;}
+}
+@media screen and (max-width:1279px){
+  .ring-size.bangles {width: 22%;}
+  .add-btns-group {flex-direction: row !important;}
+  .btn-cart-img {margin-bottom: 0;margin-right: 20px;}
+}
+@media screen and (max-width:1023px){
+  .ring-size.bangles {width: 26%;}
+  .detials-wrapper-box p {font-size: 16px;}
+}
+@media screen and (max-width:767px){
+  .ring-size.bangles {width: 32%;}
+}
+@media screen and (max-width:639px){
+  .ring-size.bangles {width: 44%;}
+  .f-link {display:block;border-top: 1px solid #eec9c2;padding: 10px 0;}
+  .footer-info {margin-top: 0;}
+  .web-footer {display: none;}
+  ul.footer-social-links li {margin: 15px 10px 20px 0;}
+  .contact .f-link {padding-bottom: 0;}
+  .top-footer {padding: 20px 0;}
+  .add-btns-group {flex-direction: column !important;}
+  .btn-cart-img {margin-right: 0;}
+  .add-btns-group .btn-outline-primary {margin-top: 10px !important;}
+  .detials-wrapper-box .pr-d-desc {margin-top: 20px !important;}
+  .assurance-list h5{min-height: unset;margin-bottom: 10px;}
+  .assurance-list li {width: 100%;padding: 0;margin-bottom: 20px;}
+}
+@media screen and (max-width:479px){
+  .ring-size.bangles {width: 59%;}
+  #btnNewslatter {max-width: 100%;}
+  .add-btns-group .btn-primary {font-size: 16px;}
+  .assurance-list li {margin-bottom: 10px;}
+}
+@media screen and (max-width:359px){
+  .ring-size.bangles {width: 66%;}
+}

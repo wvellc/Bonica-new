@@ -18,6 +18,7 @@ use App\Models\ProductSideDiamondPacket;
 use App\Models\SizeMasterPrice;
 use App\Models\Size;
 use App\Models\Country;
+use App\Models\Shape;
 
 use Cookie;
 
@@ -126,10 +127,12 @@ class ProductController extends Controller
 
         $data = array();
         /*Get Single Product Details*/
-        $product = Product::with('productImages', 'ProductShapes', 'firstProductShape', 'ProductShapes.shape', 'ProductMetalMaterial', 'ProductMetalMaterial.metal', 'ProductMetalMaterial.material', 'firstProductMetalMaterial', 'ProductSize', 'ProductSize.size');
+        $product = Product::with('productImages', 'ProductShapes', 'firstProductShape', 'ProductShapes.shape', 'ProductMetalMaterial', 'ProductMetalMaterial.metal', 'ProductMetalMaterial.material', 'firstProductMetalMaterial');
         $product = $product->where('slug', $product_slug);
         $product = $product->Active()->first();
-      
+
+
+        $product->ProductSize = Size::select('name as size','id')->Active()->where('category_id',$product->cat_id)->get();
 
         $product_center_diamonds = ProductCenterDiamondPacket::where('product_id', $product->id)->with('color','clarity')->get()->toArray();
 
@@ -509,47 +512,26 @@ class ProductController extends Controller
         'metal_id' => $request->metal_id,
         'material_id' => $request->material_id];
 
-        
-        //start calculation of users select size wise change price logic  
-
-        //Get the selected ring size
-        $ringSize = Size::where('id',$request->ringSize)->first();
-    
-        // Get all sizes with associated countries based on the given country ID
-        //$allSizes = Size::select('name')->get()->toArray();
-
-       // Sort the sizes in ascending order
-        //asort($allSizes);
-
-        // Get the master price for sizes
-        $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
-                                    ->where('max_size', '>=', $ringSize->name)
-                                    ->value('price');
-
-        // $sizePrice = 0;
-        // $price = 0;
-        // Calculate the cumulative price based on ring size and size price size-master-price
-        // if($ringSize->name > $allSizes[0]['name']){
-        //     foreach ($allSizes as $key => $singleSize) {
-        //         foreach ($sizeMasterPrices as $key => $sizeMasterPrice) {
-        //             if($sizeMasterPrice->size >= $ringSize->name){
-        //                 $price = $sizeMasterPrice->price;
-        //                 dd($price);
-        //             } else {
-        //                 break; // Stop adding prices once the condition is no longer met
-        //             }
-        //         }
-        //     }
-        // }
-      
         $productDataArr = productPriceCalculation($productData);
 
-        if($price > 0){
-            // Calculate the price increment based on the percentage of size price
-            $priceIncrement = $productDataArr['total_price'] * $price / 100;
-            // Add the calculated price increment to the total price
-            $productDataArr['total_price'] = $productDataArr['total_price'] + $priceIncrement;
-        }
+        //start calculation of users select size wise change price logic  
+        // $price = 0; 
+        // if($request->ringSize){
+        //     //Get the selected ring size
+        //     $ringSize = Size::where('id',$request->ringSize)->first();
+        //     // Get the master price for sizes
+        //     $price = SizeMasterPrice::where('min_size', '<=', $ringSize->name)
+        //                             ->where('max_size', '>=', $ringSize->name)
+        //                             ->where('category_id',$productDataArr['cat_id'])
+        //                             ->value('price');
+        // }
+        
+        // if($price > 0){
+        //     // Calculate the price increment based on the percentage of size price
+        //     $priceIncrement = $productDataArr['total_price'] * $price / 100;
+        //     // Add the calculated price increment to the total price
+        //     $productDataArr['total_price'] = $productDataArr['total_price'] + $priceIncrement;
+        // }
         //end calculation of users select size wise change price logic  
 
         $salesProductPrice = Product::getProductSalesPrice($request->product_id);
@@ -567,10 +549,15 @@ class ProductController extends Controller
         $shape_id = ($request->shape_id) ? $request->shape_id : 0;
         $metal_id = ($request->metal_id) ? $request->metal_id : 0;
         $material_id = ($request->material_id) ? $request->material_id : 0;
+        $cat_segment = ($request->cat_segment) ? $request->cat_segment : "";
 
 
         $materialMetal = ProductMetalMaterial::with("material")->where("product_id",$product_id)->where("metal_id",$metal_id)->get();
-        
+
+        $shape = Shape::where('id',$shape_id)->first();
+
+        $diamondShape = strtolower($shape->name);
+
         $materialMetalHTML = "";
         // $materialMetalHTML1 = array();
         if(!empty($materialMetal)){
@@ -608,14 +595,36 @@ class ProductController extends Controller
         $is_360video = $productImages['is_360video'];
         $product_first_image = $productImages['product_first_image'];
 
+        $handImageHtml = '';
 
+        if($cat_segment == 'rings'){
+            $handImageHtml = '  <div class="col-sm-6">
+                                    <div class="hand-wrapper">
+                                        <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
+                                        <div class="box-diamond-on-hand">
+                                            <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(1.70);">
+                                        </div>
+                                        
+                                    </div>
+                                   
+                                    <div class="carat-size d-flex align-items-center justify-content-between pb-2">
+                                        <p class="pb-0">0.5 ct</p>
+                                        <p>4 ct</p>
+                                    </div>
+                                    <div class="diamondOnhand-wrapper mb-4">
+                                        <input class="range-slider__range" id="myRange" type="range" value="3" min="0.5" max="4" step="0.25">
+                                    </div>
+                                    <p class="text-center">
+                                        Shown with <b ><span id="caratValue">3</span> carat</b> Diamond
+                                    </p>
+                                </div>';
+        }
 
         $ProductImageHtml = '';
-        $ProductImageHtml .= '<div class="products-d-big-image-wrapper">
-									<div class="slider slider-for">';
+        $ProductImageHtml .= '<div class="row">';
         if (count($image_paths) > 0) {
             foreach ($image_paths as $key => $productImage) {
-                $ProductImageHtml .= '<div class="item">
+                $ProductImageHtml .= '<div class="col-sm-6">
                                                     <div class="pd-slider-large-img">';
                 if ($is_360video[$key]) {
                     $ProductImageHtml .= '<video src="' . $video_paths[$key] . '" loop muted autoplay></video>';
@@ -629,7 +638,7 @@ class ProductController extends Controller
                                                 </div>';
             }
         } else {
-            $ProductImageHtml .= '<div class="item">
+            $ProductImageHtml .= '<div class="col-sm-6">
                                                 <div class="pd-slider-large-img">
                                                     <a href="' . asset('images/no_image.png') . '" data-fancybox="gallery" class="d-block" >
                                                         <img src="' . asset('images/no_image.png') . '" alt="ring">
@@ -638,37 +647,43 @@ class ProductController extends Controller
                                             </div>';
         }
 
-        $ProductImageHtml .= '</div>
-								</div>
-								<div class="products-d-small-image-wrapper">
-									<div class="slider slider-nav">';
+            $ProductImageHtml .= ''.$handImageHtml.'
+                                </div>';
 
-        if (count($image_paths) > 0) {
-            foreach ($image_paths as $key => $productImage) {
-                $ProductImageHtml .= '<div class="item">';
-                if ($is_360video[$key]) {
+		 						// <div class="products-d-small-image-wrapper">
+		 						// 	<div class="slider slider-nav">';
 
-                    $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
-                                                                <img src="' . $productImage . '" alt="ring">
-                                                                <img src="' . asset('images/icons/360-degree-icon.svg') . '" alt="ring" class="rotate-icon">
-                                                            </div>';
-                } else {
-                    $ProductImageHtml .= '<div class="pd-slider-mini-img">
-                                                                <img src="' . $productImage . '" alt="ring">
-                                                            </div>';
-                }
+        // if (count($image_paths) > 0) {
+        //     foreach ($image_paths as $key => $productImage) {
+        //         $ProductImageHtml .= '<div class="item">';
+        //         if ($is_360video[$key] == 1) {
 
-                $ProductImageHtml .= '</div>';
-            }
-        } else {
-            $ProductImageHtml .= '<div class="item">
-                                                    <div class="pd-slider-mini-img">
-                                                        <img src="' . asset('images/no_image.png') . '" alt="ring">
-                                                    </div>
-                                                </div>';
-        }
-        $ProductImageHtml .= '</div>
-								</div>';
+        //             $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
+        //                                                         <img src="' . $productImage . '" alt="ring">
+        //                                                         <img src="' . asset('images/icons/360-degree-icon.svg') . '" alt="ring" class="rotate-icon">
+        //                                                     </div>';
+        //         }else if ($is_360video[$key] == 2) {
+
+        //             $ProductImageHtml .= '<div class="pd-slider-mini-img rotate-wrapper">
+        //                                                         <img src="' . $productImage . '" alt="ring">
+        //                                                     </div>';
+        //         } else {
+        //             $ProductImageHtml .= '<div class="pd-slider-mini-img">
+        //                                                         <img src="' . $productImage . '" alt="ring">
+        //                                                     </div>';
+        //         }
+
+        //         $ProductImageHtml .= '</div>';
+        //     }
+        // } else {
+        //     $ProductImageHtml .= '<div class="item">
+        //                                             <div class="pd-slider-mini-img">
+        //                                                 <img src="' . asset('images/no_image.png') . '" alt="ring">
+        //                                             </div>
+        //                                         </div>';
+        // }
+        // $ProductImageHtml .= '</div>
+		// 						</div>';
 
         return response()->json(['msg' => 'success', 'ProductImageHtml' => $ProductImageHtml,'materialMetalHTML' => $materialMetalHTML]);
     }

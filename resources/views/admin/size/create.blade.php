@@ -52,6 +52,20 @@
                                     @endif
                                 </div>
                             </div> -->
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="mls">Category<span class="error">*</span></label>
+                                    <div class="select-box">
+                                    {!! Form::select('category', ['' => 'Select Parent'] + $parent_category,$selectedParentID, ['class' => 'form-control','id' => 'category']) !!}
+                                    </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('category'))
+                                    <div class="error">
+                                        {{ $errors->first('category') }}
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="col-12 col-sm-12 col-lg-6 select-inner-design-wrapper multi-select-with-checkbo-wrapper">
                                 <div class="form-group">
                                     <label for="country">Country <span class="error">*</span></label>
