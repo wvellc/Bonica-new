@@ -340,6 +340,7 @@ class ProductController extends Controller
                     <div class="col-md-6 col-lg-6">
                         <div class="row align-items-center">';
                 foreach ($products->slice(4, 4) as $product) {
+                    $product['metals'] = Metal::select('name','bgcolor')->where('id',$product->metal_display_priority_id)->first();
                     $ProductData_Html .= '<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6  product-col four-product-col">';
                     $ProductData_Html .= view('frontend.products.product-box')->with('product', $product)->with('cat_segment', $cat_segment)->with('subcategory_segment', $subcategory_segment);
                     $ProductData_Html .= '</div>';
@@ -350,6 +351,7 @@ class ProductController extends Controller
             } else {
                 $ProductData_Html .= '<div class="row align-items-center">';
                 foreach ($products->slice(4, 4) as $product) {
+                    $product['metals'] = Metal::select('name','bgcolor')->where('id',$product->metal_display_priority_id)->first();
                     $ProductData_Html .= '<div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3  product-col">';
                     $ProductData_Html .= view('frontend.products.product-box')->with('product', $product)->with('cat_segment', $cat_segment)->with('subcategory_segment', $subcategory_segment);
                     $ProductData_Html .= '</div>';
