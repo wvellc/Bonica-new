@@ -227,11 +227,10 @@
                                 
                                     @if(!empty($material_arr))
                                     <div class="" id="materialboxhide">
-
                                         <h5>Material</h5>
                                         <div class="square-radio-design" id="materialbox">
                                             @foreach ($material_arr as $key => $material)
-                                                <input onclick="getProductPrice();" type="radio" @if ($product->firstProductMetalMaterial->material_id == $key) checked @endif id="material_{{$key}}" name="material" value="{{$key}}" />
+                                                <input onclick="getProductPrice();" type="radio" @if ($metalName == $key) checked @endif id="material_{{$key}}" name="material" value="{{$key}}" />
                                                 <label for="material_{{$key}}">{{$material}}</label>
                                             @endforeach
                                         </div>

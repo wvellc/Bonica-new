@@ -49,6 +49,18 @@
         }
     }
 
+    if($product->metals){
+        $metalName = $product->metals->name;
+    }else if($product->firstProductMetalMaterial->metal){
+        $metalName = $product->firstProductMetalMaterial->metal->name;
+    }
+    
+    if($product->metals){
+        $bgColor = $product->metals->bgcolor;
+    }else if($product->firstProductMetalMaterial->metal){
+        $bgColor = $product->firstProductMetalMaterial->metal->bgcolor;
+    }
+
 @endphp
 
 <div class="pl-product-box-wrapper  mt-3">
@@ -103,10 +115,10 @@
 	<div class="onhover-pl-product-box-wrapper">
 		<div class="onhover-pl-pro-info-box text-center">
 			<h5><a href="{{$product_url}}">{{$product->name}} </a></h5>
-            @isset($product->firstProductMetalMaterial->metal)
+            @isset($metalName)
                 <h6>
                     <span>Metal</span>
-                    <span class="color-text-box"><span class="color-gold" style="background-color:{{$product->firstProductMetalMaterial->metal->bgcolor}};"></span> {{$product->firstProductMetalMaterial->metal->name}}</span>
+                    <span class="color-text-box"><span class="color-gold" style="background-color:{{$bgColor}};"></span> {{$metalName}}</span>
                 </h6>
             @endisset
 			<h6 class="price">{!! $product_price !!}</h6>
