@@ -214,7 +214,7 @@
 									<h5>Metal</h5>
 									<div class="metal-list">
                                         @foreach ($metal_arr as $key => $metal)
-										<input onclick="getProductPriceImage();" type="radio" @if ($product->firstProductMetalMaterial->metal_id == $key) checked @endif id="metal_{{$key}}" name="metal" value="{{$key}}" />
+										<input onclick="getProductPriceImage();" type="radio" @if ($product->metal_display_priority_id == $key) checked @endif id="metal_{{$key}}" name="metal" value="{{$key}}" />
 										<label for="metal_{{$key}}"><span class="color-gold" style="background-color:{{$metal['bgcolor']}};"></span> {{$metal['name']}}</label>
                                         @endforeach
 									</div>

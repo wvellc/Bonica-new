@@ -129,8 +129,7 @@ class ProductController extends Controller
         $product = Product::with('productImages', 'ProductShapes', 'firstProductShape', 'ProductShapes.shape', 'ProductMetalMaterial', 'ProductMetalMaterial.metal', 'ProductMetalMaterial.material', 'firstProductMetalMaterial', 'ProductSize', 'ProductSize.size');
         $product = $product->where('slug', $product_slug);
         $product = $product->Active()->first();
-
-        //dd($product->ProductMetalMaterial);
+      
 
         $product_center_diamonds = ProductCenterDiamondPacket::where('product_id', $product->id)->with('color','clarity')->get()->toArray();
 
@@ -597,7 +596,13 @@ class ProductController extends Controller
         $product_price = $currency['symbol'] . ' ' . number_format((float)($product_price + $shape_price + $metal_material_price) / $currency['rate'], 3, '.', '');
         $salesProductPrice = $currency['symbol'] . ' ' . number_format((float)($salesProductPrice + $shape_price + $metal_material_price) / $currency['rate'], 3, '.', ''); */
         //echo $product_id.' = '.$metal_id.' = '.$shape_id;
+
+        //comment by dipali 
         $productImages = productImages($product_id, $metal_id, $shape_id);
+        //end
+        //added by dipali
+        $productImages = proirityProductImages($product_id, $metal_id, $shape_id);
+        //end
         $image_paths = $productImages['image_paths'];
         $video_paths = $productImages['video_paths'];
         $is_360video = $productImages['is_360video'];
