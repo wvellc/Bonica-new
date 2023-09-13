@@ -4691,3 +4691,11 @@ header .dropdown-menu {margin-top:5px !important;}
 }
 
 .onhover-pl-product-box-wrapper img.cart-btn-img {vertical-align: top;}
+
+body.menu-open {overflow-y: hidden;height: 100vh;}
+.menu-open .header.fixed {height: 100vh;background-color: #fff;}
+
+span.submenu-button {padding: 0 !important;
+  top: 13px !important;
+  height: auto !important; 
+}

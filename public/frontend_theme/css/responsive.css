@@ -484,3 +484,33 @@
 @media screen and (max-width:359px){
   .ring-size.bangles {width: 66%;}
 }
+
+@media screen and (max-width: 575px)
+.product-menu-links li span{
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 0px;
+}
+
+@media screen and (max-width: 991px)
+.product-menu-links li span {
+    padding: 11px 10px;
+    display: block;
+    text-align: left;
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 0px;
+}
+
+@media screen and (max-width: 1299px)
+.product-menu-links li span {
+    font-size: 14px;
+}
+
+.product-menu-links li span {
+    font-weight: 400;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+    padding: 11px 10px 7px 10px;
+    transition: all ease 0.2s;
+}

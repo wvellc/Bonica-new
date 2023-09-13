@@ -6,7 +6,8 @@
         @endphp
         <li class="dropdown">
             <span class="submenu-button"></span>
-            <a href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}" data-src="@if ($category['image']){{ ($exists === true) ? asset($cloudFrontUrl.$category['image']) :  '' }}@endif" class="dropdown-toggle" id="newarrivalsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ file_exists(public_path('uploads/category/'.$category['icon'])) ? asset('uploads/category/'.$category['icon']) :  '' }}" alt="" class="me-2 p-m-img"><span>{{$category->name}}</span> </a>
+            <a href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}" data-src="@if ($category['image']){{ ($exists === true) ? asset($cloudFrontUrl.$category['image']) :  '' }}@endif" class="dropdown-toggle re-direct" id="newarrivalsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ file_exists(public_path('uploads/category/'.$category['icon'])) ? asset('uploads/category/'.$category['icon']) :  '' }}" alt="" class="me-2 p-m-img"><span>{{$category->name}}</span> </a>
+            <span class="for-mobile-view" style="display:none;">{{$category->name}}</span>
             @if($category->children()->count() > 0)
             <div  class="dropdown-menu"  aria-labelledby="newarrivalsDropdown">
                 <div class="container">
