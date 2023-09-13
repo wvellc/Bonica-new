@@ -354,7 +354,7 @@ plan. Made with real diamond seed, grown with precision and care")
                             @if ($home_page->about_bonica_link)
                             <div class="mt-4">
                                 <a href="{{ $home_page->about_bonica_link }}" target="_blank"
-                                    class="btn btn-primary  btn-white"><span>Our Story</span></a>
+                                    class="btn btn-primary"><span>Our Story</span></a>
                             </div>
                             @endif
                         </div>
