@@ -195,7 +195,13 @@
         .data("item.autocomplete", item)
         .append(inner_html)
         .appendTo(ul);
-    };;
+    };
+
+    $("#menu_label").on('click',function(){    
+        $('.re-direct').remove("a");
+        $('.for-mobile-view').css("display", "block");
+        $("body").addClass("menu-open");
+    });
 </script>
 
 @endpush
