@@ -523,6 +523,7 @@
     .products-slider-row .catArrowRight, .blogs-slider-row .catArrowRight {right: 0;}
     .products-slider-row .catArrowLeft, .blogs-slider-row .catArrowLeft {left: 0;}
     .products-slider-row .slick-dots {display: none;}
+    .jewelry-section a {text-align: center;}
 }
 @media screen and (max-width:359px){
   .ring-size.bangles {width: 66%;}
