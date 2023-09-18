@@ -3987,7 +3987,7 @@ a.page-link {
   font-size: 32px;
   line-height: 120%;
   text-align: center;
-  letter-spacing: 0.05em;
+  letter-spacing:normal;
   /* color: #c36d5f; */
   font-family: "Trajan-Regular";
 }
