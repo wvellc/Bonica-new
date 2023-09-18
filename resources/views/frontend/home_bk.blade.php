@@ -12,7 +12,7 @@ plan. Made with real diamond seed, grown with precision and care")
             video {
                 height: 100vh;
                 width: 100%;
-                object-fit: cover; 
+                object-fit: cover; // use "cover" to avoid distortion
                 position: absolute;
             }
         </style>
@@ -63,31 +63,48 @@ plan. Made with real diamond seed, grown with precision and care")
             @endif
         </section>
         @endif
-        
-        <section class="our-story-section common-section">
+        <section class="section intro-section">
             <div class="container">
-                <div class="title-box text-center mt-4">
-                    <h2>Our story</h2>
-                    <p>With Bonica, you are sorted whether you are looking for jewellery for daily use, special occasions, gifting purposes or others.</p>
-                </div>
-                <div class="inner-container d-flex justify-content-between align-items-center">
-                    <div class="left-content-box">
-                        <h3>Reflections of the extraordinary</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <a href="/page/our-story" target="_blank" class="btn btn-primary"><span>Read More</span></a>
-                    </div>
-                    <div class="right-img-box">
-                        <img src="{{asset('images/our-story-new.png')}}" alt="Our Story">
-                    </div>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-12 col-xl-7">
+                        <div class="intro-image-box d-flex justify-content-between">
+                            @if ($home_page->top_section_image1)
+                            <div class="intro-image-wrapper me-3 me-lg-3">
+                                <img src="{{ asset('uploads/homepage/'.$home_page->top_section_image1) }}" loading="lazy" alt="Image">
+                            </div>
+                            @endif
 
+                            @if ($home_page->top_section_image2)
+                            <div class="intro-image-wrapper">
+                                <img src="{{ asset('uploads/homepage/'.$home_page->top_section_image2) }}" loading="lazy" alt="Image">
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xl-5">
+                        <div class="info-wrap ps-xl-4 pt-4 pt-xl-0">
+                            <div class="section-title">
+                                <h2>{!! $home_page->top_section_title !!}</span></h2>
+                            </div>
+                            <p>{!! $home_page->top_section_content !!}</p>
+                            
+                            @if ($home_page->top_section_link)
+                            <div class="mt-3">
+                                <a href="{{ $home_page->top_section_link }}" target="_blank"
+                                    class="btn btn-primary"><span>Know
+                                        More</span></a>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
-            </div>           
+            </div>
         </section>
-
         <section class="section pt-0">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-md-12 col-xl-7 m-auto text-center ">
+                        <img src="{{ asset('images/divider.svg') }}" alt="" loading="lazy"/>
                         <div class="section-title mt-4">
                             <h2>{!! $home_page->shringaar_title !!}</h2>
                         </div>
@@ -166,7 +183,7 @@ plan. Made with real diamond seed, grown with precision and care")
         </section>
         @if(!empty($homecategories))
         <section class="section jewelry-section">
-            <div class="custom-container">
+            <div class="container">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-md-12 text-center ">
                         <div class="section-title">
@@ -185,10 +202,10 @@ plan. Made with real diamond seed, grown with precision and care")
                                     href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}">
                                     <div class="products-slider-image-box">
                                         @if($category->image)
-                                        <img src="{{ file_exists(public_path('uploads/category/'.$category->image)) ? asset('uploads/category/'.$category->image) :  asset('images/demo.png')  }} "
+                                        <img src="{{ file_exists(public_path('uploads/category/'.$category->image)) ? asset('uploads/category/'.$category->image) :  asset('images/no_image.png')  }} "
                                             alt="product" loading="lazy">
                                         @else
-                                            <img src="{{ asset('images/no_image.png') }}" alt="product" loading="lazy" />
+                                        <img src="{{ asset('images/no_image.png') }}" alt="product" loading="lazy" />
                                         @endif
                                     </div>
                                     <h4>{{$category->name}}</h4>
@@ -202,27 +219,77 @@ plan. Made with real diamond seed, grown with precision and care")
             </div>
         </section>
         @endif
-        <section class="our-story-section common-section">
+        <section class="section py-4">
             <div class="container">
-                <div class="title-box text-center mt-4">
-                    <h2>Our story</h2>
-                    <p>With Bonica, you are sorted whether you are looking for jewellery for daily use, special occasions, gifting purposes or others.</p>
-                </div>
-                <div class="inner-container d-flex justify-content-between align-items-center">
-                    <div class="right-img-box">
-                        <img src="{{asset('images/our-story-new.png')}}" alt="Our Story">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-12 text-center ">
+                        <div class="section-title">
+                            <h2>{!! $home_page->bonica_jewels_title !!}</h2>
+                            <p class="subtitle">{{$home_page->bonica_jewels_sub_title}}</p>
+                        </div>
                     </div>
-                    <div class="left-content-box">
-                        <h3>Reflections of the extraordinary</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <a href="/page/our-story" target="_blank" class="btn btn-primary"><span>Read More</span></a>
-                    </div>                   
                 </div>
-            </div>           
+                <div class="row  justify-content-center ">
+                    <div class="col-md-6 col-xl-4 mt-4 mt-md-5">
+                        <figure class="reason-list row  align-items-center">
+                            @if ($home_page->bonica_jewels_icon1)
+                            <p class="col-auto">
+                                <img src="{{ asset('uploads/homepage/'.$home_page->bonica_jewels_icon1) }}" alt="" loading="lazy">
+
+                            </p>
+                            @endif
+                            <figcaption class="col">
+                                <h6>{{$home_page->bonica_jewels_icon1_title}}</h6>
+                                <p class="text-small">{{$home_page->bonica_jewels_icon1_content}}</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-6 col-xl-4 mt-4 mt-md-5">
+                        <figure class="reason-list row  align-items-center">
+                            @if ($home_page->bonica_jewels_icon2)
+                            <p class="col-auto">
+                                <img src="{{ asset('uploads/homepage/'.$home_page->bonica_jewels_icon2) }}" alt="" loading="lazy">
+                            </p>
+                            @endif
+                            <figcaption class="col">
+                                <h6>{{$home_page->bonica_jewels_icon2_title}}</h6>
+                                <p class="text-small">{{$home_page->bonica_jewels_icon2_content}}</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-6 col-xl-4 mt-4 mt-md-5">
+                        <figure class="reason-list row  align-items-center">
+                            @if ($home_page->bonica_jewels_icon3)
+                            <p class="col-auto">
+                                <img src="{{ asset('uploads/homepage/'.$home_page->bonica_jewels_icon3) }}" alt="" loading="lazy">
+                            </p>
+                            @endif
+                            <figcaption class="col">
+                                <h6>{!! nl2br($home_page->bonica_jewels_icon3_title) !!}</h6>
+                                <p class="text-small">{{$home_page->bonica_jewels_icon3_content}}</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-6 col-xl-4 mt-4 mt-md-5">
+                        <figure class="reason-list row  align-items-center">
+                            @if ($home_page->bonica_jewels_icon4)
+                            <p class="col-auto">
+                                <img src="{{ asset('uploads/homepage/'.$home_page->bonica_jewels_icon4) }}" alt="" loading="lazy">
+                            </p>
+                            @endif
+                            <figcaption class="col">
+                                <h6>{{$home_page->bonica_jewels_icon4_title}}</h6>
+                                <p class="text-small">{{$home_page->bonica_jewels_icon4_content}}</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                </div>
+            </div>
         </section>
         @if(count($recommendedProducts) > 0)
         <section class="section offer-section">
-            <div class="custom-container">
+            <div class="container">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-md-12 text-center ">
                         <div class="section-title">
@@ -251,9 +318,9 @@ plan. Made with real diamond seed, grown with precision and care")
                                         <div class="products-slider-image-box">
 
                                             @if ($recommendedProduct->singleProductImages)
-                                            <img src="{{ $recommendedProduct->singleProductImages['image_path'] }}" alt="Image" loading="lazy"/>
+                                            <img src="{{ $recommendedProduct->singleProductImages['image_path'] }}" alt="Image" class="front-image" loading="lazy"/>
                                             @else
-                                            <img src="{{ asset('images/no_image.png') }}" alt="Image"/>
+                                            <img src="{{ asset('images/no_image.png') }}" alt="Image" class="front-image"/>
                                             @endif
                                             @if($recommendedProduct->recommended_hover_image)
                                             <div class="on-hover-product-img-wrapper">

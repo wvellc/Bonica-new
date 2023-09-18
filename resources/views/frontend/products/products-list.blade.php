@@ -22,10 +22,11 @@
                 <div class="container">
                     <div class="row align-items-center justify-content-between">
                         <div class="col-sm-12 col-md-6 col-xl-4 order-2 order-md-1">
-                            <div class="inner-banner-info text-center text-md-start">
+                            <!-- comment by dipalu gupta -->
+                            <!-- <div class="inner-banner-info text-center text-md-start">
                                 <h2>{{ $category['name'] }}</h2>
                                 <h4 class="text-capitalize">{{ $category_description }}</h4>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- <div class="col-sm-12 col-md-6  order-1 order-md-2">
                <div class="inner-banner-img text-center text-md-end me-auto ms-md-auto">
