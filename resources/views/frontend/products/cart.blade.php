@@ -18,7 +18,7 @@
 									<li class="breadcrumb-item active" aria-current="page">Cart</li>
 								</ol>
 							</nav>
-							<h3 class="text-center mt-3">SHopping Cart</h3>
+							<h3 class="text-center mt-3">Shopping Cart</h3>
 						</div>
 					</div>
                     @if(count($cartData) > 0)
@@ -35,7 +35,7 @@
 											<div class="col-md-12 col-lg-6">
 												<div class="form-group">
 													<label>First Name <span class="error">*</span></label>
-                                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{{ (old('first_name'))?old('first_name'):$formObj->first_name }}">
+                                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ (old('first_name'))?old('first_name'):$formObj->first_name }}">
                                                     @if ($errors->has('first_name'))
                                                     <span class="text-danger">
                                                         {{ $errors->first('first_name') }}
@@ -46,7 +46,7 @@
 											<div class="col-md-12 col-lg-6">
 												<div class="form-group">
 													<label>Last Name</label>
-                                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{{ (old('last_name'))?old('last_name'):$formObj->last_name }}">
+                                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ (old('last_name'))?old('last_name'):$formObj->last_name }}">
                                                     @if ($errors->has('last_name'))
                                                     <span class="text-danger">
                                                         {{ $errors->first('last_name') }}
@@ -59,7 +59,7 @@
                                             <div class="col-md-12 col-lg-12">
                                                 <div class="form-group">
                                                     <label>Phone Number</label>
-                                                    <input type="number" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number"
+                                                    <input type="number" class="form-control" id="phone_number" name="phone_number"
                                                         value="{{ (old('phone_number'))?old('phone_number'):$formObj->phone_number }}">
                                                     @if ($errors->has('phone_number'))
                                                     <span class="text-danger">
@@ -73,7 +73,7 @@
 											<div class="col-md-12 col-lg-12">
 												<div class="form-group">
 													<label>Address <span class="error">*</span></label>
-                                                    <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Street Address" value="{{ (old('street_address'))?old('street_address'):$formObj->street_address }}">
+                                                    <input type="text" class="form-control" id="street_address" name="street_address" value="{{ (old('street_address'))?old('street_address'):$formObj->street_address }}">
                                                     @if ($errors->has('street_address'))
                                                     <span class="text-danger">
                                                         {{ $errors->first('street_address') }}
@@ -84,7 +84,7 @@
 											<div class="col-md-12 col-lg-12">
 												<div class="form-group">
 													<label>Appartment</label>
-													<input type="text" class="form-control" id="street_address2" name="street_address2" placeholder="App, suite, building" value="{{ (old('street_address2'))?old('street_address2'):$formObj->street_address2 }}">
+													<input type="text" class="form-control" id="street_address2" name="street_address2" value="{{ (old('street_address2'))?old('street_address2'):$formObj->street_address2 }}">
                                                     @if ($errors->has('street_address2'))
                                                     <span class="text-danger">
                                                         {{ $errors->first('street_address2') }}
@@ -97,7 +97,7 @@
 											<div class="col-md-12 col-lg-6">
 												<div class="form-group">
 													<label>City <span class="error">*</span></label>
-													<input type="text" class="form-control" id="city" name="city" placeholder="City" value="{{ (old('city'))?old('city'):$formObj->city }}">
+													<input type="text" class="form-control" id="city" name="city"  value="{{ (old('city'))?old('city'):$formObj->city }}">
                                                     @if ($errors->has('city'))
                                                     <span class="text-danger">
                                                         {{ $errors->first('city') }}
@@ -109,7 +109,7 @@
 											<div class="col-md-12 col-lg-6">
 												<div class="form-group">
 													<label>Pincode <span class="error">*</span></label>
-													<input type="number" class="form-control" id="pincode" name="pincode" placeholder="Pin Code" value="{{ (old('pincode'))?old('pincode'):$formObj->pincode }}" >
+													<input type="number" class="form-control" id="pincode" name="pincode" value="{{ (old('pincode'))?old('pincode'):$formObj->pincode }}" >
                                                     @if ($errors->has('pincode'))
                                                     <span class="text-danger">
                                                         {{ $errors->first('pincode') }}
@@ -122,7 +122,7 @@
                                             <div class="col-md-12 col-lg-6">
                                                 <div class="form-group">
                                                     <label>State <span class="error">*</span></label>
-                                                    <input type="text" class="form-control" id="state" name="state" placeholder="State"
+                                                    <input type="text" class="form-control" id="state" name="state"
                                                         value="{{ (old('state'))?old('state'):$formObj->state }}">
                                                     @if ($errors->has('state'))
                                                     <span class="text-danger">
@@ -245,11 +245,11 @@
 							</div>
 							<div class="inner-form-wrapper">
 								<form>
-									<label>Coupon code  <span id="span_coupon_code"  class="badge bg-dark badge bg-dark me-1 ms-1"> @if($coupon_code) ({{$coupon_code}}) <i class="fas fa-times" onclick="couponDelete();"></i> @endif </span></label>
+									<label>Coupon code  <span id="span_coupon_code"  class="badge me-1 ms-1"> @if($coupon_code) ({{$coupon_code}}) <i class="fas fa-times" onclick="couponDelete();"></i> @endif </span></label>
 									<div class="row">
 										<div class="col-8">
 											<div class="">
-												<input type="text" name="coupon_code" id="coupon_code" class="form-control" placeholder="Enter coupon code" >
+												<input type="text" name="coupon_code" id="coupon_code" class="form-control" >
 											</div>
 										</div>
 										<div class="col-4">
