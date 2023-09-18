@@ -252,36 +252,36 @@ $("#btnNewslatter").click(function() {
 });
 
 $(document).ready(function() {
-            $('.f-title').on("click", function(e) {
-                if ($(this).hasClass('menushow')) {
-                    remove_styles();
-                    $(this).removeClass('menushow');
-                    $(this).next('ul').removeClass('menushowtoggle');
-                    if ($(this).next('ul').next('ul').length) {
-                        $(this).next('ul').next('ul').removeClass('menushowtoggle');
-                    }
-                } else {
-                    remove_styles();
-                    $(this).addClass('menushow');
-                    $(this).next('ul').addClass('menushowtoggle');
-                    if ($(this).next('ul').next('ul').length) {
-                        $(this).next('ul').next('ul').addClass('menushowtoggle');
-                    }
-                }
-                e.stopPropagation();
-                e.preventDefault();
-            });
-
-        function remove_styles() {
-            $('.f-title').each(function() {
-                $(this).removeClass('menushow');
-                $(this).next('ul').removeClass('menushowtoggle');
-                if ($(this).next('ul').next('ul').length) {
-                    $(this).next('ul').next('ul').removeClass('menushowtoggle');
-                }
-            });
+    $('.f-title').on("click", function(e) {
+        if ($(this).hasClass('menushow')) {
+            remove_styles();
+            $(this).removeClass('menushow');
+            $(this).next('ul').removeClass('menushowtoggle');
+            if ($(this).next('ul').next('ul').length) {
+                $(this).next('ul').next('ul').removeClass('menushowtoggle');
+            }
+        } else {
+            remove_styles();
+            $(this).addClass('menushow');
+            $(this).next('ul').addClass('menushowtoggle');
+            if ($(this).next('ul').next('ul').length) {
+                $(this).next('ul').next('ul').addClass('menushowtoggle');
+            }
         }
-    })
+        e.stopPropagation();
+        e.preventDefault();
+    });
+
+    function remove_styles() {
+        $('.f-title').each(function() {
+            $(this).removeClass('menushow');
+            $(this).next('ul').removeClass('menushowtoggle');
+            if ($(this).next('ul').next('ul').length) {
+                $(this).next('ul').next('ul').removeClass('menushowtoggle');
+            }
+        });
+    }
+})
 
 </script>
 @endpush
