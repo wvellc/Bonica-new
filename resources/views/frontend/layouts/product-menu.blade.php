@@ -4,12 +4,12 @@
         @php
             $exists = Storage::disk('s3')->has('categories/' . $category['image']);
         @endphp
-        <li class="dropdown">
+        <li class="dropdown category-dropdown">
             <span class="submenu-button"></span>
             <a href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}" data-src="@if ($category['image']){{ ($exists === true) ? asset($cloudFrontUrl.$category['image']) :  '' }}@endif" class="dropdown-toggle re-direct" id="newarrivalsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ file_exists(public_path('uploads/category/'.$category['icon'])) ? asset('uploads/category/'.$category['icon']) :  '' }}" alt="" class="me-2 p-m-img"><span>{{$category->name}}</span> </a>
-            <span class="for-mobile-view" style="display:none;">{{$category->name}}</span>
+            <span class="for-mobile-view" style="display:none;" >{{$category->name}}</span>
             @if($category->children()->count() > 0)
-            <div  class="dropdown-menu"  aria-labelledby="newarrivalsDropdown">
+            <div  class="dropdown-menu subcategory-menu" aria-labelledby="newarrivalsDropdown">
                 <div class="container">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-4">
@@ -84,5 +84,6 @@ $(".product-menu-links li a").hover( function() {
         $(".image-holder img").attr("src", value);
     }
 });
+
 </script>
 @endpush
