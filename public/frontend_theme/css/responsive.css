@@ -461,19 +461,24 @@
   .ring-size.bangles {width: 32%;}
 }
 @media screen and (max-width:639px){
-  .ring-size.bangles {width: 44%;}
-  .f-link {display:block;border-top: 1px solid #eec9c2;padding: 10px 0;}
-  .footer-info {margin-top: 0;}
-  .web-footer {display: none;}
-  ul.footer-social-links li {margin: 15px 10px 20px 0;}
-  .contact .f-link {padding-bottom: 0;}
-  .top-footer {padding: 20px 0;}
-  .add-btns-group {flex-direction: column !important;}
-  .btn-cart-img {margin-right: 0;}
-  .add-btns-group .btn-outline-primary {margin-top: 10px !important;}
-  .detials-wrapper-box .pr-d-desc {margin-top: 20px !important;}
-  .assurance-list h5{min-height: unset;margin-bottom: 10px;}
-  .assurance-list li {width: 100%;padding: 0;margin-bottom: 20px;}
+	.ring-size.bangles {width: 44%;}
+	.f-link {display:block;border-top: 1px solid #eec9c2;padding: 10px 0;}
+	.footer-info {margin-top: 0;}
+	.web-footer {display: none;}
+	ul.footer-social-links li {margin: 15px 10px 20px 0;}
+	.contact .f-link {padding-bottom: 0;}
+	.top-footer {padding: 20px 0;}
+	.add-btns-group {flex-direction: column !important;}
+	.btn-cart-img {margin-right: 0;}
+	.add-btns-group .btn-outline-primary {margin-top: 10px !important;}
+	.detials-wrapper-box .pr-d-desc {margin-top: 20px !important;}
+	.assurance-list h5{min-height: unset;margin-bottom: 10px;}
+	.assurance-list li {width: 100%;padding: 0;margin-bottom: 20px;}
+  	ul.contact-box-wrapper-list{margin-top: 10px !important;}
+	ul.contact-box-wrapper-list .contact-box-wrapper {padding: 0;box-shadow: none;}
+	.contact-box-wrapper:hover {background: transparent;}
+	ul.contact-box-wrapper-list .contact-box-wrapper > div {flex-direction: row;text-align: center}
+	.contact-box-wrapper img {margin:0; margin-right: 20px;}
 }
 @media screen and (max-width:479px){
   .ring-size.bangles {width: 59%;}
@@ -514,9 +519,3 @@
     padding: 11px 10px 7px 10px;
     transition: all ease 0.2s;
 }
-
-ul.contact-box-wrapper-list{margin-top: 10px !important;}
-ul.contact-box-wrapper-list .contact-box-wrapper {padding: 0;box-shadow: none;}
-.contact-box-wrapper:hover {background: transparent;}
-ul.contact-box-wrapper-list .contact-box-wrapper > div {flex-direction: row;text-align: center}
-.contact-box-wrapper img {margin:0; margin-right: 20px;}
