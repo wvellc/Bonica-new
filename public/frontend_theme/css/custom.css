@@ -1201,7 +1201,7 @@ ul.footer-social-links li {
   font-weight: 400;
   font-size: 45px;
   line-height: 55px;
-  letter-spacing: 0.05em;
+  letter-spacing: normal;
   /* text-transform: uppercase; */
   color: #000000;
 }
