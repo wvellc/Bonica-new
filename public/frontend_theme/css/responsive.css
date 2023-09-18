@@ -514,3 +514,9 @@
     padding: 11px 10px 7px 10px;
     transition: all ease 0.2s;
 }
+
+ul.contact-box-wrapper-list{margin-top: 10px !important;}
+ul.contact-box-wrapper-list .contact-box-wrapper {padding: 0;box-shadow: none;}
+.contact-box-wrapper:hover {background: transparent;}
+ul.contact-box-wrapper-list .contact-box-wrapper > div {flex-direction: row;text-align: center}
+.contact-box-wrapper img {margin:0; margin-right: 20px;}
