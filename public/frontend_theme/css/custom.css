@@ -1524,9 +1524,7 @@ figure.reason-list p {
   width: 280px;
 }
 
-.products-slider-image-box:hover img {
-  transform: scale(1.3);
-}
+.products-slider-image-box:hover img {transform: none;}
 
 .products-slider-row a:hover h4 {
   color: var(--darkpeach);
@@ -4399,9 +4397,9 @@ ul.d-list-wrapper li .d-list-img img {
 .section-title p,
 .subtitle {
   font-style: normal;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 120%;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 15px;
   text-align: center;
   letter-spacing: 0.05em;
   /* color: #c36d5f; */
