@@ -516,6 +516,7 @@
   	.add-btns-group .btn-primary {font-size: 16px;}
   	.assurance-list li {margin-bottom: 10px;}
   	.range-slider__range::-webkit-slider-thumb{height: 15px;width: 15px;border-width: 3px;}
+  	.range-slider__range::slider-thumb{height: 15px;width: 15px;border-width: 3px;}
   	.products-slider-image-box img{width: 200px;}
     .products-slider-image-box {margin: 0 auto;}
     .section-title h2 , .section-title h2 span {font-size: 24px;line-height: 28px;}
@@ -524,6 +525,8 @@
     .products-slider-row .catArrowLeft, .blogs-slider-row .catArrowLeft {left: 0;}
     .products-slider-row .slick-dots {display: none;}
     .jewelry-section a {text-align: center;}
+    .hand-wrapper img#hand {padding-top: 6px}
+    
 }
 @media screen and (max-width:359px){
   .ring-size.bangles {width: 66%;}

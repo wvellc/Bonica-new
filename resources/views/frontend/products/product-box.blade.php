@@ -112,7 +112,9 @@
 	</div>
 	<div class="pl-pro-info-box mobile-pl-pro-pro-title">
 		<h6><a href="{{$product_url}}"> {{$product->name}}</a> </h6>
-		<h6 class=" d-block d-md-none">White Gold</h6>
+        @isset($metalName)
+		  <h6 class=" d-block d-md-none">{{$metalName}}</h6>
+        @endisset
 		<h6 class="price">{!! $product_price  !!}</h6>
 	</div>
 	<div class="onhover-pl-product-box-wrapper">
