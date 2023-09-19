@@ -509,6 +509,8 @@
     .our-story-section .title-box {width: auto;margin-bottom: 15px;}
     .our-story-section .right-img-box img {width: 95%;}
     .our-story-section .inner-container {gap: 20px;}
+    .hand-wrapper img#hand {padding-top: 1px}
+    img#diamondOnhand {width: 85%}
 }
 @media screen and (max-width:479px){
   	.ring-size.bangles {width: 59%;}
@@ -516,7 +518,7 @@
   	.add-btns-group .btn-primary {font-size: 16px;}
   	.assurance-list li {margin-bottom: 10px;}
   	.range-slider__range::-webkit-slider-thumb{height: 15px;width: 15px;border-width: 3px;}
-  	.range-slider__range::slider-thumb{height: 15px;width: 15px;border-width: 3px;}
+  	.range-slider__range::-moz-range-thumb{height: 15px;width: 15px;border-width: 3px;}
   	.products-slider-image-box img{width: 200px;}
     .products-slider-image-box {margin: 0 auto;}
     .section-title h2 , .section-title h2 span {font-size: 24px;line-height: 28px;}
