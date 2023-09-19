@@ -609,7 +609,7 @@ class ProductController extends Controller
         $handImageHtml = '';
 
         if($cat_segment == 'rings'){
-            $handImageHtml = '  <div class="col-sm-6">
+            $handImageHtml = '  <div class="col-sm-12 col-md-6 col-lg-6">
                                     <div class="hand-wrapper">
                                         <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
                                         <div class="box-diamond-on-hand">
