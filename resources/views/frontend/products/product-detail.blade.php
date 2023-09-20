@@ -542,7 +542,7 @@
 <script>
 $(function ()
 {
-    getProductPrice();
+    // getProductPrice();
     getProductPriceImage('onLoad');
 
     //  $('.pl-pro-image-box-slider-wrapper').slick({
