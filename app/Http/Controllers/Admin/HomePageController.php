@@ -124,9 +124,12 @@ class HomePageController extends Controller
         $homePage->video_content  = $request->video_content;
         $homePage->video_link  = $request->video_link;
 
-        $homePage->top_section_title  = $request->top_section_title;
-        $homePage->top_section_content  = $request->top_section_content;
-        $homePage->top_section_link  = $request->top_section_link;
+        $homePage->fisrt_our_story_title  = $request->fisrt_our_story_title;
+        $homePage->fisrt_our_story_content  = $request->fisrt_our_story_content;
+        $homePage->fisrt_our_story_link  = $request->fisrt_our_story_link;
+        $homePage->second_our_story_title  = $request->second_our_story_title;
+        $homePage->second_our_story_content  = $request->second_our_story_content;
+        $homePage->second_our_story_link  = $request->second_our_story_link;
         $homePage->shringaar_title  = $request->shringaar_title;
         $homePage->shringaar_sub_title  = $request->shringaar_sub_title;
         $homePage->shringaar_image1_title  = $request->shringaar_image1_title;
@@ -167,13 +170,13 @@ class HomePageController extends Controller
         $homePage->meta_keywords  = $request->meta_keywords;
         $homePage->meta_description  = $request->meta_description;
 
-        if ($request->has('top_section_image1')) {
-            $top_section_image1 = Commonhelper::uploadFileWithThumbnail($request, 'top_section_image1', $this->path, $thumbnailPath = NULL, $resizeH = 444, $resizeW = 523, $homePage->top_section_image1);
-            $homePage->top_section_image1 = $top_section_image1;
+        if ($request->has('our_story_image1')) {
+            $our_story_image1 = Commonhelper::uploadFileWithThumbnail($request, 'our_story_image1', $this->path, $thumbnailPath = NULL, $resizeH = 444, $resizeW = 523, $homePage->our_story_image1);
+            $homePage->our_story_image1 = $our_story_image1;
         }
-        if ($request->has('top_section_image2')) {
-            $top_section_image2 = Commonhelper::uploadFileWithThumbnail($request, 'top_section_image2', $this->path, $thumbnailPath = NULL, $resizeH = 444, $resizeW = 523, $homePage->top_section_image2);
-            $homePage->top_section_image2 = $top_section_image2;
+        if ($request->has('our_story_image2')) {
+            $our_story_image2 = Commonhelper::uploadFileWithThumbnail($request, 'our_story_image2', $this->path, $thumbnailPath = NULL, $resizeH = 444, $resizeW = 523, $homePage->our_story_image2);
+            $homePage->our_story_image2 = $our_story_image2;
         }
         if ($request->has('shringaar_image1')) {
             //$shringaar_image1 = Commonhelper::uploadFileWithThumbnail($request, 'shringaar_image1', $this->path, $thumbnailPath = NULL, $resizeH = 444, $resizeW = 523, $homePage->shringaar_image1);

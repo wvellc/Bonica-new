@@ -200,7 +200,7 @@
                             <!-- Default box -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Top Section</h3>
+                                    <h3 class="card-title">Fisrt Our Story Section</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse"
                                             title="Collapse">
@@ -213,18 +213,18 @@
                                     <div class="row">
                                         <div class="col-md-6 col-lg-6">
                                             <div class="form-group">
-                                                <label for="top_section_image1">Image 1</label>
-                                                <input type="file" name="top_section_image1" class="form-control"
-                                                    id="top_section_image1">
+                                                <label for="our_story_image1">Image</label>
+                                                <input type="file" name="our_story_image1" class="form-control"
+                                                    id="our_story_image1">
                                                 <!-- Error -->
-                                                @if ($errors->first('top_section_image1'))
+                                                @if ($errors->first('our_story_image1'))
                                                 <div class="error">
-                                                    {{ $errors->first('top_section_image1') }}
+                                                    {{ $errors->first('our_story_image1') }}
                                                 </div>
                                                 @endif
-                                                @if($formObj->top_section_image1)
+                                                @if($formObj->our_story_image1)
                                                 <div class="imgPreview">
-                                                    <img src="{{ URL::asset('uploads/homepage/'.$formObj->top_section_image1) }}"
+                                                    <img src="{{ URL::asset('uploads/homepage/'.$formObj->our_story_image1) }}"
                                                         width="300px" class="img-thumbnail" alt="Image">
                                                 </div>
                                                 @endif
@@ -232,63 +232,44 @@
                                         </div>
                                         <div class="col-md-6 col-lg-6">
                                             <div class="form-group">
-                                                <label for="top_section_image2">Image 2</label>
-                                                <input type="file" name="top_section_image2" class="form-control"
-                                                    id="top_section_image2">
-                                                <!-- Error -->
-                                                @if ($errors->first('top_section_image2'))
-                                                <div class="error">
-                                                    {{ $errors->first('top_section_image2') }}
-                                                </div>
-                                                @endif
-                                                @if($formObj->top_section_image2)
-                                                <div class="imgPreview">
-                                                    <img src="{{ URL::asset('uploads/homepage/'.$formObj->top_section_image2) }}"
-                                                        width="300px" class="img-thumbnail" alt="Image">
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6">
-                                            <div class="form-group">
-                                                <label for="top_section_title">Title</label>
+                                                <label for="fisrt_our_story_title">Title</label>
                                                 {!!
-                                                Form::textarea('top_section_title',(old('top_section_title'))?old('top_section_title'):$formObj->top_section_title,['class'=>'form-control','placeholder'
-                                                => '','id'=>'top_section_title', 'rows' => 2, 'cols' =>
+                                                Form::textarea('fisrt_our_story_title',(old('fisrt_our_story_title'))?old('fisrt_our_story_title'):$formObj->fisrt_our_story_title,['class'=>'form-control','placeholder'
+                                                => '','id'=>'fisrt_our_story_title', 'rows' => 2, 'cols' =>
                                                 2]) !!}
                                                 <!-- Error -->
-                                                @if ($errors->first('top_section_title'))
+                                                @if ($errors->first('fisrt_our_story_title'))
                                                 <div class="error">
-                                                    {{ $errors->first('top_section_title') }}
+                                                    {{ $errors->first('fisrt_our_story_title') }}
                                                 </div>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-6">
                                             <div class="form-group">
-                                                <label for="top_section_content">Content</label>
+                                                <label for="fisrt_our_story_content">Content</label>
                                                 {!!
-                                                Form::textarea('top_section_content',(old('top_section_content'))?old('top_section_content'):$formObj->top_section_content,['class'=>'form-control','id'=>'top_section_content',
+                                                Form::textarea('fisrt_our_story_content',(old('fisrt_our_story_content'))?old('fisrt_our_story_content'):$formObj->fisrt_our_story_content,['class'=>'form-control','id'=>'fisrt_our_story_content',
                                                 'rows' => 2, 'cols' => 40]) !!}
                                                 <!-- Error -->
-                                                @if ($errors->first('top_section_content'))
+                                                @if ($errors->first('fisrt_our_story_content'))
                                                 <div class="error">
-                                                    {{ $errors->first('top_section_content') }}
+                                                    {{ $errors->first('fisrt_our_story_content') }}
                                                 </div>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-6">
                                             <div class="form-group">
-                                                <label for="top_section_link">Know More Link</label>
+                                                <label for="fisrt_our_story_link">Know More Link</label>
                                                 {{
-                                                Form::text('top_section_link',(old('top_section_link'))?old('top_section_link'):$formObj->top_section_link,
+                                                Form::text('fisrt_our_story_link',(old('fisrt_our_story_link'))?old('fisrt_our_story_link'):$formObj->fisrt_our_story_link,
                                                 ['class' => 'form-control', 'placeholder' => '',
-                                                'id' => 'top_section_link']) }}
+                                                'id' => 'fisrt_our_story_link']) }}
                                                 <!-- Error -->
-                                                @if ($errors->first('top_section_link'))
+                                                @if ($errors->first('fisrt_our_story_link'))
                                                 <div class="error">
-                                                    {{ $errors->first('top_section_link') }}
+                                                    {{ $errors->first('fisrt_our_story_link') }}
                                                 </div>
                                                 @endif
                                             </div>
@@ -300,6 +281,90 @@
                             <!-- /.card -->
                         </section>
                         <!--END Top Section -->
+                        <section class="content">
+                            <!-- Default box -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Second Our Story Section</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                            title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="our_story_image2">Image</label>
+                                                <input type="file" name="our_story_image2" class="form-control"
+                                                    id="our_story_image2">
+                                                <!-- Error -->
+                                                @if ($errors->first('our_story_image2'))
+                                                <div class="error">
+                                                    {{ $errors->first('our_story_image2') }}
+                                                </div>
+                                                @endif
+                                                @if($formObj->our_story_image2)
+                                                <div class="imgPreview">
+                                                    <img src="{{ URL::asset('uploads/homepage/'.$formObj->our_story_image2) }}"
+                                                        width="300px" class="img-thumbnail" alt="Image">
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="second_our_story_title">Title</label>
+                                                {!!
+                                                Form::textarea('second_our_story_title',(old('second_our_story_title'))?old('second_our_story_title'):$formObj->second_our_story_title,['class'=>'form-control','placeholder'
+                                                => '','id'=>'second_our_story_title', 'rows' => 2, 'cols' =>
+                                                2]) !!}
+                                                <!-- Error -->
+                                                @if ($errors->first('second_our_story_title'))
+                                                <div class="error">
+                                                    {{ $errors->first('second_our_story_title') }}
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="second_our_story_content">Content</label>
+                                                {!!
+                                                Form::textarea('second_our_story_content',(old('second_our_story_content'))?old('second_our_story_content'):$formObj->second_our_story_content,['class'=>'form-control','id'=>'second_our_story_content',
+                                                'rows' => 2, 'cols' => 40]) !!}
+                                                <!-- Error -->
+                                                @if ($errors->first('second_our_story_content'))
+                                                <div class="error">
+                                                    {{ $errors->first('second_our_story_content') }}
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="second_our_story_link">Know More Link</label>
+                                                {{
+                                                Form::text('second_our_story_link',(old('second_our_story_link'))?old('second_our_story_link'):$formObj->second_our_story_link,
+                                                ['class' => 'form-control', 'placeholder' => '',
+                                                'id' => 'second_our_story_link']) }}
+                                                <!-- Error -->
+                                                @if ($errors->first('second_our_story_link'))
+                                                <div class="error">
+                                                    {{ $errors->first('second_our_story_link') }}
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </section>
                         <!--Shringaar Section -->
                         <section class="content">
                             <!-- Default box -->
@@ -1248,7 +1313,8 @@
     });
 
     $('#catalog_title').summernote({});
-    $('#top_section_title').summernote({});
+    $('#fisrt_our_story_title').summernote({});
+    $('#second_our_story_title').summernote({});
     $('#video_title').summernote({});
 
     $('#about_bonica_title').summernote({});
@@ -1259,7 +1325,11 @@
     $('#bonica_jewels_title').summernote({});
     $('#recommended_title').summernote({});
 
-    $('#top_section_content').summernote({
+    $('#fisrt_our_story_content').summernote({
+        height: 300,
+        placeholder: 'content',
+    });
+    $('#second_our_story_content').summernote({
         height: 300,
         placeholder: 'content',
     });

@@ -66,19 +66,19 @@ plan. Made with real diamond seed, grown with precision and care")
         
         <section class="our-story-section common-section">
             <div class="container">
-                <div class="title-box text-center mt-4">
-                    <h2>Our story</h2>
-                    <p>With Bonica, you are sorted whether you are looking for jewellery for daily use, special occasions, gifting purposes or others.</p>
-                </div>
                 <div class="inner-container d-flex justify-content-between align-items-center">
                     <div class="left-content-box">
-                        <h3>Reflections of the extraordinary</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <a href="/page/our-story" target="_blank" class="btn btn-primary"><span>Read More</span></a>
+                        <h3>{!! $home_page->fisrt_our_story_title !!}</h3>
+                        <p>{!! $home_page->fisrt_our_story_content   !!}</p>
+                        @if ($home_page->fisrt_our_story_link)
+                            <a href="{{ $home_page->fisrt_our_story_link }}" target="_blank" class="btn btn-primary"><span>Read More</span></a>
+                        @endif
                     </div>
+                    @if ($home_page->our_story_image1)
                     <div class="right-img-box">
-                        <img src="{{asset('images/our-story-new.png')}}" alt="Our Story">
+                        <img src="{{ asset('uploads/homepage/'.$home_page->our_story_image1) }}" loading="lazy" alt="Image">
                     </div>
+                    @endif
 
                 </div>
             </div>           
@@ -185,7 +185,7 @@ plan. Made with real diamond seed, grown with precision and care")
                                     href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}">
                                     <div class="products-slider-image-box">
                                         @if($category->image)
-                                        <img src="{{ file_exists(public_path('uploads/category/'.$category->image)) ? asset('uploads/category/'.$category->image) :  asset('images/demo.png')  }} "
+                                        <img src="{{ file_exists(public_path('uploads/category/'.$category->image)) ? asset('uploads/category/'.$category->image) :  asset('images/no_image.png')  }} "
                                             alt="product" loading="lazy">
                                         @else
                                             <img src="{{ asset('images/no_image.png') }}" alt="product" loading="lazy" />
@@ -204,18 +204,18 @@ plan. Made with real diamond seed, grown with precision and care")
         @endif
         <section class="our-story-section common-section">
             <div class="container">
-                <div class="title-box text-center mt-4">
-                    <h2>Our story</h2>
-                    <p>With Bonica, you are sorted whether you are looking for jewellery for daily use, special occasions, gifting purposes or others.</p>
-                </div>
                 <div class="inner-container d-flex justify-content-between align-items-center">
+                    @if ($home_page->our_story_image2)
                     <div class="right-img-box">
-                        <img src="{{asset('images/our-story-new.png')}}" alt="Our Story">
+                        <img src="{{ asset('uploads/homepage/'.$home_page->our_story_image2) }}" loading="lazy" alt="Image">
                     </div>
+                    @endif
                     <div class="left-content-box">
-                        <h3>Reflections of the extraordinary</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <a href="/page/our-story" target="_blank" class="btn btn-primary"><span>Read More</span></a>
+                        <h3>{!! $home_page->second_our_story_title !!}</h3>
+                        <p>{!! $home_page->second_our_story_content   !!}</p>
+                        @if ($home_page->second_our_story_link)
+                            <a href="{{ $home_page->second_our_story_link }}" target="_blank" class="btn btn-primary"><span>Read More</span></a>
+                        @endif
                     </div>                   
                 </div>
             </div>           
@@ -249,7 +249,6 @@ plan. Made with real diamond seed, grown with precision and care")
                                 <div class="item">
                                     <a href="{{$product_url}}">
                                         <div class="products-slider-image-box">
-
                                             @if ($recommendedProduct->singleProductImages)
                                             <img src="{{ $recommendedProduct->singleProductImages['image_path'] }}" alt="Image" loading="lazy"/>
                                             @else
