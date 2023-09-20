@@ -1421,7 +1421,7 @@ figure.reason-list p {
 .slick-arrow {
   position: absolute;
   /* background: #c36d5f; */
-  color: #c36d5f;
+  color: #000;
   /* width: 50px;
   height: 50px; */
   text-align: center;
@@ -1441,7 +1441,7 @@ figure.reason-list p {
 }
 
 .slick-arrow:hover {
-  background: #602d23;
+  background: transparent;
 }
 
 .products-slider-row .slick-slide {
