@@ -12,6 +12,7 @@ use App\Models\HomePageSliderImage;
 use Session;
 use App\Models\Category;
 use App\Models\Newsletter;
+use App\Models\ProductMetalMaterial;
 
 class HomeController extends Controller
 {
@@ -78,8 +79,12 @@ class HomeController extends Controller
 
         if ($product_data) {
             foreach ($product_data as $key => $value) {
+                if($value->metal_display_priority_id){
+                    //metal display priority wise image send 
+                   $images = \App\Models\ProductImage::where([['product_id', $value->id],['metal_id', $value->metal_display_priority_id]])->orderBy("sort_order","ASC")->first();
 
-                if($value->singleProductImages){
+                   $image = $images->image_path;
+                }else if($value->singleProductImages){
                     $image =  $value->singleProductImages->image_path;
                 }else{
                     $image =  asset('images/default-img.png');

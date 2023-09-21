@@ -131,6 +131,10 @@
 	@media screen and (max-width:1439px){
 		section.inner-banner-section {height: 420px;}
 		.our-story-section h3 {font-size: 30px;line-height: 36px;margin-bottom: 15px;}
+		.products-slider-row .catArrowRight,
+		.blogs-slider-row .catArrowRight { right: -75px;}
+		.products-slider-row .catArrowLeft,
+		.blogs-slider-row .catArrowLeft { left: -75px;}
 	}
 
 	@media screen and (max-width:1279px){
@@ -467,6 +471,8 @@
     .title-box h2 {font-size: 36px;margin-bottom: 10px;}
     .title-box p, .our-story-section p {font-size: 18px;line-height: 29px;}
     .offer-section .products-slider-image-box{min-height: 250px;}
+    .products-slider-row .catArrowRight, .blogs-slider-row .catArrowRight {right: -75px;}
+	.products-slider-row .catArrowLeft, .blogs-slider-row .catArrowLeft {left: -75px;}
 }
 @media screen and (max-width:1023px){
   	.ring-size.bangles {width: 26%;}
@@ -511,6 +517,8 @@
     .our-story-section .inner-container {gap: 20px;}
     .hand-wrapper img#hand {padding-top: 1px}
     img#diamondOnhand {width: 85%}
+    .products-slider-row .catArrowRight, .blogs-slider-row .catArrowRight {right: -25px;}
+	.products-slider-row .catArrowLeft, .blogs-slider-row .catArrowLeft {left: -25px;}
 }
 @media screen and (max-width:479px){
   	.ring-size.bangles {width: 59%;}

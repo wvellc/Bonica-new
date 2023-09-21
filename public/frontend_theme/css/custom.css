@@ -237,7 +237,7 @@ p {
   font-weight: 300;
   font-size: 20px;
   line-height: 25px;
-  letter-spacing: 0.05em;
+  letter-spacing: normal;
   color: #000000;
   padding: 0 0 30px;
 }
@@ -1198,7 +1198,7 @@ ul.footer-social-links li {
 }
 
 .section-title h2 span {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 45px;
   line-height: 55px;
   letter-spacing: normal;
@@ -1422,8 +1422,8 @@ figure.reason-list p {
   position: absolute;
   /* background: #c36d5f; */
   color: #000;
-  /* width: 50px;
-  height: 50px; */
+  width: 50px !important;
+  height: 100% !important; 
   text-align: center;
   line-height: 50px;
   border-radius: 0px;
@@ -1434,6 +1434,9 @@ figure.reason-list p {
   transform: translateY(-50%);
   border: 0;
   transition: all ease 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .catArrowRight {
@@ -1454,12 +1457,12 @@ figure.reason-list p {
 
 .products-slider-row .catArrowRight,
 .blogs-slider-row .catArrowRight {
-  right: -50px;
+  right: -100px;
 }
 
 .products-slider-row .catArrowLeft,
 .blogs-slider-row .catArrowLeft {
-  left: -50px;
+  left: -100px;
 }
 
 .products-slider-row .slick-dots li button::before {
@@ -4397,11 +4400,11 @@ ul.d-list-wrapper li .d-list-img img {
 .section-title p,
 .subtitle {
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
   line-height: 15px;
   text-align: center;
-  letter-spacing: 0.05em;
+  letter-spacing: normal;
   /* color: #c36d5f; */
   /*font-family: "Trajan-Regular";*/
   font-family: "Futura PT";
@@ -4700,14 +4703,14 @@ span.submenu-button {padding: 0 !important;
 .custom-container {width: 1180px;max-width: 1180px; margin: 0 auto;}
 .common-section{padding: 100px 0;}
 .title-box h2{font-size: 64px;margin-bottom: 30px;}
-.title-box p , .our-story-section p{font-size: 24px;line-height: 40px;font-weight: 400;}
+.title-box p , .our-story-section p{font-size: 24px;line-height: 40px;font-weight: 300;}
 
 .our-story-section .title-box{width: 48%;margin: 0 auto;margin-bottom:50px;}
 .our-story-section .left-content-box {width: 40%;}
 .our-story-section h3{text-transform: capitalize;font-size: 34px;line-height: 40px;font-weight: 450;}
 h2 {
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 42px;
   line-height: 48px;
   letter-spacing: normal;
