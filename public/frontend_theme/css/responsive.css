@@ -528,13 +528,13 @@
     .products-slider-row .slick-dots {display: none;}
     .jewelry-section a {text-align: center;}
     .hand-wrapper img#hand {padding-top: 7px}
-    img#diamondOnhand {width: 70%}
+    img#diamondOnhand {width: 85%}
 
 }
 @media screen and (max-width:359px){
   .ring-size.bangles {width: 66%;}
   .hand-wrapper img#hand {padding-top: 9px}
-  img#diamondOnhand {width: 70%;}
+  img#diamondOnhand {width: 75%;}
 }
 
 @media screen and (max-width: 575px)
