@@ -638,7 +638,7 @@ class ProductController extends Controller
                 $ProductImageHtml .= '<div class="col-sm-6">
                                                     <div class="pd-slider-large-img">';
                 if ($is_360video[$key]) {
-                    $ProductImageHtml .= '<video src="' . $video_paths[$key] . '" loop muted autoplay></video>';
+                    $ProductImageHtml .= '<video id = "vid"  src="' . $video_paths[$key] . '" autoplay muted></video>';
                 } else {
                     $ProductImageHtml .= '<a href="' . $productImage . '" data-fancybox="gallery" class="d-block" >';
                     $ProductImageHtml .= '<img src="' . $productImage . '" alt="ring">';
