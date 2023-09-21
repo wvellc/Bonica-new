@@ -68,7 +68,9 @@ plan. Made with real diamond seed, grown with precision and care")
             <div class="container">
                 <div class="inner-container d-flex justify-content-between align-items-center">
                     <div class="left-content-box">
-                        <h3>{!! $home_page->fisrt_our_story_title !!}</h3>
+                        <div class="section-title">
+                            <h2>{!! $home_page->fisrt_our_story_title !!}</h2>                        
+                        </div>
                         <p>{!! $home_page->fisrt_our_story_content   !!}</p>
                         @if ($home_page->fisrt_our_story_link)
                             <a href="{{ $home_page->fisrt_our_story_link }}" target="_blank" class="btn btn-primary"><span>Read More</span></a>
@@ -210,8 +212,19 @@ plan. Made with real diamond seed, grown with precision and care")
                         <img src="{{ asset('uploads/homepage/'.$home_page->our_story_image2) }}" loading="lazy" alt="Image">
                     </div>
                     @endif
+                    <!-- <div class="left-content-box">
+                        <div class="section-title">
+                            <h2>{!! $home_page->second_our_story_title !!}</h2>
+                            <p>{!! $home_page->second_our_story_content   !!}</p>
+                            @if ($home_page->second_our_story_link)
+                                <a href="{{ $home_page->second_our_story_link }}" target="_blank" class="btn btn-primary"><span>Read More</span></a>
+                            @endif
+                        </div>
+                    </div> -->
                     <div class="left-content-box">
-                        <h3>{!! $home_page->second_our_story_title !!}</h3>
+                        <div class="section-title">
+                            <h2>{!! $home_page->second_our_story_title !!}</h2>                        
+                        </div>
                         <p>{!! $home_page->second_our_story_content   !!}</p>
                         @if ($home_page->second_our_story_link)
                             <a href="{{ $home_page->second_our_story_link }}" target="_blank" class="btn btn-primary"><span>Read More</span></a>
