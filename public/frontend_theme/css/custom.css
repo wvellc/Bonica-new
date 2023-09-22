@@ -1208,7 +1208,7 @@ ul.footer-social-links li {
 }
 
 .section-title h2 span {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 45px;
   line-height: 55px;
   letter-spacing: normal;
@@ -4720,7 +4720,7 @@ span.submenu-button {padding: 0 !important;
 .our-story-section h3{text-transform: capitalize;font-size: 34px;line-height: 40px;font-weight: 450;}
 h2 {
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 42px;
   line-height: 48px;
   letter-spacing: normal;
@@ -4734,3 +4734,4 @@ h2 {
 .our-story-section .right-img-box img {width: 100%;}
 .jewelry-section h4 {margin-bottom:0}
 .jewelry-section a {text-align: left;}
+.header .nav-item .nav-link img {vertical-align:top}

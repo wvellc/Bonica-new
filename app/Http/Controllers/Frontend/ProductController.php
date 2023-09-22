@@ -607,12 +607,15 @@ class ProductController extends Controller
         $product_first_image = $productImages['product_first_image'];
 
         $handImageHtml = '';
-
+        $class = ''; 
+        if($diamondShape == 'princess'){
+            $class = 'princess-cut';
+        }
         if($cat_segment == 'rings'){
             $handImageHtml = '  <div class="col-sm-12 col-md-6 col-lg-6">
                                     <div class="hand-wrapper">
                                         <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
-                                        <div class="box-diamond-on-hand">
+                                        <div class="box-diamond-on-hand ' . $class . ' ">
                                             <img id="diamondOnhand" src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image" class="diamond-on-hand" style="transform: scale(1.90);">
                                         </div>
                                         

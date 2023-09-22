@@ -519,7 +519,16 @@
     img#diamondOnhand {width: 85%}
     .products-slider-row .catArrowRight, .blogs-slider-row .catArrowRight {right: -25px;}
 	.products-slider-row .catArrowLeft, .blogs-slider-row .catArrowLeft {left: -25px;}
+	.pl-pro-info-box {display: flex;min-height: 80px;flex-direction: column;justify-content: end;}
 }
+
+
+
+
+/*@media only screen and (max-width: 479px) and (min-width: 359px){
+	.box-diamond-on-hand.princess-cut {top: 37%;margin-top: 5px;}
+}*/
+
 @media screen and (max-width:479px){
   	.ring-size.bangles {width: 59%;}
   	#btnNewslatter {max-width: 100%;}
@@ -537,40 +546,50 @@
     .jewelry-section a {text-align: center;}
     .hand-wrapper img#hand {padding-top: 7px}
     img#diamondOnhand {width: 85%}
+    .box-diamond-on-hand.princess-cut {top: 36%;}
+ 	.box-diamond-on-hand.princess-cut img#diamondOnhand {width: 75%;}
 
 }
+
+
+@media screen and (min-width: 359px){
+	.box-diamond-on-hand.princess-cut {top: 37%;}
+}
+
 @media screen and (max-width:359px){
   .ring-size.bangles {width: 66%;}
   .hand-wrapper img#hand {padding-top: 9px}
   img#diamondOnhand {width: 75%;}
 }
 
-@media screen and (max-width: 575px)
-.product-menu-links li span{
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 0px;
+@media screen and (max-width: 575px){
+	.product-menu-links li span{
+	    font-size: 16px;
+	    line-height: 20px;
+	    margin-bottom: 0px;
+	}
 }
 
-@media screen and (max-width: 991px)
+@media screen and (max-width: 991px){
+	.product-menu-links li span {
+	    padding: 11px 10px;
+	    display: block;
+	    text-align: left;
+	    font-size: 20px;
+	    line-height: 30px;
+	    margin-bottom: 0px;
+	}
+}
+@media screen and (max-width: 1299px){
+	.product-menu-links li span {
+	    font-size: 14px;
+	}
 .product-menu-links li span {
-    padding: 11px 10px;
-    display: block;
-    text-align: left;
-    font-size: 20px;
-    line-height: 30px;
-    margin-bottom: 0px;
+	    font-weight: 400;
+	    letter-spacing: 0em;
+	    text-transform: uppercase;
+	    padding: 11px 10px 7px 10px;
+	    transition: all ease 0.2s;
+	}
 }
 
-@media screen and (max-width: 1299px)
-.product-menu-links li span {
-    font-size: 14px;
-}
-
-.product-menu-links li span {
-    font-weight: 400;
-    letter-spacing: 0em;
-    text-transform: uppercase;
-    padding: 11px 10px 7px 10px;
-    transition: all ease 0.2s;
-}
