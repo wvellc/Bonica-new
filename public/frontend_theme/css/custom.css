@@ -4,6 +4,12 @@
 /* Drak purple #602D23*/
 /* dark peach #C36D5F*/
 /* scrollbar hidden in all browser */
+@-moz-document url-prefix() {
+  body {
+    font-weight: lighter !important;
+  }
+}
+
 @font-face {
   font-family: "Trajan-Regular";
   src: url("../fonts/Trajan-Regular.eot");
@@ -22,6 +28,10 @@ html {
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-weight: 400;
 }
 
 html::-webkit-scrollbar {
