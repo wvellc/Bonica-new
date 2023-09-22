@@ -638,9 +638,7 @@ class ProductController extends Controller
                 $ProductImageHtml .= '<div class="col-sm-6">
                                                     <div class="pd-slider-large-img">';
                 if ($is_360video[$key]) {
-                    $ProductImageHtml .= '<video id = "vid" src="' . $video_paths[$key] . '" preload="auto" autoplay="" loop="" playsinline="" webkit-playsinline="" x5-playsinline="" style="width: 100%; height: 100%;"></video>';
-
-                    <video  src="blob:https://www.vrai.com/419e2ba7-e6bf-47e6-b504-ec888d33233b"></video>
+                    $ProductImageHtml .= '<video id = "vid" src="' . $video_paths[$key] . '" loop muted autoplay></video>';
                 } else {
                     $ProductImageHtml .= '<a href="' . $productImage . '" data-fancybox="gallery" class="d-block" >';
                     $ProductImageHtml .= '<img src="' . $productImage . '" alt="ring">';
