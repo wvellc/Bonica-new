@@ -569,51 +569,51 @@ $(function ()
 
             var zommSize = this.value;
 
-            var range_zomm_size = '33.3074px';
+            var range_zomm_size = '33.3074%';
             if(zommSize == 0.5){
-                range_zomm_size = '16.6653px';
+                range_zomm_size = '16.6653%';
             }
             else if(zommSize == 0.75){
-                range_zomm_size = '19.0744px';
+                range_zomm_size = '19.0744%';
             }
             else if(zommSize == 1){
-                range_zomm_size = '20.9921px';
+                range_zomm_size = '20.9921%';
             }
             else if(zommSize == 1.25){
-                range_zomm_size = '22.6113px';
+                range_zomm_size = '22.6113%';
             }
             else if(zommSize == 1.5){
-                range_zomm_size = '24.0267px';
+                range_zomm_size = '24.0267%';
             }
             else if(zommSize == 1.75){
-                range_zomm_size = '25.2922px';
+                range_zomm_size = '25.2922%';
             }
             else if(zommSize == 2){
-                range_zomm_size = '26.4422px';
+                range_zomm_size = '26.4422%';
             }
             else if(zommSize == 2.25){
-                range_zomm_size = '27.4999px';
+                range_zomm_size = '27.4999%';
             }
             else if(zommSize == 2.5){
-                range_zomm_size = '28.4819px';
+                range_zomm_size = '28.4819%';
             }
             else if(zommSize == 2.75){
-                range_zomm_size = '29.4004px';
+                range_zomm_size = '29.4004%';
             }
             else if(zommSize == 3){
-                range_zomm_size = '30.2647px';
+                range_zomm_size = '30.2647%';
             }
             else if(zommSize == 3.25){
-                range_zomm_size = '31.0822px';
+                range_zomm_size = '31.0822%';
             }
             else if(zommSize == 3.5){
-                range_zomm_size = '31.8588px';
+                range_zomm_size = '31.8588%';
             }
             else if(zommSize == 3.75){
-                range_zomm_size = '32.5992px';
+                range_zomm_size = '32.5992%';
             }
             else if(zommSize == 4){
-                range_zomm_size = '33.3074px';
+                range_zomm_size = '33.3074%';
             }
             console.log("range_zomm_size",range_zomm_size)
             document.getElementById('diamondOnhand').style.width = range_zomm_size;
