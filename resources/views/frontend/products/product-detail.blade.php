@@ -545,21 +545,21 @@ $(function ()
     // getProductPrice();
     getProductPriceImage('onLoad');
 
-    //  $('.pl-pro-image-box-slider-wrapper').slick({
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     dots: false,
-    //     infinite: true,
-    //     prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-left"></i></div>',
-    //     nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-right"></i></div>',
-    //     arrows: true,
-    //     speed: 500,
-    //     fade: true,
-    //     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
-    //     // autoplay: true,
-    //     // autoplaySpeed: 3000,
-    //     //lazyLoad: 'ondemand'
-    // });
+    $(".pl-pro-image-box-slider-wrapper").not('.slick-initialized').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false,
+        infinite: true,
+        prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-left"></i></div>',
+        nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-right"></i></div>',
+        arrows: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+        // autoplay: true,
+        // autoplaySpeed: 3000,
+        //lazyLoad: 'ondemand'
+    });
 });
 
     function sizeSlider(){
@@ -891,22 +891,6 @@ function getProductPriceImage(event)
             }
         });
     }
-
-    // $('.pl-pro-image-box-slider-wrapper').slick({
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     dots: false,
-    //     infinite: true,
-    //     prevArrow: '<div class="catArrowLeft trans"><i class="far fa-chevron-left"></i></div>',
-    //     nextArrow: '<div class="catArrowRight trans"><i class="far fa-chevron-right"></i></div>',
-    //     arrows: true,
-    //     speed: 500,
-    //     fade: true,
-    //     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
-    //     // autoplay: true,
-    //     // autoplaySpeed: 3000,
-    //     //lazyLoad: 'ondemand'
-    // });
 
 </script>
 @endpush
