@@ -569,54 +569,54 @@ $(function ()
 
             var zommSize = this.value;
 
-            var range_zomm_size = 2;
+            var range_zomm_size = '33.3074px';
             if(zommSize == 0.5){
-                range_zomm_size = 1.2;
+                range_zomm_size = '16.6653px';
             }
             else if(zommSize == 0.75){
-                range_zomm_size = 1.25;
+                range_zomm_size = '19.0744px';
             }
             else if(zommSize == 1){
-                range_zomm_size = 1.30;
+                range_zomm_size = '20.9921px';
             }
             else if(zommSize == 1.25){
-                range_zomm_size = 1.35;
+                range_zomm_size = '22.6113px';
             }
             else if(zommSize == 1.5){
-                range_zomm_size = 1.40;
+                range_zomm_size = '24.0267px';
             }
             else if(zommSize == 1.75){
-                range_zomm_size = 1.45;
+                range_zomm_size = '25.2922px';
             }
             else if(zommSize == 2){
-                range_zomm_size = 1.50;
+                range_zomm_size = '26.4422px';
             }
             else if(zommSize == 2.25){
-                range_zomm_size = 1.55;
+                range_zomm_size = '27.4999px';
             }
             else if(zommSize == 2.5){
-                range_zomm_size = 1.60;
+                range_zomm_size = '28.4819px';
             }
             else if(zommSize == 2.75){
-                range_zomm_size = 1.65;
+                range_zomm_size = '29.4004px';
             }
             else if(zommSize == 3){
-                range_zomm_size = 1.70;
+                range_zomm_size = '30.2647px';
             }
             else if(zommSize == 3.25){
-                range_zomm_size = 1.75;
+                range_zomm_size = '31.0822px';
             }
             else if(zommSize == 3.5){
-                range_zomm_size = 1.80;
+                range_zomm_size = '31.8588px';
             }
             else if(zommSize == 3.75){
-                range_zomm_size = 1.85;
+                range_zomm_size = '32.5992px';
             }
             else if(zommSize == 4){
-                range_zomm_size = 1.90;
+                range_zomm_size = '33.3074px';
             }
-
-            document.getElementById('diamondOnhand').style.transform = "scale("+range_zomm_size+")";
+            console.log("range_zomm_size",range_zomm_size)
+            document.getElementById('diamondOnhand').style.width = range_zomm_size;
             $('#caratValue').html(zommSize);
             }
         }

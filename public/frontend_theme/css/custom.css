@@ -3555,12 +3555,30 @@ ul.pro-d-list-info li h6 {
   padding-top:0;
 }
 
-.box-diamond-on-hand {
+/*.box-diamond-on-hand {
   position: absolute;
   right: 33%;
   top: 36.5%;
   max-width: 18px;
   width: 100%;
+}*/
+
+.box-diamond-on-hand {
+  position: absolute;
+  top: 37%;
+  left: 20.5%;
+  width: 25%;
+  height: 25%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+
+}
+
+.diamond-on-hand{
+  width: 33.3074px;
 }
 
 .range-slider__range::-webkit-slider-thumb {
