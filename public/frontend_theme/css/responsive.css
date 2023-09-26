@@ -120,11 +120,10 @@
 	.year-box h3 { font-size: 34px; line-height: 49px; }
 	.ring-hand-mode img { max-width: 380px; }
 
-	.box-diamond-on-hand { top: 36.6%;}
+/*	.box-diamond-on-hand { top: 27%;}*/
 		/*.ui-widget.ui-widget-content {
 			width: 610px;
 		}*/
-
 		
 	}
 
@@ -163,7 +162,7 @@
 		.onhover-pl-product-box-wrapper { padding: 20px; }
 		.tab-container .nav-tabs li.nav-item a img { max-width: 35px; width: 100%; left: 10px; }
 		.tab-container .nav-tabs li.nav-item a { padding: 30px 10px 30px 60px; }
-		.box-diamond-on-hand { top: 37.7%; max-width: 14px; }
+/*		.box-diamond-on-hand { top: 37.7%; }*/
 		.caption-header h2 { font-size: 16px; line-height: 26px; }
 
 	}
@@ -267,7 +266,7 @@
 		img.right-checked { max-width: 70px; margin: 10px auto; }
 		.assurance-list { flex-wrap: wrap; }
 		.assurance-list li { width: 49%; margin:0 auto; }
-		.box-diamond-on-hand { top: 38.6%; }
+/*		.box-diamond-on-hand { top: 38.6%; }*/
 		.diamond-section{ display: none; }
 		.ring-size-table table.table td, .ring-size-table table.table th { padding: 6px 6px; font-size: 13px; }
 		.demo-two .tl-container.right .content::before,	.demo-two .tl-container.right .content::after,	.demo-two .tl-container.left .content::before,	.demo-two .tl-container.left .content::after { display: none; }
@@ -447,8 +446,12 @@
     .title-box p, .our-story-section p {font-size: 22px;line-height: 34px;}
     .our-story-section .title-box {width: 75%;margin-bottom: 40px;}
     .our-story-section .left-content-box {width: 50%;}
+    .box-diamond-on-hand img {width: 79%}
 }
 
+@media screen and (max-width:1599px){
+	.box-diamond-on-hand img {width: 75%;}
+}
 
 @media screen and (max-width:1365px){
     .ring-size.bangles {width: 44%;}
@@ -490,6 +493,7 @@
   	.ring-size.bangles {width: 32%;}
   	title-box p, .our-story-section p {font-size: 16px;line-height: 22px;font-weight: 300;}
     .our-story-section .right-img-box img {width: 90%;}
+    .box-diamond-on-hand img {width: 100%;}
 }
 @media screen and (max-width:639px){
 	.ring-size.bangles {width: 44%;}
@@ -548,6 +552,7 @@
     img#diamondOnhand {width: 85%}
     .box-diamond-on-hand.princess-cut {top: 36%;}
  	.box-diamond-on-hand.princess-cut img#diamondOnhand {width: 75%;}
+ 	.box-diamond-on-hand {top: 37.9%;}
 
 }
 

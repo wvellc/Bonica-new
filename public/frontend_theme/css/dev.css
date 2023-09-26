@@ -104,12 +104,12 @@ span.color-text-box span.color-gold {
 
 
 
-  @media screen and (max-width:1700px) {
+  /*@media screen and (max-width:1700px) {
     .box-diamond-on-hand {
-        top: 36%;
-        max-width: 13px;
+        top: 26%;
+        left: 60.5%;
     }
-}
+}*/
 
 @media screen and (max-width:767px) {
     .order-history-box-item .remove-order {
