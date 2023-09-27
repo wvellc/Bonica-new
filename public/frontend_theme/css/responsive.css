@@ -90,7 +90,7 @@
 	.first, .wrapper, .last{ height: 550px; }
 	.pl-product-box-wrapper img { max-width: 149px; width: 100%; margin: 7px auto; }
 	.pl-pro-info-box h6.price,.pl-pro-info-box h6{ font-size: 16px; line-height: 20px; }
-	.pl-pro-info-box h6 a {height:45px}
+	.pl-pro-info-box h6 a {height:45px;display: block;}
 	.inner-banner-img { max-width: 300px; margin-left: auto; width: 100%; }
 	figure.reason-list img { max-width: 46px; width: 100%; }
 	.product-title h6{ font-size: 20px; }
