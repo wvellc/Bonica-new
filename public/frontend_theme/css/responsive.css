@@ -90,6 +90,7 @@
 	.first, .wrapper, .last{ height: 550px; }
 	.pl-product-box-wrapper img { max-width: 149px; width: 100%; margin: 7px auto; }
 	.pl-pro-info-box h6.price,.pl-pro-info-box h6{ font-size: 16px; line-height: 20px; }
+	.pl-pro-info-box h6 a {height:45px}
 	.inner-banner-img { max-width: 300px; margin-left: auto; width: 100%; }
 	figure.reason-list img { max-width: 46px; width: 100%; }
 	.product-title h6{ font-size: 20px; }
@@ -312,7 +313,7 @@
 		.pl-pro-image-box { min-height: 110px; }
 		.mobile-pl-pro-pro-title h5 { font-size: 13px; }
 		.mobile-pl-pro-pro-title h6 { font-size: 12px; line-height: 15px; }
-		.pl-product-box-wrapper img{ max-width: 80px; }
+		.pl-product-box-wrapper img{ max-width: 90px; }
 		img.cart-btn-img { width: 20px !important; margin: -6px 4px 0 0 !important; }
 		.pl-pro-info-box{ display: block; }
 		.pl-pro-info-box h6.price, .pl-pro-info-box h6 { font-size: 13px; line-height: 16px; margin-top: 5px; }
