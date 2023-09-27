@@ -446,12 +446,8 @@
     .title-box p, .our-story-section p {font-size: 22px;line-height: 34px;}
     .our-story-section .title-box {width: 75%;margin-bottom: 40px;}
     .our-story-section .left-content-box {width: 50%;}
-/*    .box-diamond-on-hand img {width: 79%}*/
 }
 
-@media screen and (max-width:1599px){
-/*	.box-diamond-on-hand img {width: 75%;}*/
-}
 
 @media screen and (max-width:1365px){
     .ring-size.bangles {width: 44%;}
