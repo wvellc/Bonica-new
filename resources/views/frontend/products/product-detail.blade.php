@@ -881,7 +881,6 @@ function getProductPriceImage(event)
                     setTimeout(
                         function() {
                            sizeSlider();
-                           document.getElementById('vid').play();
                         }, taketime);
                 }
             },

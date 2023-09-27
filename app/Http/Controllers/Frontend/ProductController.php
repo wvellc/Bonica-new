@@ -242,13 +242,13 @@ class ProductController extends Controller
         $subcategory_segment = $request->subcategory_segment;
 
         $page = $request['page_no'];
-        $per_page_data = 12;
+        $per_page_data = 24;
         $skip = $page == 1? 0: $per_page_data * ($page-1);
         $productIds = array();
         if ($metal_id || $material_id) {
 
             $page = $request['page_no'];
-            $per_page_data = 12;
+            $per_page_data = 24;
             $skip = $page == 1? 0: $per_page_data * ($page-1);
             $product_metal_material =  ProductMetalMaterial::select('product_id');
             if ($metal_id) {
@@ -279,7 +279,7 @@ class ProductController extends Controller
         if ($gender) {
             $products = $products->where('gender', $gender);
             $page = $request['page_no'];
-            $per_page_data = 12;
+            $per_page_data = 24;
             $skip = $page == 1? 0: $per_page_data * ($page-1);
         }
         if (count($productIds) > 0) {
@@ -290,7 +290,7 @@ class ProductController extends Controller
 
         if ($sorting) {
             $page = $request['page_no'];
-            $per_page_data = 12;
+            $per_page_data = 24;
             $skip = $page == 1? 0: $per_page_data * ($page-1);
             if ($sorting == 'recommended') {
                 $products = $products->orderBy('recommended', 'DESC');
@@ -565,6 +565,8 @@ class ProductController extends Controller
 
         $materialMetal = ProductMetalMaterial::with("material")->where("product_id",$product_id)->where("metal_id",$metal_id)->get();
 
+        $products = Product::select('is_solitaire')->where('id',$product_id)->first();
+
         $shape = Shape::where('id',$shape_id)->first();
 
         $diamondShape = strtolower($shape->name);
@@ -584,7 +586,7 @@ class ProductController extends Controller
                 }
             }
         }
-        //dd($materialMetalHTML);
+        
         /* $product_price = Product::getProductPrice($product_id);
         $salesProductPrice = Product::getProductSalesPrice($product_id);
         $shape_price = ProductShape::getProductShapePrice($product_id, $shape_id);
@@ -607,15 +609,12 @@ class ProductController extends Controller
         $product_first_image = $productImages['product_first_image'];
 
         $handImageHtml = '';
-        $class = ''; 
-        if($diamondShape == 'princess'){
-            $class = 'princess-cut';
-        }
-        if($cat_segment == 'rings'){
+       
+        if($cat_segment == 'rings' && $products->is_solitaire == 1){
             $handImageHtml = '  <div class="col-sm-12 col-md-6 col-lg-6">
                                     <div class="hand-wrapper">
                                         <img id="hand" src="' . asset('images/hand.png') .'" alt="image" class="v-hand" >
-                                        <div class="box-diamond-on-hand ' . $class . ' ">
+                                        <div class="box-diamond-on-hand ">
                                             <div id="diamondOnhand" class="diamond-on-hand">
                                                 <img src="' . asset("images/shapes/".$diamondShape.".png") .'" alt="image">
                                             </div>
@@ -641,7 +640,7 @@ class ProductController extends Controller
         if (count($image_paths) > 0) {
             foreach ($image_paths as $key => $productImage) {
                 $ProductImageHtml .= '<div class="col-sm-6">
-                                                    <div class="pd-slider-large-img">';
+                                            <div class="pd-slider-large-img">';
                 if ($is_360video[$key]) {
                     $ProductImageHtml .= '<video id = "vid" src="' . $video_paths[$key] . '" preload="auto" autoplay="" loop="" playsinline="" webkit-playsinline="" x5-playsinline="" style="width: 100%; height: 100%;"></video>';
                 } else {
