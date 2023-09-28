@@ -400,7 +400,7 @@ class Commonhelper
 			// Use FFmpeg to extract the thumbnail from the video
 		    $ffmpeg = \FFMpeg\FFMpeg::create();
 		    $video = $ffmpeg->open($videoPath);
-		    $frame = $video->frame(TimeCode::fromSeconds(2));
+		    $frame = $video->frame(TimeCode::fromSeconds(0.5));
 		    $frame->save($destinationPath.$imageName);
 
 			Image::make($destinationPath.$imageName)->resize(1080, 1080, function ($constraint) {
