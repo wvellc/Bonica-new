@@ -95,9 +95,11 @@
                                                 @php
                                                     $shape = strtolower($product->ProductShapes[0]['shape']['name']);
                                                 @endphp
-                                                <img src="{{ asset('images/icons/products/'.$shape.'.svg') }}"  alt="Image" class="cart-btn-img" />
-                                                <p style="font-size: 15px;font-weight: 500;">{{$product->ProductShapes[0]['shape']['name']}}</p>
-                                                <input type="hidden" data-id="{{$product->ProductShapes[0]['shape']['name']}}" name="shape" id="shape" value="{{$product->ProductShapes[0]['shape_id']}}">
+                                                <div class="no-dropdown">
+                                                    <img src="{{ asset('images/icons/products/'.$shape.'.svg') }}"  alt="Image" class="cart-btn-img" />
+                                                    <p style="font-size: 15px;font-weight: 500;">{{$product->ProductShapes[0]['shape']['name']}}</p>
+                                                    <input type="hidden" data-id="{{$product->ProductShapes[0]['shape']['name']}}" name="shape" id="shape" value="{{$product->ProductShapes[0]['shape_id']}}">
+                                                </div>
                                                 @endif
                                             </div>
 										</div>
