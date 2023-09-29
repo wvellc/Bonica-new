@@ -4681,7 +4681,7 @@ li.ui-menu-item {
     font-weight: 500;
 }
 
-.center-dropdowns .b-dropdown.f-item {width:35%;}
+.center-dropdowns .b-dropdown.f-item {width:auto;}
 .center-dropdowns .b-dropdown.color.f-item , .center-dropdowns .b-dropdown.clarity.f-item {width:18%;}
 .ring-size {width: 24%;}
 header .dropdown-menu {margin-top:5px !important;}
@@ -4753,3 +4753,4 @@ h2 {
 .jewelry-section h4 {margin-bottom:0}
 .jewelry-section a {text-align: left;}
 .header .nav-item .nav-link img {vertical-align:top}
+.no-dropdown {padding-top: 10px;}
