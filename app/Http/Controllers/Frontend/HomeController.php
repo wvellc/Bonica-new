@@ -61,12 +61,12 @@ class HomeController extends Controller
         $search = $request->search;
         $category_data = Category::with('parent')->where('name', 'LIKE', '%' . $search . "%")
         ->Active()->get();
-
         $response = array();
         if ($category_data) {
             foreach ($category_data as $key => $value) {
-                $image = ($value->image) ? asset('uploads/category/' . $value->image) : asset('images/default-img.png');
+                $image = ($value->image) ? env('CLOUDFRONTURL')."categories/" . $value->image : asset('images/default-img.png');
                 $product_url =  route('frontend.show_category_product', ['category' => $value['slug']]);
+            
                 if ($value->parent) {
                     $product_url =  route('frontend.show_sub_category_product', ['category' => $value->parent->slug, 'subcategory' => $value['slug']]);
                 }
@@ -75,29 +75,57 @@ class HomeController extends Controller
         }
 
         /* Search Product */
-        $product_data =  Product::with('category','subcategory','singleProductImages')->where('name', 'LIKE', '%' . $search . "%")->Active()->get();
+        $product_data =  Product::with('category', 'subcategory', 'singleProductImages')
+                                    ->where('name', 'LIKE', '%' . $search . "%")
+                                    ->Active()
+                                    ->get();
 
         if ($product_data) {
             foreach ($product_data as $key => $value) {
-                if($value->metal_display_priority_id){
-                    //metal display priority wise image send 
-                   $images = \App\Models\ProductImage::where([['product_id', $value->id],['metal_id', $value->metal_display_priority_id]])->orderBy("sort_order","ASC")->first();
+                if ($value->metal_display_priority_id) {
+                    // Metal display priority wise image send 
+                    $images = \App\Models\ProductImage::where([
+                                                ['product_id', $value->id],
+                                                ['metal_id', $value->metal_display_priority_id]
+                                            ])->orderBy("sort_order", "ASC")->first();
 
-                   $image = $images->image_path;
-                }else if($value->singleProductImages){
-                    $image =  $value->singleProductImages->image_path;
-                }else{
-                    $image =  asset('images/default-img.png');
+                    if ($images) {
+                        $image = $images->image_path;
+                    } else {
+                        $image = asset('images/default-img.png');
+                    }
+                } else if ($value->singleProductImages) {
+                    if ($value->singleProductImages->image_path) {
+                        $image = $value->singleProductImages->image_path;
+                    } else {
+                        $image = asset('images/default-img.png');
+                    }
+                } else {
+                    $image = asset('images/default-img.png');
                 }
+
                 if ($value->subcategory) {
-                    $product_url =  route('frontend.product_detail', ['category' => $value->category->slug, 'subcategory' => $value->subcategory->slug, 'product' => $value->slug]);
+                    $product_url = route('frontend.product_detail', [
+                        'category' => $value->category->slug,
+                        'subcategory' => $value->subcategory->slug,
+                        'product' => $value->slug
+                    ]);
                 } else if ($value->category) {
-                    $product_url =  route('frontend.show_sub_category_product', ['category' => $value->category->slug, 'subcategory' => $value->slug]);
+                    $product_url = route('frontend.show_sub_category_product', [
+                        'category' => $value->category->slug,
+                        'subcategory' => $value->slug
+                    ]);
                 }
 
-                $response[] = array("image" => $image, "value1" => $product_url, "value" => $value['name'], "label" => $value['name']);
+                $response[] = array(
+                    "image" => $image,
+                    "value1" => $product_url,
+                    "value" => $value['name'],
+                    "label" => $value['name']
+                );
             }
         }
+
         return $response;
     }
     public function newsletter(Request $request)

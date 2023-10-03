@@ -43,7 +43,9 @@ class ImportPacket implements ToCollection
                     $clarityId = $clarityId->id;
                 }
 
-                $packet = new Packet();
+                $packet = Packet::firstOrNew([
+                                'name' => $packetData[0],
+                            ]);
                 $packet->name = $packetData[0];
                 $packet->diamond_size = $packetData[1];
                 $packet->shape_id = $shapeId;
