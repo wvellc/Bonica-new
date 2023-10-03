@@ -171,6 +171,7 @@ class PacketController extends Controller
         if ($edit) {
             $Packet  = Packet::find($id);
             $msg = 'messages.update_message';
+             
         } else {
             $Packet = new Packet();
             $msg = 'messages.create_message';
@@ -180,6 +181,16 @@ class PacketController extends Controller
             return redirect()->back()->with('error', 'Packet combination already exists.');
         }*/
 
+        // Check if the provided name already exists for a different packet
+	    $existingPacket = Packet::where('name', $request->name)
+							        ->where('id', '!=', $id)
+							        ->first();
+
+		if ($existingPacket) {
+	        return redirect()
+	             ->route($edit ? 'admin.packet.edit' : 'admin.packet.create', ['packet' => $id])
+	            ->with('error', 'Packet with this name already exists.');
+	    }
         try {
             $Packet->name  = $request->name;
             $Packet->diamond_size  = $request->diamond_size;
