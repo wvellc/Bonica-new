@@ -50,8 +50,8 @@ class ProductController extends Controller
             $data['is_parent_category'] = ($category['parent_id'] == 0) ? 1 : 0;
             $data['category_description'] = $category['description'];
             $data['category_banner_image'] = ($category['banner_image']) ? env('CLOUDFRONTURL')."categories/" . $category['banner_image'] : 'images/banners/banner-2.png';
-            $data['discover_image'] = ($category['discover_image']) ? 'uploads/category/' . $category['discover_image'] : 'images/no_image_big.png';
-            $data['shopthelook_image'] = ($category['shopthelook_image']) ? 'uploads/category/' . $category['shopthelook_image'] : 'images/no_image_big.png';
+            $data['discover_image'] = ($category['discover_image']) ? env('CLOUDFRONTURL')."categories/" . $category['discover_image'] : 'images/no_image_big.png';
+            $data['shopthelook_image'] = ($category['shopthelook_image']) ? env('CLOUDFRONTURL')."categories/" . $category['shopthelook_image'] : 'images/no_image_big.png';
 
             $data['metals'] = Metal::query()->Active()->orderBy('sort_order', 'ASC')->get();
             $data['materials'] = Material::query()->Active()->orderBy('sort_order', 'ASC')->get();
@@ -103,8 +103,8 @@ class ProductController extends Controller
             $data['is_parent_category'] = ($category['parent_id'] == 0) ? 1 : 0;
             $data['category_description'] = $category['description'];
             $data['category_banner_image'] = ($category['banner_image']) ? env('CLOUDFRONTURL')."categories/" . $category['banner_image'] : 'images/banners/banner-2.png';
-            $data['discover_image'] = ($category['discover_image']) ? 'uploads/category/' . $category['discover_image'] : 'images/no_image_big.png';
-            $data['shopthelook_image'] = ($category['shopthelook_image']) ? 'uploads/category/' . $category['shopthelook_image'] : 'images/no_image_big.png';
+            $data['discover_image'] = ($category['discover_image']) ? env('CLOUDFRONTURL')."categories/" . $category['discover_image'] : 'images/no_image_big.png';
+            $data['shopthelook_image'] = ($category['shopthelook_image']) ? env('CLOUDFRONTURL')."categories/" . $category['shopthelook_image'] : 'images/no_image_big.png';
 
             $data['metals'] = Metal::query()->Active()->orderBy('sort_order', 'ASC')->get();
             $data['materials'] = Material::query()->Active()->orderBy('sort_order', 'ASC')->get();
