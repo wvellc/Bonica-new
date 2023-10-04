@@ -259,8 +259,8 @@ class CategoryController extends Controller
 
         /*Discover Image*/
         if ($request->has('discover_image')) {
-            $discover_image = Commonhelper::uploadFileWithThumbnail($request, 'discover_image', $this->path, $thumbnailPath = NULL, $resizeH = 819, $resizeW = 842, $category->discover_image);
-
+            $discover_image = AWSHelper::uploadImageS3($request, 'discover_image', $this->path, $category->discover_image);
+    
             $category->discover_image = $discover_image;
         }
 
@@ -274,8 +274,8 @@ class CategoryController extends Controller
         }
         /*Shop The Look Image*/
         if ($request->has('shopthelook_image')) {
-            $shopthelook_image = Commonhelper::uploadFileWithThumbnail($request, 'shopthelook_image', $this->path, $thumbnailPath = NULL, $resizeH = 819, $resizeW = 842, $category->shopthelook_image);
-           
+            $shopthelook_image = AWSHelper::uploadImageS3($request, 'shopthelook_image', $this->path, $category->shopthelook_image);
+
             $category->shopthelook_image = $shopthelook_image;
         }
 

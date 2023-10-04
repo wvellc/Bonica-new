@@ -211,7 +211,7 @@
                                     @endif
                                     @if($formObj->discover_image)
                                     <div class="imgPreview">
-                                        <img src="{{ URL::asset('categories/'.$formObj->discover_image) }}" width="200px" class="img-thumbnail" alt="discover_image">
+                                        <img src="{{ URL::asset($cloud_front_url.$formObj->discover_image) }}" width="200px" class="img-thumbnail" alt="discover_image">
                                     </div>
                                     @endif
                                 </div>
@@ -277,7 +277,7 @@
                             @endif
                             @if($formObj->shopthelook_image)
                             <div class="imgPreview">
-                                <img src="{{ URL::asset('categories/'.$formObj->shopthelook_image) }}" width="200px" class="img-thumbnail" alt="shopthelook_image">
+                                <img src="{{ URL::asset($cloud_front_url.$formObj->shopthelook_image) }}" width="200px" class="img-thumbnail" alt="shopthelook_image">
                             </div>
                             @endif
                         </div>
