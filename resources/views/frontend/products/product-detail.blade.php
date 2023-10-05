@@ -305,7 +305,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="pr-d-desc mt-5 mt-2">
+                                    <div class="pr-d-desc mt-3 mt-2">
                                         <h5>Description</h5>
                                         {!! $product->description !!}
                                     </div>
@@ -398,7 +398,7 @@
 					<div class="row align-items-center justify-content-between">
 						<div class="col-md-12 text-center ">
 							<div class="section-title">
-								<h2><span>BONICA's ASSURANCE</span></h2>
+								<h2>BONICA's ASSURANCE</h2>
 							</div>
 							<ul class="assurance-list d-flex">
 								<li>
@@ -444,7 +444,7 @@
 					<div class="row align-items-center justify-content-between">
 						<div class="col-md-12 text-center ">
 							<div class="section-title">
-								<h2><span>DISCOVER MORE PRODUCTS</span></h2>
+								<h2>DISCOVER MORE PRODUCTS</h2>
 							</div>
 						</div>
 					</div>
