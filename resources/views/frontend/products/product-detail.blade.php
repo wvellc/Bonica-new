@@ -398,7 +398,7 @@
 					<div class="row align-items-center justify-content-between">
 						<div class="col-md-12 text-center ">
 							<div class="section-title">
-								<h2>BONICA's ASSURANCE</h2>
+								<h2>Bonica's Assurance</h2>
 							</div>
 							<ul class="assurance-list d-flex">
 								<li>
@@ -444,7 +444,7 @@
 					<div class="row align-items-center justify-content-between">
 						<div class="col-md-12 text-center ">
 							<div class="section-title">
-								<h2>DISCOVER MORE PRODUCTS</h2>
+								<h2>Discover More Products</h2>
 							</div>
 						</div>
 					</div>
