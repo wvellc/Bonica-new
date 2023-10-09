@@ -572,7 +572,7 @@ if (!function_exists('proirityProductImages')){
         $product_first_image = '';
         $product_list_first_image = '';
         $product_first_image_paths = array();
-        if($event == 'onClick'){
+        if($event == 'onClick' || $event == 'onChange'){
             $images = \App\Models\ProductImage::where([['product_id', $product_id],['metal_id', $metal_id],['shape_id', $shape_id]])->orderBy("sort_order","ASC")->get()->toArray();
             $count = 1;
             foreach ($images as  $productimg) {
@@ -611,7 +611,7 @@ if (!function_exists('proirityProductImages')){
                 }
             }
         }else{
-            $images = \App\Models\ProductImage::where('product_id', $product_id)->where('metal_display_priority_id', 1)->orderBy("sort_order","ASC")->get()->toArray();
+            $images = \App\Models\ProductImage::where([['product_id', $product_id],['metal_id', $metal_id],['shape_id', $shape_id]])->where('metal_display_priority_id', 1)->orderBy("sort_order","ASC")->get()->toArray();
 
             if(count($images) > 0){
                 $count = 1;
