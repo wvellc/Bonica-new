@@ -21,4 +21,9 @@ class ShopthelookProduct extends Model
         }
         return $product;
     }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class,'id','product_id');
+    }
 }
