@@ -449,7 +449,7 @@
                     },
                     success: function (data) {
                         if(data.msg == 'success'){
-                            if(data.pageproductdata < 12){
+                            if(data.pageproductdata < 24){
                                 $("#loader").val(0);
                             }else{
                                 $("#loader").val(1);
