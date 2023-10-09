@@ -1,5 +1,6 @@
 <ul class="product-menu-links d-flex align-items-center justify-content-center">
     @if(!empty($categories))
+
         @foreach($categories as $key => $category)
         @php
             $exists = Storage::disk('s3')->has('categories/' . $category['image']);
@@ -17,7 +18,9 @@
                                 <li>By Category</li>
                                 <li><a href="{{ route('frontend.show_category_product', ['category' => $category['slug']]) }}" data-src="@if ($category['image']){{ ($exists === true) ? asset($cloudFrontUrl.$category['image']) :  '' }}@endif"><span>All {{$category->name}}</span></a></li>
                                 @foreach($category->children as $key => $subcategory)
-                                <li><a href="{{ route('frontend.show_sub_category_product', ['category' => $category['slug'],'subcategory' => $subcategory->slug]) }}" data-src="@if ($subcategory['image']){{ ($exists === true) ? asset($cloudFrontUrl.$subcategory['image']) :  '' }}@endif"><span>{{$subcategory->name}}</span></a></li>
+                                    @if($subcategory->status == 1)
+                                        <li><a href="{{ route('frontend.show_sub_category_product', ['category' => $category['slug'],'subcategory' => $subcategory->slug]) }}" data-src="@if ($subcategory['image']){{ ($exists === true) ? asset($cloudFrontUrl.$subcategory['image']) :  '' }}@endif"><span>{{$subcategory->name}}</span></a></li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
