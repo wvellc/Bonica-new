@@ -52,17 +52,14 @@
         }
     }
 
-    if($product->metals){
+    if ($product->metals && $product->metals->name) {
         $metalName = $product->metals->name;
-    }else if($product->firstProductMetalMaterial->metal){
-        $metalName = $product->firstProductMetalMaterial->metal->name;
-    }
-    
-    if($product->metals){
         $bgColor = $product->metals->bgcolor;
-    }else if($product->firstProductMetalMaterial->metal){
+    } elseif ($product->firstProductMetalMaterial && $product->firstProductMetalMaterial->metal && $product->firstProductMetalMaterial->metal->name) {
+        $metalName = $product->firstProductMetalMaterial->metal->name;
         $bgColor = $product->firstProductMetalMaterial->metal->bgcolor;
     }
+
 
 @endphp
 
