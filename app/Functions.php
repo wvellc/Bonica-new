@@ -712,8 +712,11 @@ if (!function_exists('productPriceCalculation')){
 
         $price_percentage = ProductSize::where([['product_id',$product_id],['size_id',$ringSize]])->value('price_percentage');
 
-        $center_diamond_price = ProductCenterDiamondPacket::where([['product_id',$product_id],['shape_id',$shape_id],['color_id',$center_diamond_color],['clarity_id',$center_diamond_clarity]])->value('price');
-
+        $center_diamond_price = ProductCenterDiamondPacket::where([['product_id',$product_id],['shape_id',$shape_id],['color_id',$center_diamond_color],['clarity_id',$center_diamond_clarity]])->first();
+        
+        if($center_diamond_price != null){
+            $center_diamond_price = $center_diamond_price->price * $center_diamond_price->weight;
+        }
         $side_diamond_price_data = ProductSideDiamondPacket::where([['product_id',$product_id],['color_id',$side_diamond_color],['clarity_id',$side_diamond_clarity]])->with('packet')->get()->toArray();
         $side_diamond_price = 0;
         if(count($side_diamond_price_data) > 0){
