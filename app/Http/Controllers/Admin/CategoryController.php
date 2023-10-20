@@ -305,7 +305,7 @@ class CategoryController extends Controller
         $category->delete();
         if ($category->image) {
             if (Storage::disk('s3')->has($this->path . $category->image)) {
-                AWSHelper::deleteImageS3($this->path . $category->image);
+                AWSHelper::deleteImageS3($category->image,$this->path);
             }
         }
         if ($category->icon) {
@@ -315,7 +315,7 @@ class CategoryController extends Controller
         }
         if ($category->banner_image) {
             if (Storage::disk('s3')->has($this->path . $category->banner_image)) {
-                AWSHelper::deleteImageS3($this->path . $category->banner_image);
+                AWSHelper::deleteImageS3($category->banner_image,$this->path);
             }
         }
         return response()->json(['code' => 200, 'message' => __('messages.delete_message', ['title' => 'category']), 'data' => array()]);
