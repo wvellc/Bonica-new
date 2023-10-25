@@ -4747,6 +4747,17 @@ h2 {
   margin-bottom: 10px;
 }
 
+h2 p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 48px;
+  letter-spacing: normal;
+  text-transform: capitalize;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
 .our-story-section .inner-container {gap: 50px;}
 .our-story-section .right-img-box {width: 50%;}
 .our-story-section .right-img-box img {width: 100%;}
