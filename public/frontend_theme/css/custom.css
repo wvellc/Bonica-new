@@ -4669,7 +4669,7 @@ li.ui-menu-item {
 
 .home-page .subtitle,
 .home-page .section-title p,
-.home-page .section-title h2 {
+.home-page .section-title h2 p{
   color: #000;
   font-family: "Futura PT";
 }
