@@ -4735,7 +4735,7 @@ span.submenu-button {padding: 0 !important;
 
 .our-story-section .title-box{width: 48%;margin: 0 auto;margin-bottom:50px;}
 .our-story-section .left-content-box {width: 40%;}
-.our-story-section .left-content-box .section-title h2 {text-align: left;}
+.our-story-section .left-content-box .section-title h2 p{text-align: left;}
 .our-story-section h3{text-transform: capitalize;font-size: 34px;line-height: 40px;font-weight: 450;}
 h2 {
   font-style: normal;
