@@ -439,7 +439,7 @@
 	}
 
 @media screen and (max-width:1919px){
-	.ring-size.bangles {width: 39%;}
+	.ring-size.bangles {width: 48%;}
 	.add-btns-group a{max-width: unset;width: auto;}
 	.add-btns-group .btn-primary {padding: 12px 35px;}
 	.add-btns-group a { max-width: unset; width: auto;}
@@ -451,7 +451,7 @@
 
 
 @media screen and (max-width:1365px){
-    .ring-size.bangles {width: 44%;}
+    .ring-size.bangles {width: 50%;}
     .add-btns-group {flex-direction: column !important;align-items: start !important;}
     .add-btns-group a {width: 100%;}
     .btn-cart-img {margin-bottom: 10px;}
