@@ -87,7 +87,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
 			ajax: "{!! route('admin.cmspage.index') !!}",
 			deferRender: true,
 			lengthMenu: [

@@ -88,7 +88,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
 			ajax: "{!! route('admin.shape.index') !!}",
 			deferRender: true,
 			lengthMenu: [

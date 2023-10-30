@@ -89,7 +89,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
 			ajax: "{!! route('admin.user.index') !!}",
 			deferRender: true,
 			lengthMenu: [

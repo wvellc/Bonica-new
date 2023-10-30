@@ -87,7 +87,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
 			ajax: "{!! route('admin.clarity.index') !!}",
 			deferRender: true,
 			lengthMenu: [

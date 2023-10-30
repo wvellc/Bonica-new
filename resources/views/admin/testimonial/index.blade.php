@@ -89,7 +89,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
 			ajax: "{!! route('admin.testimonial.index') !!}",
 			deferRender: true,
 			lengthMenu: [

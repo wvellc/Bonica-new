@@ -124,7 +124,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
             ajax: {
                 "url": "{!! route('admin.faq.index') !!}",
                 "data": function ( data )

@@ -103,7 +103,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
             ajax: {
                 "url": "{!! route('admin.category.index') !!}",
                 "data": function ( data )
