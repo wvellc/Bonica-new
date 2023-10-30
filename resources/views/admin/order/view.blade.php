@@ -28,7 +28,7 @@
 					<div class="card-body">
 						<div class="row justify-content-start">
 							<div class="col-lg-12">
-								<table id="tbl_datatable" class="table table-bordered ">
+								<table id="tbl_datatable" class="table table-responsive table-bordered ">
 
 									<tbody>
 										<tr>
