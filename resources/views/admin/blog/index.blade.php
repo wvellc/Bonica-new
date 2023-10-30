@@ -110,7 +110,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
 			ajax: "{!! route('admin.blog.index') !!}",
            /*  ajax: {
                 "url": "{!! route('admin.blog.index') !!}",

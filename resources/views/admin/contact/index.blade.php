@@ -135,7 +135,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
 			ajax: "{!! route('admin.contact.index') !!}",
 			deferRender: true,
 			lengthMenu: [

@@ -106,7 +106,6 @@
 			processing: true,
 			serverSide: true,
 			searching: true,
-            responsive: true,
 			ajax: "{!! route('admin.appointment.index') !!}",
 			deferRender: true,
 			lengthMenu: [
