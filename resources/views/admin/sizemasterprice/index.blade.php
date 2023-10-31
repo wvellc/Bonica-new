@@ -40,7 +40,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-                        <table id="tbl_datatable" class="table table-responsive table-bordered table-hover">
+                        <table id="tbl_datatable" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>id</th>
@@ -89,6 +89,7 @@
 			searching: true,
 			ajax: "{!! route('admin.size-master-price.index') !!}",
 			deferRender: true,
+			responsive:true,
 			lengthMenu: [
                 [25, 50, 100, 150, 200, 500],
                 [25, 50, 100, 150, 200, 500]
