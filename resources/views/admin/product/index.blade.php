@@ -40,23 +40,27 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-                        <table id="tbl_datatable" class="table table-responsive table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Sub Category</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+						<div style="width: 100%; padding-left: -10px;">
+    						<div class="table-responsive">
+		                        <table id="tbl_datatable" class="table table-bordered table-hover">
+		                            <thead>
+		                                <tr>
+		                                    <th>id</th>
+		                                    <th>Image</th>
+		                                    <th>Name</th>
+		                                    <th>Category</th>
+		                                    <th>Sub Category</th>
+		                                    <th>Quantity</th>
+		                                    <th>Price</th>
+		                                    <th>Status</th>
+		                                    <th>Action</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody>
+		                            </tbody>
+		                        </table>
+		                    </div>
+		                </div>
 					</div>
 					<!-- /.card-body -->
 				</div>
@@ -76,12 +80,6 @@
 {{ Html::script("admin_theme/plugins/datatables-responsive/js/responsive.bootstrap4.min.js") }}
 {{ Html::script("admin_theme/plugins/datatables-buttons/js/dataTables.buttons.min.js") }}
 {{ Html::script("admin_theme/plugins/datatables-buttons/js/buttons.bootstrap4.min.js") }}
-{{ Html::script("admin_theme/plugins/jszip/jszip.min.js") }}
-{{ Html::script("admin_theme/plugins/pdfmake/pdfmake.min.js") }}
-{{ Html::script("admin_theme/plugins/pdfmake/vfs_fonts.js") }}
-{{ Html::script("admin_theme/plugins/datatables-buttons/js/buttons.html5.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-buttons/js/buttons.print.min.js") }}
-{{ Html::script("admin_theme/plugins/datatables-buttons/js/buttons.colVis.min.js") }}
 
 <!-- SweetAlert2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -94,6 +92,7 @@
 			searching: true,
 			ajax: "{!! route('admin.product.index') !!}",
 			deferRender: true,
+			responsive:true,
 			lengthMenu: [
                 [150, 200, 500],
                 [150, 200, 500]
