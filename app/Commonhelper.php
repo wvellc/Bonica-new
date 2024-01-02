@@ -382,8 +382,8 @@ class Commonhelper
         $filename    =  $file->getClientOriginalName();
         $extension   =  $file->extension();
         $arrayFileName = explode(".", $file->getClientOriginalName());
-        $s3FilePath = $s3Directory. $arrayFileName[0] . date('his') . '.' . $extension;
-        $imageName = $arrayFileName[0] . date('his') . '.png';
+        $s3FilePath = $s3Directory. $arrayFileName[0] .Str::random(1). date('his') . '.' . $extension;
+        $imageName = $arrayFileName[0] .Str::random(1). date('his') . '.png';
         $storage_path_full = '/'.$filename;
 
         $destinationPath = public_path($path);
@@ -463,7 +463,7 @@ class Commonhelper
 		if($type == 'image'){
 
 			if ($path) {
-				$imageName = $arrayFileName[0] . date('his') . '.' . $extension;
+				$imageName = $arrayFileName[0] .Str::random(1). date('his') . '.' . $extension;
                 $img = Image::make($file->path());
                 $destinationPath = public_path($path);
                 if (!file_exists($destinationPath)) {
